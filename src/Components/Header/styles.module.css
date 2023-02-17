@@ -1,0 +1,17 @@
+.buttons{
+    width: 100%;
+    font-size: 14px;
+    text-align: right;
+}
+.button{
+    text-decoration: none;
+    color :rgba(255, 255, 255, 0.918);
+    padding: 0 5px;
+}
+.button :hover {
+    color: white;
+}
+.logo{
+    width: 30px ;
+    height: 30px ;
+}
