@@ -39,3 +39,24 @@
     opacity: 0.8;
     filter: blur(4px);
   }
+.buttonswrapper{
+  display: block;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  bottom: 20px;
+}
+.buttons{
+  display: block;
+  width: 100%;
+  display: relative;
+}
+.button{
+  margin: 5px ;
+  width: 30px;
+  height:30px;
+  border-radius: 10px ;
+  border :0px;
+  cursor: pointer;
+  opacity: 50%;
+}
