@@ -33,5 +33,9 @@
     position: relative;
   }
   .transition {
-    transition: all 1s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+  .outfocus{
+    opacity: 0.8;
+    filter: blur(4px);
   }
