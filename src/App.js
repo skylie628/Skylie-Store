@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Header from './Components/Header/Header';
+import Footer from './Components/Footer/Footer'
 import LandingPage from './Pages/landingpage/LandingPage';
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
           <body>
             <LandingPage></LandingPage>
           </body>
-          <footer></footer>
+      <Footer></Footer>
     </div>
   );
 }

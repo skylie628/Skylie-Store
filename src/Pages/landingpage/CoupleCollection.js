@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './styles.module.css'
-import coupleCollection from '../../assets/images/couple-collection.png'
+import coupleCollection from '../../assets/images/couple-collection-graybg.png'
 export default function CoupleCollection() {
   return (
     <div className = {styles.coupleCollectionWrapper}>

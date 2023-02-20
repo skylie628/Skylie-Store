@@ -1,0 +1,27 @@
+.footerContainer{
+    display: flex;
+    background-color: rgb(231, 231, 231);
+    text-align: left;
+    color: black;
+    padding: 30px;
+    margin-top: 10px;
+}
+.footerContents{
+    display: block;
+    margin: 0 30px;
+}
+.footerContentName{
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 10px;
+}
+.footerContentItems{
+    padding: 15;
+    display: block;
+    font-size: 11px;
+}
+.footerContentItems span{
+    margin: 15px;
+    display: block;
+}
