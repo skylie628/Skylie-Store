@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styles from './style.module.css'
 import { useEffect } from 'react'
+import CloseIcon from '../../assets/images/close-icon.png';
+import videoPath from '../../assets/videos/football.mp4' 
+import useWindowDimensions from '../../Hooks/useWindowDimensions'
 export default function VideoModal(props) {
+  const {width,height}  = useWindowDimensions()
+    const video = useRef() 
     useEffect(()=>{
+    video.current.volume = 0.2
     document.body.style.overflowY = "hidden";
     return () => {
         document.body.style.overflowY = "visible";
@@ -11,9 +17,14 @@ export default function VideoModal(props) {
 
   return (
     <div className = {styles.container}>
-        <div style = {{color : 'white'}} onClick = {()=>{return props.closeModal(false)}}> 
-        <iframe src="https://player.vimeo.com/video/60814695?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" width="448" height="800" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen>
-        </iframe>
+      <div style = {{maxWidth: 'fit-content', height:'100%',margin:'0 auto', position:'relative'}}>
+        <img src = {CloseIcon} style = {{width: '20px', height: '20px', display:'block',position :"absolute",cursor:'pointer',zIndex:1, left:'-10px'}} onClick = {()=>{return props.closeModal(false)}}></img>
+        <div style = {{height : '100%',position :"relative"}} > 
+          <video ref = {video} height ='100%' style ={{ objectFit: 'cover'}} controls>
+          <source src={videoPath} type="video/mp4"/>
+          Your browser does not support HTML video.
+        </video>
+        </div>
         </div>
     </div>
   )

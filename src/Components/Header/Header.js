@@ -15,7 +15,7 @@ export default function Header() {
     <img  src= {Logo} className ={styles.logo} onClick = {()=>navigate('/')}/>
     <box className ={styles.buttons}>
     <span className ={styles.button}><a className ={styles.button}>Về chúng tôi</a></span>
-    <span className ={styles.button}><a className ={styles.button}>Shopping</a></span>
+    <span className ={styles.button}><a className ={styles.button} onClick = {()=> navigate('/shopping')}>Shopping</a></span>
     <span className ={styles.button}><a className ={styles.button} onClick = {()=> navigate('/signin')}>Đăng nhập</a></span>
     </box>
     </Toolbar>

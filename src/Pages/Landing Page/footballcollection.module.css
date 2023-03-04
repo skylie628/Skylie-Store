@@ -101,8 +101,7 @@ margin: 5px;
 }
 .pause img{
   margin-right: 30px;
-  width: 30px;
-  height: 30px;
+  height: 40px;
   display: block;
   cursor: pointer;
 }
@@ -119,8 +118,7 @@ margin: 5px;
 }
 .watchVideo{
   margin-right : '30px';
-  font-size :'20px';
-  font-weight: 'bold';
   cursor: pointer;
+  height: 40px;
 }
 

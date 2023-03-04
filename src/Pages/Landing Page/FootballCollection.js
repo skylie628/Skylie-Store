@@ -5,6 +5,7 @@ import footballCollection1 from  '../../assets/images/football-collection-1.png'
 import footballCollection2 from  '../../assets/images/football-collection-2.png'
 import footballCollection3 from  '../../assets/images/football-collection-3.png'
 import footballCollection4 from  '../../assets/images/football-collection-4.png'
+import playingVideo from '../../assets/images/play-video-button.png'
 import shoppingIcon from  '../../assets/images/shopping-icon.png'
 import playIcon from  '../../assets/images/play-icon.png'
 import pauseIcon from  '../../assets/images/pause-icon.png'
@@ -168,7 +169,7 @@ export default function FootballCollection() {
        </div>
        <div className= {`${styles.buttonswrapper} ${styles.pause}` } >
           <div style={{display: 'flex'}}>
-          <div className = {styles.watchVideo} onClick = {()=>showVideoModal()}>Xem video</div>
+          <img src = {playingVideo} className = {styles.watchVideo} onClick = {()=>showVideoModal()}></img>
           <img  src = {isPlay? pauseIcon : playIcon} onClick = {()=>handlePauseBtn()}></img>
           </div>
        </div>

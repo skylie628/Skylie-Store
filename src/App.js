@@ -6,6 +6,7 @@ import Footer from './Components/Footer/Footer'
 import LandingPage from './Pages/Landing Page/LandingPage';
 import SigninPage from './Pages/Signin Page/SigninPage'
 import SignupPage from './Pages/SignUp Page/SignupPage';
+import ShoppingPage from './Pages/ShoppingPage/ShoppingPage';
 import { Route, Routes } from 'react-router-dom';
 import Scrollbar from 'smooth-scrollbar';
 import React from "react";
@@ -31,6 +32,7 @@ function App() {
             <Route path="/" element = {<LandingPage/>} />
             <Route path="/signin" element = {<SigninPage/>} />
             <Route path="/signup" element = {<SignupPage/>} />
+            <Route path="/shopping" element  = {<ShoppingPage/>} />
             <Route path="*" element={<LandingPage/>}/>
           </Routes>
           </body>
