@@ -4,6 +4,7 @@
     text-align: right;
 }
 .button{
+    cursor: pointer;
     text-decoration: none;
     color :rgba(255, 255, 255, 0.918);
     padding: 0 5px;
@@ -14,4 +15,5 @@
 .logo{
     width: 30px ;
     height: 30px ;
+    cursor: pointer;
 }

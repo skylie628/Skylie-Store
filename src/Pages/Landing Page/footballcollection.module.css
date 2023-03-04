@@ -1,0 +1,126 @@
+
+.footballCollectionImg {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  }
+.footballCollectionWrapper{
+    overflow: hidden;
+    position: relative;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    height: 550px;
+    background-color :white;
+  }
+  .footballCollectionContentWrapper{
+    position: absolute;
+    white-space: nowrap;
+    z-index: 1;
+    width: 100%;
+    right: 10px;
+    height: 100%;
+    color: black;
+  }
+  .footballCollectionImageWrapper{
+    display: inline-block;
+    margin: 10px;
+    width: 90%;
+    height: 100%;
+    position: relative;
+  }
+  .transition {
+    transition: all 0.8s ease-in-out;
+  }
+  .outfocus{
+    opacity: 0.5;
+    filter: blur(4px);
+  }
+.buttonswrapper{
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  display: block;
+}
+.buttons{
+  display: block;
+  width: 100%;
+  display: relative;
+}
+.button{
+  margin: 5px ;
+  width: 20px;
+  height:20px;
+  border-radius: 10px ;
+  border :0px;
+  cursor: pointer;
+  opacity: 50%;
+}
+.button:hover {
+  background-color: 'black';
+}
+.shoppingButtonWrapper{
+  position: absolute;
+  width: 200px;
+  z-index: 3;
+  bottom: -50px;
+  left: 50px;
+}
+.shoppingButton{
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+    align-items: center;        /* for single line flex container */
+    align-content: center;   
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  text-align: center;
+  z-index: 3;
+}
+.shoppingButton span{
+font-size: 15px;
+font-weight: bold;
+display: block;
+margin: 5px;
+}
+.shoppingButton img{
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+}
+.pause{
+  right: 10px;
+}
+.pause img{
+  margin-right: 30px;
+  width: 30px;
+  height: 30px;
+  display: block;
+  cursor: pointer;
+}
+.controlGroup{
+  position: relative;
+  width: 100%;
+  display: block;
+  height: 50px;
+}
+.centerXY{
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+.watchVideo{
+  margin-right : '30px';
+  font-size :'20px';
+  font-weight: 'bold';
+  cursor: pointer;
+}
+
