@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Logo({src,srcOnHover,style}) {
   return (
-    <img src = {src} style = {{...style,display: 'block',cursor: 'pointer'}}
+    <img src = {src} style = {{display: 'block',cursor: 'pointer',...style}}
     onMouseOver={(e): void => {
         srcOnHover && (e.currentTarget.src = srcOnHover);
       }}
