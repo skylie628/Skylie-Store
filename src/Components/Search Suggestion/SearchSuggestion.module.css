@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    height: 100%;
+}
+.searchSuggest{
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100%;
+}
+.imagesDescription{    
+    flex: 3 0 0 ;
+    background-color: white;
+    height: 100%;
+}
+.searchRst{
+    margin: 10px;
+    align-self: center;
+    display: block;
+    cursor: pointer;
+}
+.gridContainer{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    height: 200px;
+    grid-gap:10px 20px;
+    margin: 30px;
+    grid-auto-rows: auto;
+}
+
+.gridItem{
+    background-color: white;
+    position: relative;
+}
+.squareImage{
+    display: block;
+    position: relative;
+    margin: 10px;
+}
+.squareImage div{
+    margin-top: 10px;
+}
+.img{
+    display: block;
+}

@@ -7,6 +7,7 @@ import SearchIcon from '../../assets/images/search-icon.png'
 import FilterIcon from '../../assets/images/filter-icon-small.png' 
 import SortIcon from '../../assets/images/sort-icon-small.png' 
 import Logo from '../Logo/Logo';
+import SearchSuggestion from '../Search Suggestion/SearchSuggestion';
 import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +70,9 @@ export default function HelperHeader({isFixed,style,showFilter,setShowFilter}) {
       </div>
       </div>
     </div>
-    <div className = {styles.searchSuggest} style ={{height : searchFocus ? '200px' : '0px'}}></div>
+    <div className = {styles.searchSuggest} style ={{height : searchFocus ? 'auto' : '0px'}}>
+      <SearchSuggestion></SearchSuggestion>
+    </div>
     </div>
   )
 }
