@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './ItemCard.module.css'
-export default function ItemCard({src,hotTag,name,option,sold,price}) {
+export default function ItemCard({src,id,hotTag,name,option,sold,price}) {
+  const navigate = useNavigate();
   return (
-    <div className = {styles.card}>
+    <div className = {styles.card} onClick ={()=>navigate(`../product/${id}`)}>
     <div className ={styles.square}>
         <img src ={src} ></img>
     </div>

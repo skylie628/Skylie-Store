@@ -2,7 +2,7 @@ import React from 'react' ;
 import { useEffect, useState,useMemo,useRef } from 'react';
 import useWindowDimensions from '../../Hooks/useWindowDimensions.js'
 import styles from './styles.module.css';
-import {gsap} from 'gsap'
+import {gsap} from 'gsap';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 export default function MainHeadline() {
   const [ratio, setRatio] = useState(0);

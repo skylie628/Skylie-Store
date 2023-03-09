@@ -2,8 +2,12 @@ import React from 'react'
 import styles from './ItemList.module.css'
 import ItemCard from '../../Components/Item Card/ItemCard'
 import ProductImage from '../../assets/images/ProductImage/1.png'
+import { useNavigate } from 'react-router-dom'
+import ProductPage from '../ProductPage/ProductPage'
 export default function ItemsList() {
+    const navigate = useNavigate();
     const itemList =  [0,1,2,3,4,5,6,7].map(x =>({
+        id : x,
         src: ProductImage,
         name: 'Unique mẫu 1 ',
         hotTag: "Best Seller",
@@ -19,7 +23,7 @@ export default function ItemsList() {
     {Array.from(Array(row).keys()).map(x =>
         <div style ={{display:'flex',flexWrap: 'wrap'}}>
         {Array.from(Array(itemPerRow).keys()).map(y =>
-                (x*itemPerRow + y > itemCount-1)? '':<ItemCard className={styles.square} {...itemList[x*itemPerRow + y]}/>)
+                (x*itemPerRow + y > itemCount-1)? '':<ItemCard className={styles.square}  {...itemList[x*itemPerRow + y]}/>)
         }
         </div>    
             )}

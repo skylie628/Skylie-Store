@@ -4,26 +4,24 @@ import Box from '@mui/material/Box'
 import  Toolbar  from '@mui/material/Toolbar'
 import { useNavigate } from "react-router-dom"
 import { useState,  useEffect} from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, matchPath } from 'react-router-dom'
 import styles from './styles.module.css'
 import Logo from '../../assets/images/skylie-logo-icon.png'
 import BlackLogo from '../../assets/images/skylie-logo-icon-black.png'
 export default function Header(props) {
   const { pathname } = useLocation();
-  const [isShopping, setIsShopping] = useState(false);
+  const [isRelative, setIsRelative] = useState(false);
   useEffect(()=>{
-    pathname =='/shopping' ? setIsShopping(true) : setIsShopping(false)
+   (pathname =='/shopping' || matchPath({path : '/product/:id',exact: false},pathname)) ? setIsRelative(true) : setIsRelative(false)
   },[pathname])
   const navigate = useNavigate();
   const changePath = (path) =>{
     navigate(path);
   }
   return (
-    <div >
-    <Box>
-    <AppBar  sx = {{boxShadow: 'inherit',zIndex:2, opacity: 0.9, top:0, position :isShopping ? 'relative' : 'fixed'}} >
-    <Toolbar sx = {{backgroundColor : isShopping? 'rgb(245,245,245)':'black'}} style ={{color: isShopping? 'black' : 'white'}}  >
-    <img  src= {isShopping? BlackLogo : Logo} className ={styles.logo} onClick = {() =>{changePath('/')}}/>
+    <AppBar  sx = {{boxShadow: 'inherit',zIndex:2, opacity: 0.9, top:0, position :isRelative ? 'relative' : 'sticky',height:'64px'}} >
+    <Toolbar sx = {{backgroundColor : isRelative? 'rgb(245,245,245)':'black'}} style ={{color: isRelative? 'black' : 'white',top:0}}  >
+    <img  src= {isRelative? BlackLogo : Logo} className ={styles.logo} onClick = {() =>{changePath('/')}}/>
     <box className ={styles.buttons}>
     <span className ={styles.button}><a className ={styles.button} >Về chúng tôi</a></span>
     <span className ={styles.button}><a className ={styles.button} onClick = {() =>{changePath('/shopping')}}>Shopping</a></span>
@@ -31,7 +29,5 @@ export default function Header(props) {
     </box>
     </Toolbar>
     </AppBar>
-    </Box>
-    </div>
   )
 }
