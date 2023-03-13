@@ -16,3 +16,9 @@
     height: 30px ;
     cursor: pointer;
 }
+.cart{
+    width: 16px;
+    height: 16px;
+    z-index: 3;
+    position: absolute;
+}

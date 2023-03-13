@@ -7,12 +7,15 @@ import { useState,  useEffect} from 'react'
 import { useLocation, matchPath } from 'react-router-dom'
 import styles from './styles.module.css'
 import Logo from '../../assets/images/skylie-logo-icon.png'
+import BlackShoppingBag from '../../assets/images/shopping-bag-icon-black.png'
+import WhiteShoppingBag from '../../assets/images/shopping-bag-icon-white.png'
 import BlackLogo from '../../assets/images/skylie-logo-icon-black.png'
+import zIndex from '@mui/material/styles/zIndex'
 export default function Header(props) {
   const { pathname } = useLocation();
   const [isRelative, setIsRelative] = useState(false);
   useEffect(()=>{
-   (pathname =='/shopping' || matchPath({path : '/product/:id',exact: false},pathname)) ? setIsRelative(true) : setIsRelative(false)
+   (pathname =='/shopping' || pathname =='/cart' || matchPath({path : '/product/:id',exact: false},pathname)) ? setIsRelative(true) : setIsRelative(false)
   },[pathname])
   const navigate = useNavigate();
   const changePath = (path) =>{
@@ -26,6 +29,7 @@ export default function Header(props) {
     <span className ={styles.button}><a className ={styles.button} >Về chúng tôi</a></span>
     <span className ={styles.button}><a className ={styles.button} onClick = {() =>{changePath('/shopping')}}>Shopping</a></span>
     <span className ={styles.button}><a className ={styles.button} onClick = {() =>{changePath('/signin')}}>Đăng nhập</a></span>
+    <span className ={styles.button}><img  src= {isRelative? BlackShoppingBag : WhiteShoppingBag} className ={styles.cart} onClick = {() =>{changePath('/cart')}}/></span>
     </box>
     </Toolbar>
     </AppBar>

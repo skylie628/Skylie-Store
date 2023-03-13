@@ -1,75 +1,83 @@
 import React, { useState,useRef } from 'react'
 import styles from '../ProductPage/ProductPage.module.css'
-import ProductImage from '../../assets/images/ProductImage/1.png'
+import ProductImages from './ProductImages'
+import OptionSelection from './OptionSelection'
+import MaterialSelection from './MaterialSelection'
+import Comment from './Comment'
+import BrandMenu from '../../Components/Brand Menu/BrandMenu'
+import ShowHideLayout from '../../Components/Show Hide Layout/ShowHideLayout'
+import SimpleItemList from '../../Components/Simple Item List/SimpleItemList'
+import Suggestion from '../../Components/Suggestion/Suggestion'
 import side1 from '../../assets/images/ProductImage/side-1.png'
-import side2 from '../../assets/images/ProductImage/side-2.png'
-import productSide3 from '../../assets/images/product-side3.png'
-import productSide4 from '../../assets/images/product-side4.png'
-import GlassIcon from '../../assets/images/Material Icon/glasscase-icon.png'
-import MirrorIcon from '../../assets/images/Material Icon/mirrorcase-icon.png'
-import TransSilIcon from '../../assets/images/Material Icon/transparent-silicon-icon.png'
-import BlackSilIcon from '../../assets/images/Material Icon/black-silicon-icon.png'
-import ThreeDIcon from '../../assets/images/Material Icon/3dcase-icon.png'
+
 export default function ProductPage() {
     const [showingImage,setShowingImage] = useState(side1);
-    const changeImage = (img) => {
-        setShowingImage(img.target.src)
-    }
+    const [selectedMaterial,setSelectedMaterial] = useState(0);
+    const [selectedBrand,setSelectedBrand] = useState(0);
+    const [selectedModel,setSelectedModel] = useState(0);
+    const [selectedOption,setSelectedOption] = useState(0);
+    const ProductInfo = {
+        id:0,
+        img:side1,
+        name: 'Unique Collection x mẫu 01',
+        price: 95000,
+        score: 4,
+    } 
+    const OptionList = [{
+        id: 0,
+        src: require(`../../assets/images/ProductImage/side-1.png`),
+    }, {
+        id:1,
+        src: require(`../../assets/images/ProductImage/side-1.png`)
+}]
+    const PhoneNames = ['Iphone6', 'Iphone6s','Iphone7s Plus','Iphone XsMax']
   return (
     <div>
     <div className={styles.container}>
-    <div className ={styles.images}>
-        <div className = {styles.stickyEle}>
-        <div className={styles.thumbnail}>
-         <div className = {styles.thumbnailImg}>
-            <img src={side1} style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}>
-            </img>
-        </div>   
-         <div className = {styles.thumbnailImg}>
-         <img src={side2} style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
-         </div>   
-         <div className = {styles.thumbnailImg}>
-         <img src={productSide3} style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
-        </div>   
-         <div className = {styles.thumbnailImg}>
-         <img src={productSide4} style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
-        </div>   
-        </div>
-        <div className={styles.productImage}>
-            <img src={showingImage} style={{height:'100%',objectFit:'cover'}}></img>
-        </div>
-        </div>
-    </div>
+    <ProductImages showingImage={showingImage} setShowingImage = {setShowingImage}/>
     <div className ={styles.information}>
         <div className={styles.hotTag}>New Comming</div>
         <div className={styles.name}>Unique Collection x mẫu 01</div>
         <div className={styles.price}>95.000 vnd</div>
-        <div className={styles.materialsSelection}>
-            <div className ={styles.materialsImg}>
-                <img src = {GlassIcon} style={{width:'100%'}}></img>
-                <span>Nano </span><span>Glass</span>
+        <OptionSelection selectedOption={selectedOption} setSelectedOption= {setSelectedOption} OptionList={OptionList}/>
+        <MaterialSelection selectedMaterial={selectedMaterial} setSelectedMaterial={setSelectedMaterial}></MaterialSelection>
+        <BrandMenu selectedBrand ={selectedBrand} setSelectedBrand ={setSelectedBrand}></BrandMenu>
+        <SimpleItemList ListItem={PhoneNames} selectedItem = {selectedModel} setSelectedItem ={setSelectedModel} style ={{}}></SimpleItemList>
+        <div className = {styles.addToCartBtn} onClick={()=>{alert(selectedBrand +''+selectedMaterial+' '+ selectedModel)}}>Thêm vào giỏ hàng</div>
+        <ShowHideLayout header='Chính sách vận chuyển'>
+            <div style ={{ lineHeight:'2em'}}>
+            <div>
+                Đơn hàng của bạn từ 2 ốp lưng sẽ được hỗ trợ miễn phí vận chuyển. Cước phí vận chuyển được tính theo dịch vụ giao hàng tiết kiệm.
             </div>
-            <div className ={styles.materialsImg}>
-                <img src = {MirrorIcon} style={{width:'100%'}}></img>
-                <span>Mirror</span>
+            <ul>
+           <li>
+            Mất 1 - 2 ngày để chúng mình in mẫu bạn chọn lên ốp và bàn giao cho đơn vị vận chuyển.
+           </li>
+           <li>
+            Đối với khu vực nội thành TP. Hồ Chí Minh, khách hàng nhận hàng sau 2 - 3 ngày sau khi đặt, thời gian này đối với khu vực các tỉnh ngoại thành  khoản 3 - 6 ngày phụ thuộc các yếu tố khách quan.
+            </li>
+            <li>
+            Khách hàng thanh toán sau khi nhận hàng
+            </li>
+            </ul>
             </div>
-            <div className ={styles.materialsImg}>
-                <img src = {TransSilIcon} style={{width:'100%'}}></img>
-                <span>Alpha </span><span>Silicon</span>
+        </ShowHideLayout>
+        <ShowHideLayout header='Chính sách bảo hành'>
+            <div style ={{ lineHeight:'2em'}}>
+            <ul>
+           <li>
+            1 đổi 1 nếu sản phẩm sai mẫu, sai dòng điện thoại so với đơn đặt hàng trên hệ thống.
+           </li>
+           <li>
+            Khách hàng được bảo hành ốp mới trong vòng 6 tháng nếu ốp bị hỏng do lỗi nhà cung cấp.
+           </li>
+            </ul>
             </div>
-            <div className ={styles.materialsImg}>
-                <img src = {BlackSilIcon} style={{width:'100%'}}></img>
-                <span>Black</span><span> Silicon</span>
-            </div>
-            <div className ={styles.materialsImg}>
-                <img src = {ThreeDIcon} style={{width:'100%'}}></img>
-                <span>3D</span>
-            </div>
-        </div>
-        <div style ={{margin: '30px',fontSize: '12x', display:'block',float:'right'}}><a style={{textDecoration:'none'}} href="#">Tư vấn cho mình về chất liệu ốp</a></div>
+        </ShowHideLayout>
+        <Comment ProductInfo ={ProductInfo}/>
     </div>
     </div>
-    <div style={{position:'relative',height: '300px'}}></div>
+    <Suggestion></Suggestion>
     </div>
   )
 }

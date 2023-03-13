@@ -8,6 +8,8 @@ import SigninPage from './Pages/Signin Page/SigninPage'
 import SignupPage from './Pages/SignUp Page/SignupPage';
 import ShoppingPage from './Pages/ShoppingPage/ShoppingPage';
 import ProductPage from './Pages/ProductPage/ProductPage';
+import CartPage from './Pages/CartPage/CartPage';
+import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
 import { Route, Routes } from 'react-router-dom';
 import Scrollbar from 'smooth-scrollbar';
 import React from "react";
@@ -35,6 +37,8 @@ function App() {
             <Route path="/signup" element = {<SignupPage/>} />
             <Route path="/shopping" element  = {<ShoppingPage/>} />
             <Route path="/product/:id" element  = {<ProductPage/>}/> 
+            <Route path="/checkout" element  = {<CheckoutPage/>}/> 
+            <Route path="/cart" element  = {<CartPage/>}/> 
             <Route path="*" element={<LandingPage/>}/>
           </Routes>
           </body>

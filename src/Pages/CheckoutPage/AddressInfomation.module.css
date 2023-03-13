@@ -1,0 +1,17 @@
+.billInfo{
+    border-radius: 10px;
+    text-align: left;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 10px;
+}
+.billInfo > div{
+    margin-top: 10px;
+}
+.billInfoHeader{
+    display: flex;
+}
+.addMoreAddress{
+    flex: 0,0,0;
+    cursor: pointer;
+
+}

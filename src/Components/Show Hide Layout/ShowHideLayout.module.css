@@ -1,0 +1,28 @@
+.content{
+    margin: 0 10px;
+    overflow: hidden;
+}
+.icon{
+    cursor: pointer;
+}
+.header{
+    padding: 15px 0px;
+    display: flex;
+    cursor:pointer;
+}
+.headerTitle{
+    opacity: 0.8;
+    flex: 1 0 0;
+    font-size: 20px;
+}
+.headerIcon{
+    flex: 0 0 0;
+}
+
+.icon{
+    height: 20px;
+}
+.container{
+ padding: 10px;
+ border-top: 1px solid rgba(0,0,0,0.3);
+}

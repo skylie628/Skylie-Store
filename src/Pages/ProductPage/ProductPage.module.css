@@ -1,50 +1,9 @@
 .container{
     position: relative;
     display: flex;
+    
     padding:30px 20px;
-    height: 500vh;
-}
-.images{
-    display: block;
-    height: 100%;
-    flex: 6 0 0;
-    align-self: flex-start;
-}
-
-.productImage{
-    flex: 4 0 0;
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background-color: rgb(246,246,246);
-}
-.productImage img{
-    top: 50%;
-    position: relative;
-    transform: translateY(-50%);
-    width: 100%;
-}
-.thumbnailImg{
-    background-color: rgb(246,246,246);
-    cursor:pointer;
-    margin:20px;
-}
-.thumbnailImg::after{
-    content: '';
-    padding-top: 100%;
-}
-.thumbnail{
-flex: 1 0 0;
-display: flex;
-height: auto;
-flex-direction: column;
-overflow-y:scroll;
-}
-.stickyEle{
-    display: flex;
-    top:0;
-    height: 100vh;
-    position:sticky;
+    height: auto;
 }
 .information{
     display: block;
@@ -63,15 +22,15 @@ overflow-y:scroll;
     font-size: 20px;
     margin: 20px 0px;
 }
-.materialsSelection{
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-}
-.materialsSelection div{
-    flex: 1 0 0;
-    cursor: pointer;
-}
-.materialsSelection span{
+
+.addToCartBtn{
     display: block;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin:30px auto;
+    cursor: pointer;
+    width: 200px;
 }

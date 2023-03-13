@@ -18,6 +18,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.3",
+    "react-horizontal-scrolling-menu": "^3.2.5",
     "react-locomotive-scroll": "^0.2.2",
     "react-nice-scroll": "^1.0.0",
     "react-responsive-carousel": "^3.2.23",

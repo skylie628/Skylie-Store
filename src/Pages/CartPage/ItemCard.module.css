@@ -1,0 +1,39 @@
+
+.productCard{
+     display: flex;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin: 30px;
+    }
+    
+.item{
+    flex: 2 0 0;
+    display: flex;
+    text-align: left;}
+.item img{
+        width: 300px;
+        margin:30px;
+    }
+.productInfo{
+        flex: 3 0 0;
+        margin: 20px;
+        line-height: 2em;
+    }
+.quantity{
+        margin: 20px 0px;
+        flex: 1 0 0;
+        width: 30%;
+    }
+.productName{
+        font-size: 30px;
+        font-weight: 600;
+    }
+.subtotal{
+    flex: 1 0 0;
+        font-size: 20px;
+        margin: 20px;
+      }
+
+.rightcol{
+    display: flex;
+    flex-direction: column;
+}
