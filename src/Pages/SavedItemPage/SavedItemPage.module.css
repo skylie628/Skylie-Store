@@ -1,0 +1,35 @@
+.SaveHeader{
+    background-color: white;
+    position: sticky;
+    top:0px;
+    text-align: left;
+}
+.SaveHeader div{
+    display: inline-block;
+    margin: 20px;
+    font-size: 25px;
+}
+.mainHeadline{
+    font-size: 28px;
+    width: 70%;
+    line-height: 1.5em;
+    margin: 50px auto;
+    font-weight: 100;
+}
+.Album{
+    margin: 0 20px;
+}
+.AlbumHeader{
+    display: flex;
+    padding: 15px;
+    margin: 10px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.AlbumList{
+}
+.AlbumRow{
+    display: flex;
+}
+.AlbumRow > div{
+    flex: 1 0 0;
+}

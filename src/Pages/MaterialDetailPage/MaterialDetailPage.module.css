@@ -1,0 +1,9 @@
+.container{
+    position: relative;
+    background-color: black;
+    height: 200vh;
+}
+.fixEle{
+    position: sticky;
+    top:64px;
+}

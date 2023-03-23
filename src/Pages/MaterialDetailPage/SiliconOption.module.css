@@ -1,0 +1,35 @@
+.container{
+    position: relative;
+    background-color: black;
+}
+.materialsImg{
+    display: block;
+    width: 100%;
+    top: -64px;
+    position: absolute;
+    object-fit: cover;
+}
+.options{
+    width: 30%;
+    height: 100%;
+    float: right;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+}
+.option{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.colorDot{
+    display: block;
+    border-radius: 100%;
+    z-index: 4;
+    cursor: pointer;
+    padding: 10px;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}

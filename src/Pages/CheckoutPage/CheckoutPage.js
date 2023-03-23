@@ -3,6 +3,7 @@ import React from 'react'
 import PaymentSummary from './PaymentSummary'
 import AddressInfomation from './AddressInfomation'
 import ItemCard from './ItemCard'
+import {gsap} from 'gsap'
 export default function CheckoutPage() {
   return (
     <div>

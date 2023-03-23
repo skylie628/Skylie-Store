@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 export default function SignInForm(props) {
     const yup = require("yup");
     const handleFormSubmit = (value)=>{
+      console.log(value)
       const {onSubmit} = props;
     if(onSubmit) {
       onSubmit(value)

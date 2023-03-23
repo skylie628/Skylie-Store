@@ -1,0 +1,44 @@
+.expandContainer{
+    display: flex;
+    background-color: black;
+    width: 100%;
+    position: absolute;
+    top: 64px;
+    left: 0px;
+    overflow: hidden;
+}
+.reviewCartButton{
+    flex: 0 0 0;
+}
+.reviewCartButton div{
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgb(11, 98, 211);
+    color: white;
+    width: 100px;
+    cursor: pointer;
+    margin: 20px;
+}
+.leftCol{
+    flex :1 0 0;
+    font-size: 25px;
+    margin: 30px; 
+    text-align: left;
+}
+.ItemsWrapper{
+    margin: 20px ;
+    display: flex;
+    font-size: 15px;
+}
+.myProfile{
+    margin: 50px;
+}
+.myProfile > div > div{
+    cursor: pointer;
+    margin: 10px 0px;
+    display: flex;
+    align-items: center;
+}
+.myProfile > div > div div{
+    margin: 0px 10px;
+}

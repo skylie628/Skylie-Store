@@ -1,0 +1,19 @@
+.formContainer{
+    position: fixed;
+    top: 50%;
+    z-index: 3;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 20px auto;
+    width: 50vw;
+    height: 80vh;
+    background-color:white;
+    border-radius: 10px;
+    display: block;
+    overflow-y: scroll;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.formContainer >div{
+    width: 70%;
+    margin: 30px auto;
+}

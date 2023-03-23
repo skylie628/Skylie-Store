@@ -20,8 +20,9 @@ export default function HelperHeader({isFixed,style,showFilter,setShowFilter}) {
   const [searchFocus,setSearchFocus] = useState(false);
   const [showSortPopup, setShowSortPopup] = useState(false);
   const classes = useStyles();
+
   return (
-    <div style = {{width: '100%',zIndex: 3,top : (!isFixed && searchFocus) ? '-64px' : '0px', transition : (searchFocus || !isFixed) ?'top 0.5s ease-in-out' : '',position : isFixed ? 'fixed' : 'relative' }}>
+    <div style = {{width: '100%',zIndex: searchFocus? 3 : 1,top : (!isFixed && searchFocus) ? '-64px' : '0px', transition : (searchFocus || !isFixed) ?(!searchFocus ? ' top 0.5s linear , z-index 0s ease-in-out 0.5s':'top 0.5s linear')  : '',position : isFixed ? 'fixed' : 'relative' }}>
     <div className = {styles.container} >
       <div className = {styles.brandName}style ={{ display : searchFocus ? 'none' :'block'}}>Skylie</div>
       <div className = {styles.searchWrapper} style ={{ flex : searchFocus ? '0 0 100%' :'0 0 50%'}}>

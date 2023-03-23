@@ -11,7 +11,7 @@ import samsung from '../../assets/images/Brand Logo/samsung-logo.png'
 import vivo from '../../assets/images/Brand Logo/vivo-logo.png'
 import xiaomi from '../../assets/images/Brand Logo/xiaomi-logo.png'
 import { useState,useEffect } from 'react'
-export default function BrandMenu({selectedBrand,setSelectedBrand}) {
+export default function BrandMenu({id,stateBrandMenu,setStateBrandMenu,selectedBrand,setSelectedBrand}) {
     const ScrollWidth = useRef(null);
     const [current,setCurrent] = useState(-1)
     const [speed,setSpeed] = useState(100)
@@ -32,8 +32,13 @@ export default function BrandMenu({selectedBrand,setSelectedBrand}) {
         setCurrent(prev => (prev-1))
        }
     }
+    const changeBrandMenu = (id) =>{
+        setSelectedBrand(id);
+        setStateBrandMenu(prev => 'Touched');
+    }
   return (
-    <div style={{borderTop: '1px solid rgba(0,0,0,0.3)'}}>
+    <div style={{borderTop: '1px solid rgba(0,0,0,0.3)',position:'relative'}}>
+        <div className = {styles.notActive} style ={{display:(stateBrandMenu == 'notActive')? 'block': 'none'}}></div>
         <div style={{padding: '30px 0px'}}>Chọn dòng điện thoại</div>
     <div className  = {styles.phoneBrand}>
     <div className={styles.prevBtn} onClick ={()=>handlePrevBtn()}>
@@ -41,36 +46,36 @@ export default function BrandMenu({selectedBrand,setSelectedBrand}) {
     </div>
     <div className= {styles.content} ref ={ScrollWidth}>
     <div className ={styles.phoneBrandSlider} style={{left: `-${current*speed*60}px`,transition:'0.3s ease-in-out'}}>
-    <div className ={styles.phoneBrandImage}>
-        <img src ={apple} style={{opacity: selectedBrand == 0 ? 1 : 0.5}} onClick={()=>setSelectedBrand(0)}></img>
+    <div id={id} className ={styles.phoneBrandImage}>
+        <img src ={apple} style={{opacity: selectedBrand == 0 ? 1 : ''}} onClick={()=>changeBrandMenu(0)}></img>
         <span>Apple</span>
     </div>
     <div className ={styles.phoneBrandImage}>
-        <img src ={samsung} style={{opacity: selectedBrand == 1 ? 1 : 0.5}} onClick={()=>setSelectedBrand(1)}></img>
+        <img src ={samsung} style={{opacity: selectedBrand == 1 ? 1 : ''}} onClick={()=>changeBrandMenu(1)}></img>
         <span>Samsung</span>
     </div>
     <div className ={styles.phoneBrandImage}>
-        <img src ={lg} style={{opacity: selectedBrand == 2 ? 1 : 0.5}} onClick={()=>setSelectedBrand(2)}></img>
+        <img src ={lg} style={{opacity: selectedBrand == 2 ? 1 : ''}} onClick={()=>changeBrandMenu(2)}></img>
         <span>Lg</span>
     </div>
     <div className ={styles.phoneBrandImage}>
-        <img src ={xiaomi} style={{opacity: selectedBrand == 3 ? 1 : 0.5}} onClick={()=>setSelectedBrand(3)}></img>
+        <img src ={xiaomi} style={{opacity: selectedBrand == 3 ? 1 : ''}} onClick={()=>changeBrandMenu(3)}></img>
         <span>Xiaomi</span>
     </div>
     <div className ={styles.phoneBrandImage}>
-        <img src ={oppo}  style={{opacity: selectedBrand == 4 ? 1 : 0.5}} onClick={()=>setSelectedBrand(4)}></img>
+        <img src ={oppo}  style={{opacity: selectedBrand == 4 ? 1 : ''}} onClick={()=>changeBrandMenu(4)}></img>
         <span>Oppo</span>
     </div>
     <div className ={styles.phoneBrandImage}>
-        <img src ={realme} style={{opacity: selectedBrand == 5 ? 1 : 0.5}} onClick={()=>setSelectedBrand(5)}></img>
+        <img src ={realme} style={{opacity: selectedBrand == 5 ? 1 : ''}} onClick={()=>changeBrandMenu(5)}></img>
         <span>Realme</span>
     </div>
     <div className ={styles.phoneBrandImage}>
-        <img src ={huawei} style={{opacity: selectedBrand == 6 ? 1 : 0.5}} onClick={()=>setSelectedBrand(6)}></img>
+        <img src ={huawei} style={{opacity: selectedBrand == 6 ? 1 : ''}} onClick={()=>changeBrandMenu(6)}></img>
         <span>Huawei</span>
     </div>
     <div className ={styles.phoneBrandImage}>
-        <img src ={vivo} style={{opacity: selectedBrand == 7 ? 1 : 0.5}} onClick={()=>setSelectedBrand(7)}></img>
+        <img src ={vivo} style={{opacity: selectedBrand == 7 ? 1 : ''}} onClick={()=>changeBrandMenu(7)}></img>
         <span>Vivo</span>
     </div>
     </div>

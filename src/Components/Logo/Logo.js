@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Logo({src,srcOnHover,style}) {
+export default function Logo({src,srcOnHover,onClick,style}) {
   return (
-    <img src = {src} style = {{display: 'block',cursor: 'pointer',...style}}
+    <img src = {src} onClick ={onClick} style = {{display: 'block',cursor: 'pointer',...style}}
     onMouseOver={(e): void => {
         srcOnHover && (e.currentTarget.src = srcOnHover);
       }}

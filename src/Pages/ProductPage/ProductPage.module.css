@@ -26,11 +26,14 @@
 .addToCartBtn{
     display: block;
     border-radius: 10px;
-    background-color: black;
+    background-color: gray;
     color: white;
     padding: 15px;
     text-align: center;
     margin:30px auto;
     cursor: pointer;
     width: 200px;
+}
+.addToCartBtn:hover{
+background-color: black;
 }

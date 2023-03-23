@@ -4,12 +4,18 @@ import { useRef ,useEffect } from 'react';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer'
 import LandingPage from './Pages/Landing Page/LandingPage';
-import SigninPage from './Pages/Signin Page/SigninPage'
+import SigninPage from './Pages/Signin Page/SigninPage';
+import MaterialDetailPage from './Pages/MaterialDetailPage/MaterialDetailPage';
 import SignupPage from './Pages/SignUp Page/SignupPage';
 import ShoppingPage from './Pages/ShoppingPage/ShoppingPage';
 import ProductPage from './Pages/ProductPage/ProductPage';
 import CartPage from './Pages/CartPage/CartPage';
+import SavedItemPage from './Pages/SavedItemPage/SavedItemPage';
+import DetailedAlbum from './Pages/AlbumPage/DetailedAlbum';
+import ProfilePage from './Pages/ProfiledPage/ProfiledPage';
+import OrdersPage from './Pages/OrdersPage/OrdersPage';
 import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
+import ScrollToTop from './Components/Scroll To Top/ScrollToTop';
 import { Route, Routes } from 'react-router-dom';
 import Scrollbar from 'smooth-scrollbar';
 import React from "react";
@@ -31,6 +37,7 @@ function App() {
      <Header>
      </Header>
           <body >
+          <ScrollToTop/>
           <Routes>
             <Route path="/" element = {<LandingPage/>} />
             <Route path="/signin" element = {<SigninPage/>} />
@@ -39,6 +46,11 @@ function App() {
             <Route path="/product/:id" element  = {<ProductPage/>}/> 
             <Route path="/checkout" element  = {<CheckoutPage/>}/> 
             <Route path="/cart" element  = {<CartPage/>}/> 
+            <Route path="/saved" element  = {<SavedItemPage/>}/> 
+            <Route path="/saved/:id" element  = {<DetailedAlbum/>}/> 
+            <Route path="/profile" element  = {<ProfilePage/>}/> 
+            <Route path="/orders" element  = {<OrdersPage/>}/> 
+            <Route path="/materials" element  = {<MaterialDetailPage/>}/> 
             <Route path="*" element={<LandingPage/>}/>
           </Routes>
           </body>

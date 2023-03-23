@@ -2,8 +2,10 @@ import React from 'react'
 import styles from './CartPage.module.css'
 import Suggestion from '../../Components/Suggestion/Suggestion'
 import ItemCard from './ItemCard'
+import { useNavigate } from 'react-router-dom'
 export default function CartPage() {
-  return (
+    const navigate = useNavigate();
+    return (
     <div>
         <div className ={styles.header}>
         <div style={{fontSize: '35px', textAlign:'left', fontWeight:'600'}}>Xem giỏ hàng.</div>
@@ -26,7 +28,7 @@ export default function CartPage() {
             <div style={{flex:'1 0 0',textAlign:'left'}}>Tổng </div>
             <div>275000</div>
             </div>
-            <div className={styles.checkoutButton}>Checkout ngay!</div>
+            <div className={styles.checkoutButton} onClick ={()=>navigate('/checkout')}>Checkout ngay!</div>
         </div>
         <Suggestion/>
     </div>

@@ -6,7 +6,9 @@ import ColorLayer from '../../assets/images/Glass Material Component/color-layer
 import GlassLayer from '../../assets/images/Glass Material Component/glass-layer.png'
 import {gsap} from 'gsap'
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useNavigate } from 'react-router-dom'
 export default function GlassMaterialsAds() {
+  const navigate = useNavigate()
   gsap.registerPlugin(ScrollTrigger);
   useEffect(() => {
     gsap.to('#uvb',
@@ -51,7 +53,7 @@ export default function GlassMaterialsAds() {
         <div style={{position : 'relative'}}>
             <span className = {`${styles.productName} ${styles.shine}`}>Nano Case</span>
             <span className = {`${styles.productProperty} ${styles.shine}`}>Sang trọng. Đẳng cấp.</span>
-            <span><a href='#' className = {styles.morebtn}>Xem thêm</a></span>
+            <span><a href='#' onClick = {()=>navigate('/materials')} className = {styles.morebtn}>Xem thêm</a></span>
         </div>
     </div>
     <img id = "uvb" style = {{top:-10}} src = {Uvb} className ={styles.glassMaterialsImg}></img>

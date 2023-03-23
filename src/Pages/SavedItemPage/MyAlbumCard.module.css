@@ -1,0 +1,64 @@
+.cardWrapper{
+    position: relative;
+    display: grid;
+    grid-template-columns: 48.5% 48.5%;
+    column-gap: 3%;
+    height: 25vw;
+    grid-auto-rows:100%;
+    align-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.cardWrapper:first-child{
+ 
+}
+.cardItem{
+    position: relative;
+    min-width: 100px;
+    border-radius: 10px;
+    background-color: rgba(241,241,241);
+}
+.cardItem img{
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    min-width: 100px;
+}
+.albumName{
+    font-size: 20px;
+}
+.collectionNameControl{
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0px;
+}
+.albumInfo div div{
+    float: left;
+}
+.albumInfo >div{
+    margin: 5px;
+} 
+.collectionControlBtn{
+ display: flex;
+ justify-content: space-between;
+}
+.collectionMoreBtn{
+    display: block;
+    cursor: pointer;
+    vertical-align: center;
+}
+.collectionMoreBtn:hover{
+    font-weight: 600;
+}
+
+.albumInfo{
+    display: flex;
+    flex-direction: column;
+}
+.collectionQuantity{
+}

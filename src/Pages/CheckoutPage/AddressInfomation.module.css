@@ -3,6 +3,7 @@
     text-align: left;
     border: 1px solid rgba(0,0,0,0.1);
     padding: 10px;
+    line-height: 25px;
 }
 .billInfo > div{
     margin-top: 10px;
@@ -13,5 +14,4 @@
 .addMoreAddress{
     flex: 0,0,0;
     cursor: pointer;
-
-}
+    color:rgb(0, 75, 145);}
