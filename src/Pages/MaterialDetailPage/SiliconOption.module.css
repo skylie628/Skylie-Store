@@ -33,3 +33,21 @@
     height: 15px;
     margin-right: 10px;
 }
+.property{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    font-size: 3.5vw;
+    width: 40%;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    justify-content: center;
+    text-align: left;
+    height: 100%;
+    transition: 0.5 ease-in-out;
+
+}
+.property div{
+    margin-top: 10px;
+}

@@ -13,19 +13,29 @@ export default function SiliconOption() {
         setWindowDimensions({width : width,height : height})},[])
   return (
     <div style ={{width:windowDimensions.width,height: windowDimensions.height}} className={styles.container}>
+    <div className={styles.property} style ={{opacity: optionSelect, left: optionSelect == 0? '-50px' : '0', transition:'0.5s ease-in-out'}}>
+    <div>Darknight.</div>
+    <div>Cool.</div>
+    <div>Mystery.</div>
+    </div>
+    <div className={styles.property} style ={{opacity: optionSelect == 0 ? 1 : 0, left: optionSelect == 1? '-50px' : '0', transition:'0.5s ease-in-out'}}>
+    <div>PureHeart.</div>
+    <div>Soft.</div>
+    <div>Luxury.</div>
+    </div>
     <img className={styles.materialsImg} src = {BlackSil} style ={{zIndex : 3, height:'100%', opacity: optionSelect, transition:'0.5s ease-in-out'}} ></img>
     <img className={styles.materialsImg} src = {TransSil} style ={{zIndex: 2,height:'100%',transition:'0.5s ease-in-out'}} ></img>
     <div className ={styles.options}>
         <div className={styles.option}>
             <div className={styles.colorDot} style={{backgroundColor:'white',border:optionSelect == 0? '2px solid blue' :'2px solid black'}} onClick = {()=>setOptionSelect(0)}></div>
             <div >
-            Trong suot
+            Trong suốt
             </div>
         </div>
         <div className={styles.option}>
         <div className={styles.colorDot} style={{backgroundColor:'black',border:optionSelect == 1? '2px solid blue' :'2px solid gray'}} onClick = {()=>{setOptionSelect(1)}}></div>
         <div>
-            Den
+            Đen
             </div>
         </div>
     </div>

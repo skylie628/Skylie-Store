@@ -7,15 +7,14 @@ import SiliconCanvas from '../../Components/Canvas/SiliconCanvas'
 import {gsap} from 'gsap';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 export default function MaterialDetailPage() {
-  let id = 0;
+  let id = 1;
   gsap.registerPlugin(ScrollTrigger);
  const [windowDimensions,setWindowDimensions] = useWindowDimensions();
  let  imgUrl = {index: 0};
- const [prevId,setPrevId] = useState(0);
  const canvas = React.useRef();
 const imagelist = useMemo(() => {
+  console.log('preload image')
   let imgls = [...Array(19).keys()].map(x=>{
-      console.log('preload image')
       const image = new Image();
       image.width = 3000;
       image.height = 840;
@@ -24,6 +23,8 @@ const imagelist = useMemo(() => {
   })
   return imgls;
 },[]);
+
+
  useEffect(()=>{
   
     const width = window.document.body.clientWidth;
@@ -37,11 +38,12 @@ const imagelist = useMemo(() => {
     let requestId ;
   
     const render = () => {
-    console.log("renderprogress:",windowDimensions.height,window.innerHeight)
     context.clearRect (offsetX,offsetY,nwidth,windowDimensions.height*0.8);
     context.drawImage(imagelist[id], offsetX,offsetY,nwidth,windowDimensions.height*0.8);
   };
-  render();
+  imagelist[0].onload = render
+  context.clearRect (offsetX,offsetY,nwidth,windowDimensions.height*0.8);
+  context.drawImage(imagelist[0], offsetX,offsetY,nwidth,windowDimensions.height*0.8);
     //console.log(windowDimensions)
     gsap.to(imgUrl, {
       // backgroundPosition: (-offset_value * frame_count * 2) + "px 50%",
@@ -49,7 +51,7 @@ const imagelist = useMemo(() => {
       index: 18,
       scrollTrigger: {
       start: windowDimensions.height,
-      end: "+=" + windowDimensions.height*2,
+      end: "+=" + windowDimensions.height,
       scrub: 1 ,
       },
       onUpdate: self => {
@@ -57,15 +59,100 @@ const imagelist = useMemo(() => {
         if (round !== id){
         id = round;
         requestId = window.requestAnimationFrame(render);}
-     }})
+     }})  
+     gsap.to(imgUrl,
+     {
+      scrollTrigger:"#weightOption",
+      index:0,
+      onUpdate: self =>{
+        window.requestAnimationFrame(render)
+      }
+    });
+     gsap.to('#rightTexts',
+     {
+      scrollTrigger:"#rightborder",
+      opacity:1,
+      duration: 1.5,
+    });
+    gsap.to('#rightborder',
+    {
+     scrollTrigger:"#rightborder",
+     width:'80%',
+     duration: 0.5,
+   });
+   gsap.to('#rightProperty',
+ { opacity: 0, 
+  immediateRender: false,
+  scrollTrigger: {
+  trigger:'#rightProperty',
+  start: "top top",
+  end:  "+=" + windowDimensions.height/2,
+  scrub: true
+},
+});
+
+gsap.to('#leftProperty',
+{ opacity: 1, 
+ immediateRender: false,
+ scrollTrigger: {
+ trigger:'#leftProperty',
+ start: "top top",
+ end:  "+=" + windowDimensions.height/2,
+ scrub: true
+},
+});
+
+gsap.to('#leftborder',
+{  width:'80%',
+ immediateRender: false,
+ scrollTrigger: {
+ trigger:'#weightOption',
+ start: "top top",
+ end:  "+=" + windowDimensions.height/2,
+ scrub: true
+},
+});
+
+gsap.to('#leftTexts',
+{  opacity:1,
+ marginLeft:'10vw',
+ immediateRender: false,
+ scrollTrigger: {
+ trigger:'#weightOption',
+ start: "top top",
+ end:  "+=" + windowDimensions.height/2,
+ scrub: true
+},
+});
+
+
 
   },[])
   return (
     <div>
       <SiliconOption></SiliconOption>
-    <div className = {styles.container}>
+    <div id="weightOption" className = {styles.container}>
     <div className ={styles.fixEle} style ={{width:'100%',height:windowDimensions.height - 64}}>
     <canvas ref = {canvas} width = {windowDimensions.width} height = {windowDimensions.height*0.8} className = {styles.canvasimg}></canvas>
+    <div id ="leftProperty" className ={styles.property} style ={{width:'35%',height:windowDimensions.height,left:'0',opacity:0}}>
+       <div style ={{position:'absolute', bottom:'20vw'}}>
+       <div id = "leftTexts" style ={{opacity: 0,textAlign:'left',marginBottom:'3vw'}}>
+       <div style ={{fontSize:'3vw'}}>but can be </div>
+       <div style ={{fontSize:'5vw',fontWeight:'bold', color:'rgb(56,166,241)'}}>THICKER.</div> 
+       </div>
+       <div style={{fontSize:'15px',textAlign:'left',marginLeft:'20%',marginBottom:'10px'}}>2mm border</div>
+        <div id ="leftborder" style ={{height: '1px',marginLeft:'20%',backgroundColor:'rgb(56,166,241)',width:'0'}}></div>
+      </div>
+      </div>
+
+    <div id ="rightProperty" className ={styles.property} style ={{width:'35%',height:windowDimensions.height,right:'0'}}>
+       <div id = "rightTexts" style ={{opacity: 0,margin:'5vw 10vw 3vw 10vw'}}>
+       <div style ={{fontSize:'3vw'}}>this is </div>
+       <div style ={{fontSize:'4vw',fontWeight:'bold', color:'rgb(56,166,241)'}}>THICK.</div> 
+       </div>
+       <div style={{fontSize:'15px',textAlign:'right',marginRight:'20%',marginBottom:'10px'}}>1mm border</div>
+       <div ><div id ="rightborder" style ={{height: '0.5px',backgroundColor:'rgb(56,166,241)',width:'0'}}></div></div>
+      </div>
     </div>
     </div>
     </div>
