@@ -11,7 +11,7 @@ import playIcon from  '../../assets/images/play-icon.png'
 import pauseIcon from  '../../assets/images/pause-icon.png'
 import VideoModal from "../../Components/Video Modal/VideoModal";
 import { Opacity } from "@mui/icons-material";
-export default function FootballCollection() {
+export default function FootballCollection({windowDimensions,setWindowDimensions}) {
   const [cur, setCur] = useState(1);
   const [isPlay,setIsPlay] = useState(true);
   const [isPlayVideo,setIsPlayVideo] = useState(false);
@@ -85,7 +85,7 @@ export default function FootballCollection() {
     <div style={{display: 'block'}}>
     {isPlayVideo && <VideoModal closeModal = {setIsPlayVideo}/>}
     <div className = {styles.footballCollectionWrapper}>
-    <div className= {`${styles.footballCollectionContentWrapper} ${!disableTransition && styles.transition}`}  style = {{right : `${0.85*width + 30 + (cur-1)*(0.9*width + 20)}px`}}>
+    <div className= {`${styles.footballCollectionContentWrapper} ${!disableTransition && styles.transition}`}  style = {{right : `${0.85*windowDimensions.width + 30 + (cur-1)*(0.9*windowDimensions.width + 20)}px`}}>
         <div className={styles.footballCollectionImageWrapper } onMouseOver = {()=>setCurClick(1)}>
         <img src = {footballCollection4} className = {`${styles.footballCollectionImg} ${styles.outfocus} ${styles.transition}`}  ></img>
         </div>

@@ -1,0 +1,9 @@
+.container{
+    background-color: black;
+    color: white;
+    overflow-x: hidden ;
+}
+.img{
+    width: 35%;
+
+}

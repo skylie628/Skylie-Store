@@ -1,6 +1,5 @@
 .mainHeadline{
   display: block;
-  width: 100vw;
   height: 250vh;
   background-color: black;
 }
@@ -14,7 +13,6 @@
   display: block;
 }
 .canvasimg{
-  height: 600px;
   width: 1263px;
   position: absolute;
   z-index: 1;

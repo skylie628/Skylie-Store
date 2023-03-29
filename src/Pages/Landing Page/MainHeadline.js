@@ -4,17 +4,14 @@ import useWindowDimensions from '../../Hooks/useWindowDimensions.js'
 import styles from './styles.module.css';
 import {gsap} from 'gsap';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-export default function MainHeadline() {
-  const [ratio, setRatio] = useState(0);
+export default function MainHeadline({windowDimensions,setWindowDimensions}) {
   let id = 0;
-  const [ height, width ] = [600,1263];
   gsap.registerPlugin(ScrollTrigger);
-  const nwidth =  height*3000/840;
-  const offsetX = (width - nwidth) / 2 ;
-  const offsetY =  0;
 const canvas = React.useRef();
 const brandname = React.useRef();
+
 const imagelist = useMemo(() => {
+  
   let imgls = [...Array(108).keys()].map(x=>{
       console.log('preload image')
       const image = new Image();
@@ -26,14 +23,19 @@ const imagelist = useMemo(() => {
   return imgls;
 },[]);
 useEffect(() => {
+  const width = window.document.body.clientWidth;
+  const height = window.innerHeight;
+  setWindowDimensions({width : width,height : height});
+  const nwidth =  (windowDimensions.height-64)*3000/840;
+  const offsetX = (windowDimensions.width - nwidth) / 2 ;
+  const offsetY =  0;
   const imgUrl = {index: 0};
   const context = canvas.current.getContext('2d');
   let requestId ;
 
 const render = () => {
-  console.log("renderprogress:",id)
-  context.clearRect (offsetX,offsetY,nwidth,height);
-  context.drawImage(imagelist[id], offsetX,offsetY,nwidth,height);
+  context.clearRect (offsetX,offsetY,nwidth,windowDimensions.height-64);
+  context.drawImage(imagelist[id], offsetX,offsetY,nwidth,windowDimensions.height-64);
 };
 render();
   gsap.to(imgUrl, {
@@ -42,7 +44,7 @@ render();
   index: 107,
   scrollTrigger: {
   start: "top top",
-  end: "+=" + 600,
+  end: "+=" + windowDimensions.height,
   scrub: 1 ,
   },
   onUpdate: self => {
@@ -58,7 +60,7 @@ gsap.fromTo('#brandname', {opacity: 1, fontSize :'16vw', yPercent :50},
   scrollTrigger: {
   trigger:'#brandname',
   start: "top top",
-  end:  "+=" + 400,
+  end:  "+=" + windowDimensions.height - 200,
   scrub: true
 },
 });
@@ -66,8 +68,8 @@ gsap.fromTo('#slogan-text', {backgroundImage: "linear-gradient(-45deg, #ee7752, 
  { backgroundImage: "linear-gradient(-45deg, #12c2e9, #c471ed, #f64f59, #ee7752)" ,
   scrollTrigger: {
   trigger:'#slogan-text',
-  start: "+=" + 300,
-  end:  "+=" + 800,
+  start: windowDimensions.height/2,
+  end:  "+=" + windowDimensions.height,
   scrub: true
 },
 });
@@ -77,8 +79,8 @@ gsap.fromTo('#slogan', {opacity: 0, fontSize :'8vw'},
  { opacity: 1, fontSize :'10vw',
   scrollTrigger: {
   trigger:'#brandname',
-  start: "+=" + 300,
-  end:  "+=" + 400,
+  start: windowDimensions.height/2,
+  end:  "+=" + windowDimensions.height/2 + 100 ,
   scrub: true
 },
 });
@@ -88,8 +90,8 @@ gsap.to('#slogan',
   immediateRender: false,
   scrollTrigger: {
   trigger:'#brandname',
-  start: "+=" + 700,
-  end:  "+=" + 800,
+  start: windowDimensions.height -100,
+  end:  "+=" + windowDimensions.height ,
   scrub: true
 },
 });
@@ -97,7 +99,7 @@ gsap.to('#slogan',
   return () => cancelAnimationFrame(requestId);
   },[])
   return (
-    <div className = {styles.mainHeadline}    id = "scroller">
+    <div className = {styles.mainHeadline} style ={{width: windowDimensions.width}}   id = "scroller">
         {/*<div className = {styles.text}>
         <span  className = {styles.slogan} > Find your style.</span>
         <span  className = {styles.quote} > Thế giới gần 8 tỉ người, nhưng bạn là duy nhất.</span>
@@ -107,11 +109,14 @@ gsap.to('#slogan',
         <span  className = {styles.slogan} > Find your style.{offset}</span>
   </div> */}
 
-        <div  id ="pin" style = {{display :'block', width : '100%',height: '600px', position: 'fixed'}}>{/*style = {{position :  (ratio >3 )? 'absolute' :'sticky', bottom:(ratio >3 )? 0 :'' , display:'block',width:'100%',height:'100%'}} */}
+        <div  id ="pin" style = {{display :'block', width : windowDimensions.width,height: windowDimensions.height-64, position: 'fixed'}}>{/*style = {{position :  (ratio >3 )? 'absolute' :'sticky', bottom:(ratio >3 )? 0 :'' , display:'block',width:'100%',height:'100%'}} */}
           <div style = {{position: 'relative', display: 'block'}}>
-          <canvas ref = {canvas} width = {width} height = {height} className = {styles.canvasimg}></canvas>
+          <canvas ref = {canvas} width = {windowDimensions.width} height = {windowDimensions.height-64} className = {styles.canvasimg}></canvas>
           <div  ref = {brandname} id="brandname" className={styles.HeaderName}>
-          <span >SKYLIE</span>
+          <span  style ={{display:'flex'}}>
+            <div style={{flex:'1 0 0', textAlign:'right'}}>SK</div>
+            <div>Y</div>
+            <div style={{flex:'1 0 0', textAlign:'left'}}>LIE</div></span>
           </div>
           <div id = "slogan" className = {styles.Slogan} >
             <span id = "slogan-text" >Find your style.</span>

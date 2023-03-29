@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react'
 import SiliconImage from '../../assets/images/Transparent Silicon Sequence Img/sil1.png'
+import EyeProtection from './EyeProtection'
+import FlexibleAds from './FlexibleAds'
 import useWindowDimensions from '../../Hooks/useWindowDimensions'
 import SiliconOption from './SiliconOption'
 import styles from './MaterialDetailPage.module.css'
@@ -38,12 +40,10 @@ const imagelist = useMemo(() => {
     let requestId ;
   
     const render = () => {
-    context.clearRect (offsetX,offsetY,nwidth,windowDimensions.height*0.8);
-    context.drawImage(imagelist[id], offsetX,offsetY,nwidth,windowDimensions.height*0.8);
-  };
-  imagelist[0].onload = render
-  context.clearRect (offsetX,offsetY,nwidth,windowDimensions.height*0.8);
-  context.drawImage(imagelist[0], offsetX,offsetY,nwidth,windowDimensions.height*0.8);
+      context.clearRect (offsetX,offsetY,nwidth,windowDimensions.height*0.8);
+      context.drawImage(imagelist[id], offsetX,offsetY,nwidth,windowDimensions.height*0.8);
+    };
+    imagelist[0].onload = render
     //console.log(windowDimensions)
     gsap.to(imgUrl, {
       // backgroundPosition: (-offset_value * frame_count * 2) + "px 50%",
@@ -82,6 +82,7 @@ const imagelist = useMemo(() => {
    });
    gsap.to('#rightProperty',
  { opacity: 0, 
+  right: -50,
   immediateRender: false,
   scrollTrigger: {
   trigger:'#rightProperty',
@@ -131,6 +132,7 @@ gsap.to('#leftTexts',
   return (
     <div>
       <SiliconOption></SiliconOption>
+      <EyeProtection windowDimensions ={windowDimensions} setWindowDimensions = {setWindowDimensions}></EyeProtection>
     <div id="weightOption" className = {styles.container}>
     <div className ={styles.fixEle} style ={{width:'100%',height:windowDimensions.height - 64}}>
     <canvas ref = {canvas} width = {windowDimensions.width} height = {windowDimensions.height*0.8} className = {styles.canvasimg}></canvas>
@@ -155,6 +157,7 @@ gsap.to('#leftTexts',
       </div>
     </div>
     </div>
+    <FlexibleAds windowDimensions = {windowDimensions} setWindowDimensions = {setWindowDimensions}></FlexibleAds>
     </div>
   )
 }

@@ -7,7 +7,7 @@ import GlassLayer from '../../assets/images/Glass Material Component/glass-layer
 import {gsap} from 'gsap'
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useNavigate } from 'react-router-dom'
-export default function GlassMaterialsAds() {
+export default function GlassMaterialsAds({windowDimensions,setWindowDimensions}) {
   const navigate = useNavigate()
   gsap.registerPlugin(ScrollTrigger);
   useEffect(() => {
@@ -46,8 +46,8 @@ export default function GlassMaterialsAds() {
 
   },[])
   return (
-    <div className={styles.Container}>
-    <div className={styles.Sticky}>
+    <div className={styles.Container} style ={{width: windowDimensions.width}}>
+    <div className={styles.Sticky}  style ={{height: windowDimensions.height-64}}>
     <div className = {styles.glassMaterialsWrapper}>
     <div className = {styles.contentWrapper}>
         <div style={{position : 'relative'}}>
@@ -56,9 +56,9 @@ export default function GlassMaterialsAds() {
             <span><a href='#' onClick = {()=>navigate('/materials')} className = {styles.morebtn}>Xem thêm</a></span>
         </div>
     </div>
-    <img id = "uvb" style = {{top:-10}} src = {Uvb} className ={styles.glassMaterialsImg}></img>
-    <img id = "color" style = {{top:10}}  src = {ColorLayer} className ={styles.glassMaterialsImg}></img>
-    <img id = "glass" style = {{top:10}}  src = {GlassLayer} className ={styles.glassMaterialsImg}></img>
+    <img id = "uvb" style = {{top:-10, width: windowDimensions.width, height: windowDimensions.height-64}} src = {Uvb} className ={styles.glassMaterialsImg}></img>
+    <img id = "color" style = {{top:10, width: windowDimensions.width, height: windowDimensions.height-64}}  src = {ColorLayer} className ={styles.glassMaterialsImg}></img>
+    <img id = "glass" style = {{top:10, width: windowDimensions.width, height: windowDimensions.height-64}}  src = {GlassLayer} className ={styles.glassMaterialsImg}></img>
     </div>
     </div>
     </div>
