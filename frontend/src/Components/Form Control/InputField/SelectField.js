@@ -5,6 +5,10 @@ import {MenuItem} from '@mui/material';
 import {InputLabel} from '@mui/material';
 export default function SelectField(props) {
   const {formState} = props.form ;
+  const handleOnChange = (e)=>{
+    console.log(e.target)
+    props.setSelected({value:e.target.value})
+  }
   return (
     <div>
     <Controller
@@ -18,10 +22,10 @@ export default function SelectField(props) {
         options={props.options}
         value={value}
         label = {props.label}
-        onChange={onChange}
+        onChange={(e)=>{onChange(e); handleOnChange(e)}}
       >       
     {        props.options.map(x =>
-                <MenuItem value = {x.value} key={x.key} >{x.value}</MenuItem>)
+                <MenuItem value = {x.value} key={x.key} >{x.label}</MenuItem>)
     }
       </Select></FormControl>
     }}

@@ -15,7 +15,7 @@ export default function SignupForm(props) {
     }
     }
     const schema = yup.object().shape({
-        fullname: yup.string().required('Hãy nhập tên bạn nhé!'),
+        firstname: yup.string().required('Hãy nhập tên bạn nhé!'),
         lastname: yup.string().required('Hong được bỏ trống trường này đâu!'),
         email: yup.string().required('Email là bắt buộc ạ!').email('Bạn kiểm tra lại email nhé!'),
         password: yup.string().required('Ui chưa nhập password này!').min(6),
@@ -35,9 +35,9 @@ export default function SignupForm(props) {
     <div style = {{ m: 1, width: '30%',minWidth : 380 , display: 'flex',margin : '30px  auto' }}>
     <div style = {{ m: 1, flex: '1 1 auto', display: 'block',margin : '30px 0px 10px 0px', alignSelf : "left" }}>
     <InputField
-       name= "fullname"
-       id="fullname"
-       label="fullname"
+       name= "firstname"
+       id="firstname"
+       label="firstname"
        variant="outlined"
        form = {form}
        />

@@ -13,7 +13,7 @@ export default function DateTimePicker(props) {
     name = {props.name}
     control = {props.form.control}
       render = {({ field }) => <DatePicker
-      defaultValue={dayjs('2022-07-17')}
+      defaultValue={dayjs(props.defaultdob)}
       minDate={dayjs('1950-01-00')}
       maxDate={dayjs('2016-01-00')}
       format="DD/MM/YYYY"

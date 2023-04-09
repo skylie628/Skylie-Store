@@ -6,15 +6,21 @@ import CoupleCollection from './CoupleCollection'
 import FootballCollection from './FootballCollection'
 import QrCode from './QrCode'
 import useWindowDimensions from '../../Hooks/useWindowDimensions'
+import { useSelector, useDispatch } from 'react-redux'
+import { GetUserCurrent } from '../../store/actions/user'
 import { height } from '@mui/system'
 export default function LandingPage() {
  const [windowDimensions,setWindowDimensions] = useWindowDimensions();
+ const dispatch = useDispatch();
+ const {islogged} = useSelector(state => state.auth)
+ useEffect(()=>{
+  setTimeout(()=>{islogged && dispatch(GetUserCurrent());},1000) 
+ },[islogged])
  useEffect(()=>{
   const width = window.document.body.clientWidth;
   const height = window.innerHeight;
   setWindowDimensions({width : width,height : height});
  },[])
-
   return (
     <div style ={{width:windowDimensions.width }}>    
     <MainHeadline windowDimensions ={windowDimensions} setWindowDimensions = {setWindowDimensions}></MainHeadline> 

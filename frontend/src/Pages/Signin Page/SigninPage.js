@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Logo from '../../Components/Logo/Logo.js'
 import GoogleActive from '../../assets/images/google-icon-active.png'
 import GoogleInactive from '../../assets/images/google-icon-inactive.png'
@@ -8,11 +8,20 @@ import SignInForm from './SignInForm.js'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import styles from './styles.module.css'
+import { Login } from '../../store/actions/auth.js'
+import { useDispatch, useSelector } from 'react-redux'
 export default function SigninPage() {
+const dispatch = useDispatch();
 const navigate = useNavigate();
-const handleFormSubmit = (value) =>{
-console.log(value)
+const {islogged} = useSelector(state => state.auth);
+useEffect(()=>{
+  console.log('login islogged', islogged)
+  islogged && navigate('/')
+},[islogged])
+const handleFormSubmit = async (value) =>{
+  dispatch(Login(value))
 }
+
   return (
     <Box
     sx={{

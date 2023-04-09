@@ -1,16 +1,28 @@
 import React from 'react'
+import { useEffect } from 'react'
 import Logo from '../../Components/Logo/Logo.js'
 import GoogleActive from '../../assets/images/google-icon-active.png'
 import GoogleInactive from '../../assets/images/google-icon-inactive.png'
 import FacebookActive from '../../assets/images/facebook-icon-active.png'
 import FacebookInactive from '../../assets/images/facebook-icon-inactive.png'
 import SignupForm from './SignupForm.js'
+import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import styles from './styles.module.css'
+import { apiRegister } from '../../services/auth.js'
+import { Register } from '../../store/actions/auth.js'
+import {useDispatch, useSelector} from 'react-redux'
 export default function SignupPage() {
-const handleFormSubmit = (value) =>{
-console.log(value)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {islogged} = useSelector(state => state.auth);
+  const handleFormSubmit =  async value =>{
+  dispatch(Register(value))
 }
+useEffect(()=>{
+  console.log("islogged",islogged)
+  islogged && navigate('/');
+},[islogged])
   return (
     <Box
     sx={{

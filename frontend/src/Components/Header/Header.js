@@ -10,9 +10,13 @@ import Logo from '../../assets/images/skylie-logo-icon.png'
 import BlackShoppingBag from '../../assets/images/shopping-bag-icon-black.png'
 import WhiteShoppingBag from '../../assets/images/shopping-bag-icon-white.png'
 import BlackLogo from '../../assets/images/skylie-logo-icon-black.png'
+import { useSelector, useDispatch } from 'react-redux'
+import { GetUserCurrent } from '../../store/actions/user'
 import ExpandHeader from './ExpandHeader'
 export default function Header(props) {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const {islogged} = useSelector(state=> state.auth);
   const [isRelative, setIsRelative] = useState(false);
   const [isExpandHeader,setIsExpandHeader] = useState(false);
   /*useEffect(()=>{
@@ -32,7 +36,7 @@ export default function Header(props) {
     <box className ={styles.buttons}>
     <span className ={styles.button}><a className ={styles.button} >Về chúng tôi</a></span>
     <span className ={styles.button}><a className ={styles.button} onClick = {() =>{changePath('/shopping')}}>Shopping</a></span>
-    <span className ={styles.button}><a className ={styles.button} onClick = {() =>{changePath('/signin')}}>Đăng nhập</a></span>
+    {!islogged && <span className ={styles.button}><a className ={styles.button} onClick = {() =>{changePath('/signin')}}>Đăng nhập</a></span>}
     <span className ={styles.button}><img  src= {isRelative? BlackShoppingBag : WhiteShoppingBag} className ={styles.cart} onClick = {() =>setIsExpandHeader(prev => !prev)}/></span>
     </box>
     </Toolbar>

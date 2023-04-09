@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@mui/material';
@@ -6,6 +6,7 @@ import Logo from '../../Components/Logo/Logo';
 import CloseIcon from '../../assets/images/close-icon-black.png'
 import InputField from '../../Components/Form Control/InputField/InputField';
 import SelectField from '../../Components/Form Control/InputField/SelectField';
+import { apiGetAllProvinces,apiGetDistrictsByProvince,apiGetWardsByDistrict } from '../../services/address';
 import styles from './DeliveryInfoForm.module.css'
 export default function DeliveryInfoForm(props) {
     const yup = require("yup");
@@ -16,6 +17,13 @@ export default function DeliveryInfoForm(props) {
         onSubmit(value)
       }
       }
+    const [provincesList,setProvincesList] = useState([]);
+    const [districtsList,setDistrictsList] = useState([]);
+    const [wardsList,setWardsList] = useState([]);
+    const [selectedProvince,setSelectedProvince] = useState(0);
+    const [selectedDistrict,setSelectedDistrict] = useState(0);
+    const [selectedWard,setSelectedWard] = useState(0);
+
     const schema = yup.object().shape({
         fullname: yup.string().required('Hãy nhập tên bạn nhé!'),
         lastname: yup.string().required('Hong được bỏ trống trường này đâu!'),
@@ -39,6 +47,43 @@ export default function DeliveryInfoForm(props) {
         .string()
         .required('Thông tin này bắt buộc để vận chuyển đơn hàng'),
     });
+    useEffect(()=>{
+      const getAllProvinces = async()=>{
+        const response = await apiGetAllProvinces()
+        const provinces = response.map(x =>({
+          label: x.name,
+          value: x.code
+        }))
+        setProvincesList(provinces);
+    }
+    getAllProvinces();
+    },[])
+    useEffect(()=>{
+      console.log("selectedProvince",selectedProvince.value)
+      const getDistricts = async(pcode)=>{
+        const response = await apiGetDistrictsByProvince(pcode)
+        const districts = response.districts.map(x =>({
+          label: x.name,
+          value: x.code
+        }))
+        setDistrictsList(districts);
+    }
+    getDistricts(selectedProvince.value);
+    },[selectedProvince])
+
+    useEffect(()=>{
+      const getWards = async(dcode)=>{
+        const response = await apiGetWardsByDistrict(dcode)
+        const wards = response.wards.map(x =>({
+          label: x.name,
+          value: x.code
+        }))
+        setWardsList(wards);
+    }
+    getWards(selectedDistrict.value);
+    },[selectedDistrict])
+
+
 
     const form = useForm({
         defaultValues : {
@@ -89,11 +134,8 @@ export default function DeliveryInfoForm(props) {
         name = 'province'
         id = 'province'
         label = 'Tỉnh/Thành phố'
-        options = {[
-            { label: "Tây Ninh", value: "Tây Ninh" },
-            { label: "Bình Dương", value: "Bình Dương" },
-            { label: "Tp Hồ chí Minh", value: "Tp Hồ chí Minh" }
-          ]}
+        options = {provincesList}
+        setSelected = {setSelectedProvince}
         form = {form}
         ></SelectField>
 </div> <div>
@@ -101,11 +143,8 @@ export default function DeliveryInfoForm(props) {
         name = 'district'
         id = 'district'
         label = 'Quận/Huyện'
-        options = {[
-            { label: "Tây Ninh", value: "Tây Ninh" },
-            { label: "Bình Dương", value: "Bình Dương" },
-            { label: "Tp Hồ chí Minh", value: "Tp Hồ chí Minh" }
-          ]}
+        options = {districtsList}
+        setSelected = {setSelectedDistrict}
         form = {form}
         ></SelectField>
 </div><div>
@@ -113,11 +152,8 @@ export default function DeliveryInfoForm(props) {
         name = 'wards'
         id = 'wards'
         label = 'Phường/Xã'
-        options = {[
-            { label: "Tây Ninh", value: "Tây Ninh" },
-            { label: "Bình Dương", value: "Bình Dương" },
-            { label: "Tp Hồ chí Minh", value: "Tp Hồ chí Minh" }
-          ]}
+        options = {wardsList}
+        setSelected ={setSelectedWard}
         form = {form}
         ></SelectField>
 </div><div>
