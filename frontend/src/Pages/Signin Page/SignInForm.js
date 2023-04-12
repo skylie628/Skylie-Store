@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FormControl, InputAdornment } from '@mui/material';
 import {useForm} from 'react-hook-form';
 import Button from '@mui/material/Button';
 import EmailIcon from '@mui/icons-material/Email';
 import InputField from '../../Components/Form Control/InputField/InputField.js';
 import PasswordInputField from '../../Components/Form Control/InputField/PasswordInputField.js';
+import SingleNotify from '../../Components/MultipleNotify/SingleNotify.js';
+import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
+import actionTypes from '../../store/actions/actionTypes.js';
+import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner.js';
 export default function SignInForm(props) {
+    const {errors,action} = useSelector(state => state.auth);
     const yup = require("yup");
     const handleFormSubmit = (value)=>{
       console.log(value)
@@ -15,6 +20,9 @@ export default function SignInForm(props) {
       onSubmit(value)
     }
     }
+    useEffect(()=>{
+      console.log("loi la : ",errors,action);
+    })
     const schema = yup.object().shape({
         email: yup.string().required('Hãy nhập email bạn nhé!').email('Hãy nhập đúng email bạn nhé!'),
         password: yup.string().required('Hãy nhập password bạn nhé!'),
@@ -30,6 +38,8 @@ export default function SignInForm(props) {
       )
   return (
     <form onSubmit = {form.handleSubmit(handleFormSubmit)}>
+    {(action == actionTypes.LOGIN_FAIL) && <SingleNotify style = {{backgroundColor:'rgba(0,0,0,0.1)',width: '30%',margin:'0 auto'}} severity ='error' msg={errors}></SingleNotify>}
+    <LoadingSpinner overlay={{backgroundColor: 'white'}} isLoading ={action == actionTypes.LOGIN }>
     <div style={{ m: 1, width: '30%',minWidth : 380 , display: 'block',margin : '30px auto' }} variant="outlined">  
        <InputField
        name= "email"
@@ -48,9 +58,11 @@ export default function SignInForm(props) {
          variant="outlined"
          form = {form} />
      </div>
+     </LoadingSpinner>
      <div>
      <Button variant="outlined" style = {{display: 'block', margin : '10px auto'}} onClick = {form.handleSubmit(handleFormSubmit)}>Đăng nhập</Button>
      </div>
+     
      </form>
   )
 }

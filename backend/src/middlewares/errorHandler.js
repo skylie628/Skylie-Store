@@ -12,8 +12,8 @@ const errorHandler =  (err, req, res, next )=> {
     const messageError = err.messageObject || err.message;
   // create format error response
     const error ={
-        status:"Error",
-        error: messageError
+        err:-1,
+        errors: messageError
     }
     const status = err.status || 400;
     

@@ -7,7 +7,6 @@ export const apiRegister = (payload) => new Promise(async(resolve,reject)=>{
             url: '/api/v1/auth/register',
             data: payload
         })
-    
         resolve(response)
     } catch(err){
         reject(err)
@@ -15,7 +14,14 @@ export const apiRegister = (payload) => new Promise(async(resolve,reject)=>{
 })
 
 export const apiLogin = (payload) => new Promise(async(resolve, reject) => {
-    try{
+
+    axiosConfig({
+        method:'post',
+        url: '/api/v1/auth/login',
+        data:payload
+    }).then(rs=>resolve(rs.data))
+    .catch(err =>reject(err.response.data))
+    /*try{
     const response = await axiosConfig({
         method:'post',
         url: '/api/v1/auth/login',
@@ -23,7 +29,8 @@ export const apiLogin = (payload) => new Promise(async(resolve, reject) => {
     })
     resolve(response)
     }
-    catch(err){
-        reject(err)
-    }
+    catch(resErr){
+        console.log("errrrrr",resErr.response.data)
+        reject(resErr.response.data)
+    }*/
 })

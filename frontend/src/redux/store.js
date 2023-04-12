@@ -8,6 +8,7 @@ import { persistReducer, persistStore } from 'redux-persist';
     const AuthpersistConfig = {
         key: 'root',
         storage ,
+        blacklist:['action','errors'],
       }
 
       const UserpersistConfig = {

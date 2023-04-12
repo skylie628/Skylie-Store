@@ -14,12 +14,13 @@ export default function SigninPage() {
 const dispatch = useDispatch();
 const navigate = useNavigate();
 const {islogged} = useSelector(state => state.auth);
+const {isloading,errors,action} = useSelector(state => state.auth)
 useEffect(()=>{
-  console.log('login islogged', islogged)
   islogged && navigate('/')
 },[islogged])
 const handleFormSubmit = async (value) =>{
-  dispatch(Login(value))
+  await dispatch(Login(value))
+console.log("response là",action,errors);
 }
 
   return (

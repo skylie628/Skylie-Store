@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import actionTypes  from "../actions/actionTypes"
-
+import actionTypes from "../actions/actionTypes";
 const initialState = {
+    action:'',
     islogged: false,
     userToken: null, // for storing the JWT\
-    msg: '',
+    errors: null,
+    
   }
-
 
   const authSlice = createSlice({
     name: 'auth',
@@ -27,19 +27,30 @@ const initialState = {
          msg: action.payload.data
      }
      },
+     login: (state,action) =>{
+      return {
+        ...state,
+        isLoading: true,
+        action: actionTypes.LOGIN,
+        errors: null,
+      }
+     },
      loginSuccess: (state,action) =>{
        return {
         ...state,
         islogged: true,
-        userToken: action.payload.data
+        action: actionTypes.LOGIN_SUCCESS,
+        userToken: action.payload.data,
+        
     }
     },
     loginFail: (state,action) =>{
       return {
        ...state,
        islogged: false,
+       action: actionTypes.LOGIN_FAIL,
        userToken: null,
-       msg: action.payload.data
+       errors: action.payload.data
    }
    },
    logout: (state,action) =>{
@@ -52,5 +63,5 @@ const initialState = {
  },
     },
   })
-  export const {registerSuccess,registerFail,loginSuccess,loginFail,logout} = authSlice.actions;
+  export const {registerSuccess,registerFail,login,loginSuccess,loginFail,logout} = authSlice.actions;
   export default authSlice.reducer;
