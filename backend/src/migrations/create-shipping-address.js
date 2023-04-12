@@ -20,19 +20,25 @@ module.exports = {
       phonenum: {
         type: Sequelize.STRING
       },
-      city: {
-        type: Sequelize.STRING
+      province: {
+        type: Sequelize.INTEGER
       },
       district: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
-      wards: {
-        type: Sequelize.STRING
-      },
-      streets: {
-        type: Sequelize.STRING
+      ward: {
+        type: Sequelize.INTEGER
       },
       homenum: {
+        type: Sequelize.STRING
+      },
+      default: {
+        type: Sequelize.BOOLEAN
+      },
+      account_id: {
+        type: Sequelize.STRING
+      },
+      address: {
         type: Sequelize.STRING
       },
       createdAt: {

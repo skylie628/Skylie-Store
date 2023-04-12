@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      ShippingAddress.belongsTo(models.Account,{foreignKey:'account_id',targetKey:'id',as:'account'})
     }
   }
   ShippingAddress.init({
@@ -18,11 +18,12 @@ module.exports = (sequelize, DataTypes) => {
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
     phonenum: DataTypes.STRING,
-    city: DataTypes.STRING,
-    district: DataTypes.STRING,
-    wards: DataTypes.STRING,
-    streets: DataTypes.STRING,
-    homenum: DataTypes.STRING
+    province: DataTypes.INTEGER,
+    district: DataTypes.INTEGER,
+    ward: DataTypes.INTEGER,
+    homenum: DataTypes.STRING,
+    default: DataTypes.BOOLEAN,
+    address: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'ShippingAddress',

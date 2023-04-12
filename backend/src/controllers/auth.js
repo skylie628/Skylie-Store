@@ -20,7 +20,7 @@ export const register = async (req,res) =>{
     }
 }
 
-export  const login = async (req,res) =>{
+/*export  const login = async (req,res) =>{
     const {email,password} = req.body;
     try{
         if(!email || !password){
@@ -38,4 +38,16 @@ export  const login = async (req,res) =>{
             msg: 'fail at auth controller:'+err
         })
     }
+}*/
+
+export  const login = async (req,res,next) =>{
+    const {email,password} = req.body;
+
+    if(!email || !password){
+          next(new Error('Thiếu email hoặc password'))
+    }
+    
+    const response = await authService.loginService(req.body);
+    return res.status(200).json(response)
+        
 }

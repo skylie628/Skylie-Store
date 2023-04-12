@@ -2,6 +2,7 @@ import express  from "express";
 import connectDatabase from "./src/config/connectDatabase";
 import {allowCrossDomain} from "./src/config/corsConfig";
 import initRoutes from './src/routes'
+require('express-async-errors');
 require('dotenv').config();
 var cors = require('cors')
 const app = express();
