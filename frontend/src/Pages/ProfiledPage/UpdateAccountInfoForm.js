@@ -11,9 +11,11 @@ import styles from './AccountInfo.module.css';
 export default function UpdateAccountInfoForm(props) {
     const yup = require("yup");
     const userInfo = props.userInfo
+    const phoneRegExp = /((09|03|07|08|05)+([0-9]{8})\b)/g;
     const schema = yup.object().shape({
         firstname: yup.string().required('Hãy nhập tên bạn nhé!'),
         lastname: yup.string().required('Hong được bỏ trống trường này đâu!'),
+        phonenum:yup.string().required('Hong được bỏ trống trường này đâu!').matches(phoneRegExp,'Số điện thoại không đúng định dạng rồi!'),
         email: yup.string().required('Email là bắt buộc ạ!').email('Bạn kiểm tra lại email nhé!'),
         dob: yup
         .string()

@@ -3,6 +3,7 @@ import React from 'react'
 import storage from 'redux-persist/lib/storage';
 import authReducer from '../store/reducers/authSlice';
 import userReducer from '../store/reducers/userSlice';
+import shippingAddressReducer from '../store/reducers/shippingAddressSlice'
 import { persistReducer, persistStore } from 'redux-persist';
     const AuthpersistConfig = {
         key: 'root',
@@ -19,7 +20,8 @@ import { persistReducer, persistStore } from 'redux-persist';
     export const store = configureStore({
         reducer: {
           auth: persistedAuthReducer,
-          user: persistedUserReducer
+          user: persistedUserReducer,
+          shippingAddress: shippingAddressReducer
         }
       });
     export const persistor  = persistStore(store);

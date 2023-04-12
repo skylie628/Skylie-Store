@@ -22,6 +22,7 @@ export default function SelectField(props) {
         options={props.options}
         value={value}
         label = {props.label}
+        disabled = {props.isDisabled || false}
         onChange={(e)=>{onChange(e); handleOnChange(e)}}
       >       
     {        props.options.map(x =>

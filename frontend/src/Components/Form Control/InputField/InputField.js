@@ -4,6 +4,8 @@ import {Controller} from 'react-hook-form'
 export default function InputField(props) {
   const {formState} = props.form ;
   const hasError = formState.touchedFields[props.name] && formState.errors[props.name];
+  if(props.name == 'phonenum'){
+  console.log("istouched là",formState.touchedFields[props.name],formState.errors[props.name])}
   return (
     <Controller
     name = {props.name}

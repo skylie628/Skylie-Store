@@ -29,7 +29,9 @@
     justify-content: space-between;
 }
 .editBtn{
+    display: block;
     position: absolute;
     top:0;
+    z-index: 3;
     right: 0;
 }

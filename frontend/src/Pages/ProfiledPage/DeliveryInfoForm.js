@@ -2,45 +2,68 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
 import Logo from '../../Components/Logo/Logo';
 import CloseIcon from '../../assets/images/close-icon-black.png'
+import { useMemo } from 'react';
 import InputField from '../../Components/Form Control/InputField/InputField';
 import SelectField from '../../Components/Form Control/InputField/SelectField';
 import { apiGetAllProvinces,apiGetDistrictsByProvince,apiGetWardsByDistrict } from '../../services/address';
 import styles from './DeliveryInfoForm.module.css'
 export default function DeliveryInfoForm(props) {
     const yup = require("yup");
-    const handleFormSubmit = (value)=>{
+    const selectedId= props.selectedId
+    const submitForm = (value)=>{
       console.log(value)
-        const {onSubmit} = props;
-      if(onSubmit) {
-        onSubmit(value)
+      props.handleFormSubmit(value)
       }
-      }
+    const addresses = useSelector(state => state.shippingAddress).addresses;
     const [provincesList,setProvincesList] = useState([]);
     const [districtsList,setDistrictsList] = useState([]);
     const [wardsList,setWardsList] = useState([]);
-    const [selectedProvince,setSelectedProvince] = useState(0);
-    const [selectedDistrict,setSelectedDistrict] = useState(0);
-    const [selectedWard,setSelectedWard] = useState(0);
+    const [selectedProvince,setSelectedProvince] = useState(false);
+    const [selectedDistrict,setSelectedDistrict] = useState(false);
+    const [selectedWard,setSelectedWard] = useState(false);
+    const [disabledDistrict,setDisabledDistrict] = useState(true);
+    const [disabledWard,setDisabledWard] = useState(true);
+    const updateItem  = selectedId && addresses.find(address => address.id == selectedId);
+    const getAllProvinces = async()=>{
+      const response = await apiGetAllProvinces()
+      const provinces = response.map(x =>({
+        label: x.name,
+        value: x.code
+      }))
+      setProvincesList(provinces);
+  }
+    const getDistricts = async(pcode)=>{
+      const response = await apiGetDistrictsByProvince(pcode)
+      const districts = response.districts.map(x =>({
+        label: x.name,
+        value: x.code
+      }))
+      setDistrictsList(districts);
+  }
+    const getWards = async(dcode)=>{
+      const response = await apiGetWardsByDistrict(dcode)
+      const wards = response.wards.map(x =>({
+        label: x.name,
+        value: x.code
+      }))
+      setWardsList(wards);
+    }
+    const phoneRegExp = /((09|03|07|08|05)+([0-9]{8})\b)/g;
 
     const schema = yup.object().shape({
-        fullname: yup.string().required('Hãy nhập tên bạn nhé!'),
+        firstname: yup.string().required('Hãy nhập tên bạn nhé!'),
         lastname: yup.string().required('Hong được bỏ trống trường này đâu!'),
-        phonenum: yup.string().required('Số điện thoại là bắt buộc ạ!'),
-        province: yup
-        .string()
-        .required('Thông tin này bắt buộc để vận chuyển đơn hàng'),
+        phonenum: yup.string().matches(phoneRegExp, 'Phone number is not valid'),
         province: yup
         .string()
         .required('Thông tin này bắt buộc để vận chuyển đơn hàng'),
         district: yup
         .string()
         .required('Thông tin này bắt buộc để vận chuyển đơn hàng'),
-        wards: yup
-        .string()
-        .required('Thông tin này bắt buộc để vận chuyển đơn hàng'),
-        streets: yup
+        ward: yup
         .string()
         .required('Thông tin này bắt buộc để vận chuyển đơn hàng'),
         homenum: yup
@@ -48,53 +71,61 @@ export default function DeliveryInfoForm(props) {
         .required('Thông tin này bắt buộc để vận chuyển đơn hàng'),
     });
     useEffect(()=>{
-      const getAllProvinces = async()=>{
-        const response = await apiGetAllProvinces()
-        const provinces = response.map(x =>({
-          label: x.name,
-          value: x.code
-        }))
-        setProvincesList(provinces);
+      console.log("Id chọn là",selectedId);
+      getAllProvinces();
+    if(selectedId){
+      console.log("update Item",updateItem)
+      getDistricts(updateItem.province)
+      getWards(updateItem.district)
+      setSelectedProvince(updateItem.province)
+      setSelectedDistrict(updateItem.district)
+      setSelectedWard(updateItem.ward)
     }
-    getAllProvinces();
+
+    document.body.style.overflowY = "hidden";
+    return () => {
+        document.body.style.overflowY = "visible";
+    }
+
     },[])
     useEffect(()=>{
-      console.log("selectedProvince",selectedProvince.value)
-      const getDistricts = async(pcode)=>{
-        const response = await apiGetDistrictsByProvince(pcode)
-        const districts = response.districts.map(x =>({
-          label: x.name,
-          value: x.code
-        }))
-        setDistrictsList(districts);
-    }
+    console.log('selectedProvince',selectedProvince.value)
     getDistricts(selectedProvince.value);
+    setWardsList([]);
+    selectedProvince && setDisabledDistrict(false)
+    selectedProvince  && setDisabledWard(true);
     },[selectedProvince])
 
     useEffect(()=>{
-      const getWards = async(dcode)=>{
-        const response = await apiGetWardsByDistrict(dcode)
-        const wards = response.wards.map(x =>({
-          label: x.name,
-          value: x.code
-        }))
-        setWardsList(wards);
-    }
+      console.log('selectedDistrict',selectedDistrict.value)
     getWards(selectedDistrict.value);
+    selectedDistrict && setDisabledWard(false)
     },[selectedDistrict])
 
 
-
-    const form = useForm({
+    
+    const updateform =  useForm({
         defaultValues : {
-          fullname: 'Đinh Vĩnh',
-          lastname: 'Khương',
-          phonenum: '035297477',
+          firstname: updateItem.firstname,
+          lastname: updateItem.lastname,
+          phonenum: updateItem.phonenum,
+          province: updateItem.province,
+          district: updateItem.district,
+          ward:updateItem.ward,
+          homenum:updateItem.homenum,
+        },
+        resolver: yupResolver(schema),
+      })
+
+      const addform =  useForm({
+        defaultValues : {
+          firstname: '',
+          lastname: '',
+          phonenum: '',
           province: '',
           district: '',
-          wards:'',
-          street: '',
-          detailed:''
+          ward:'',
+          homenum:'',
         },
         resolver: yupResolver(schema),
       })
@@ -107,10 +138,10 @@ export default function DeliveryInfoForm(props) {
         </span>
         <div>
         <InputField
-        name = 'fullname'
-        id = 'fullname'
+        name = 'firstname'
+        id = 'firstname'
         label = 'Họ'
-        form = {form}
+        form = {selectedId? updateform : addform}
         ></InputField>
         </div>
         <div>
@@ -118,7 +149,7 @@ export default function DeliveryInfoForm(props) {
         name = 'lastname'
         id = 'lastname'
         label = 'Tên'
-        form = {form}
+        form = {selectedId? updateform : addform}
         ></InputField>
         </div>
         <div>
@@ -126,7 +157,7 @@ export default function DeliveryInfoForm(props) {
         name = 'phonenum'
         id = 'phonenum'
         label = 'Số điện thoại'
-        form = {form}
+        form = {selectedId? updateform : addform}
         ></InputField>
         </div>
 <div>
@@ -136,7 +167,7 @@ export default function DeliveryInfoForm(props) {
         label = 'Tỉnh/Thành phố'
         options = {provincesList}
         setSelected = {setSelectedProvince}
-        form = {form}
+        form = {selectedId? updateform : addform}
         ></SelectField>
 </div> <div>
 <SelectField
@@ -144,41 +175,31 @@ export default function DeliveryInfoForm(props) {
         id = 'district'
         label = 'Quận/Huyện'
         options = {districtsList}
+        isDisabled = {disabledDistrict}
         setSelected = {setSelectedDistrict}
-        form = {form}
+        form = {selectedId? updateform : addform}
         ></SelectField>
 </div><div>
 <SelectField
-        name = 'wards'
-        id = 'wards'
+        name = 'ward'
+        id = 'ward'
         label = 'Phường/Xã'
         options = {wardsList}
+        isDisabled = {disabledWard}
         setSelected ={setSelectedWard}
-        form = {form}
+        form = {selectedId? updateform : addform}
         ></SelectField>
-</div><div>
-<SelectField
-        name = 'streets'
-        id = 'streets'
-        label = 'Đường/Tòa nhà'
-        options = {[
-            { label: "Tây Ninh", value: "Tây Ninh" },
-            { label: "Bình Dương", value: "Bình Dương" },
-            { label: "Tp Hồ chí Minh", value: "Tp Hồ chí Minh" }
-          ]}
-        form = {form}
-        ></SelectField>
-        </div>
+</div>
         <div>
     <InputField
         name = 'homenum'
         id = 'homenum'
-        label = 'Số nhà/Vị trí cụ thể'
-        form = {form}
+        label = 'Tên đường/Số nhà/Vị trí cụ thể'
+        form = {selectedId? updateform : addform}
         ></InputField>
         </div>
 
-        <Button variant="outlined" style = {{display: 'block', margin : '10px auto'}} onClick = {form.handleSubmit(handleFormSubmit)}>Save</Button>
+        <Button variant="outlined" style = {{display: 'block', margin : '10px auto'}} onClick = {selectedId? updateform.handleSubmit(submitForm) :  addform.handleSubmit(submitForm)}>Save</Button>
     </div>
   )
 }
