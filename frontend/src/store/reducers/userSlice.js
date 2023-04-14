@@ -3,6 +3,7 @@ import actionTypes  from "../actions/actionTypes"
 
 const initialState = {
     userInfo:null ,
+    action:null,
   }
 
 const userSlice = createSlice({
@@ -22,7 +23,6 @@ const userSlice = createSlice({
          userInfo: null}
         }
   }})
-
 export const {login,logout} = userSlice.actions
 export default userSlice.reducer
 

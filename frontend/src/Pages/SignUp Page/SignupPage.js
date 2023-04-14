@@ -7,22 +7,26 @@ import FacebookActive from '../../assets/images/facebook-icon-active.png'
 import FacebookInactive from '../../assets/images/facebook-icon-inactive.png'
 import SignupForm from './SignupForm.js'
 import { useNavigate } from 'react-router-dom'
+import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner.js'
 import Box from '@mui/material/Box';
 import styles from './styles.module.css'
-import { apiRegister } from '../../services/auth.js'
-import { Register } from '../../store/actions/auth.js'
+import { Register,ResetError } from '../../store/actions/auth.js'
+import actionTypes from '../../store/actions/actionTypes.js'
 import {useDispatch, useSelector} from 'react-redux'
 export default function SignupPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {islogged} = useSelector(state => state.auth);
   const handleFormSubmit =  async value =>{
-  dispatch(Register(value))
+  await dispatch(Register(value))
 }
 useEffect(()=>{
   console.log("islogged",islogged)
   islogged && navigate('/');
 },[islogged])
+useEffect(()=>{
+  return dispatch(ResetError())
+},[])
   return (
     <Box
     sx={{

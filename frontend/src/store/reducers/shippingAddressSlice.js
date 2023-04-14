@@ -2,40 +2,66 @@ import { createSlice } from "@reduxjs/toolkit";
 import actionTypes  from "../actions/actionTypes"
 
 const initialState = {
-  isloading : false,
-  status : '',
-  addresses: []};
+  action : null,
+  errors: null,
+  addresses: []
+};
 const shippingAddressSlice = createSlice({
     name: 'shippingAddress',
     initialState,
     reducers: {
-      Requesting: (state,action) =>{
+      getAll: (state,action) =>{
         return {
           ...state,
-          isloading: true,
+          action: actionTypes.GET_ALL,
+          errors: null
         }
       },
-      RequestFail: (state,action) =>{
+      getAllFail: (state,action) =>{
         return {
           ...state,
-          isloading: false,
-          err: true,
+          action: actionTypes.GET_ALL_FAIL,
+          errors: action.payload.data
         }
       },
-      fetchSuccess: (state,action) =>{
+      getAllSuccess: (state,action) =>{
+        console.log('getAllSuccess',action.payload)
         return {
           ...state,
-          isloading: false,
-          err: false,
-          addresses: [...action.payload.data.data]
+          errors: null,
+          action: actionTypes.GET_ALL_SUCCESS,
+          addresses: [...action.payload.data]
+        }
+      },
+      add: (state,action) =>{
+        return {
+          ...state,
+          action: actionTypes.ADD,
+          errors: null
         }
       },
       addSuccess: (state,action) =>{
          return {
-        isloading: false,
-        err: false,
+        action: actionTypes.ADD_SUCCESS,
+        errs: null,
          addresses:[...state.addresses,
           action.payload.data]}
+        },
+      addFail: (state,action) =>{
+          return {
+            ...state,
+            action: actionTypes.ADD_FAIL,
+            errors: action.payload.data
+          }
+         },
+
+
+        update: (state,action) =>{
+          return {
+            ...state,
+            action: actionTypes.UPDATE,
+            errors: null
+          }
         },
       updateSuccess: (state,action) =>{
           const {firstname,lastname,phonenum,homenum,district,province,ward} = action.payload.data
@@ -52,27 +78,53 @@ const shippingAddressSlice = createSlice({
               address.address = action.payload.data.address;
             }
           })
-          state.isloading= false;
-          state.err = false;
+          state.action = actionTypes.UPDATE_SUCCESS
+          state.errors = false;
          },
-        
-      dropSuccess: (state,action) =>{
+         updateFail: (state,action) =>{
+          return {
+            ...state,
+            action: actionTypes.UPDATE_FAIL,
+            errors: action.payload.data
+          }
+        },
+        drop: (state,action) =>{
+          return {
+            ...state,
+            action: actionTypes.DELETE,
+            errors: null
+          }
+        },
+        dropSuccess: (state,action) =>{
          const addresses =[];
+         console.log("reducer drop là",action.payload)
           state.addresses.forEach((address)=>{
-            if(address.id !== action.payload.data){
+            if(address.id !== action.payload){
               addresses.push(address)
             }
           })
-          console.log(addresses);
           return {
             ...state,
-            isloading: false,
-            err: false,
+            action: actionTypes.DELETE_SUCCESS,
+            errors: false,
             addresses: [...addresses]}
          },
+         dropFail: (state,action) =>{
+          return {
+            ...state,
+            action: actionTypes.DELETE_FAIL,
+            errors: null
+          }
+        },
+         resetError: (state,action) =>{
+         return {
+           ...state,
+           errors:null,
+           action: null
+         }}
   }})
 
-export const {fetchSuccess,addSuccess,updateSuccess,dropSuccess} = shippingAddressSlice.actions
+export const {getAll,getAllFail,getAllSuccess,add,addFail,addSuccess,update,updateSuccess,updateFail,drop,dropSuccess,dropFail,resetError} = shippingAddressSlice.actions
 export default shippingAddressSlice.reducer
 
 

@@ -1,19 +1,42 @@
 .formContainer{
     position: fixed;
+    backdrop-filter: blur(8px);
     top: 50%;
     z-index: 3;
     left: 50%;
     transform: translate(-50%,-50%);
-    margin: 20px auto;
+    margin: 0px auto;
     width: 50vw;
     height: 80vh;
     background-color:white;
-    border-radius: 10px;
+    border-radius: 30px;
     display: block;
-    overflow-y: scroll;
+    scrollbar-width: none;
+    overflow: hidden;
     border: 1px solid rgba(0,0,0,0.2);
 }
-.formContainer >div{
+.content{
+    overflow-y: scroll;
+    scrollbar-width: 0;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    height: calc(80vh - 200px);
+}
+.content::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+.content > div{
     width: 70%;
     margin: 30px auto;
+}
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.1);
+    backdrop-filter : blur(100px);
+    
 }

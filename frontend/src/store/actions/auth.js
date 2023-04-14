@@ -1,18 +1,13 @@
 import { apiLogin, apiRegister } from '../../services/auth'
-import {registerSuccess,registerFail,loginSuccess,loginFail,login,logout} from '../reducers/authSlice'
+import {registerSuccess,registerFail,loginSuccess,loginFail,login,logout, register,resetError} from '../reducers/authSlice'
 export  const Register = (payload) => async(dispatch) =>{
-    try{
-        const response = await apiRegister(payload);
-        if(response.data.err === 0){
-            dispatch(registerSuccess({data: response.data.token}))
-        }
-        else {
-            dispatch(registerFail({data:response.data.msg}))
-        }
-    }
-    catch(err){
-        dispatch(registerFail({data:null}))
-    }
+    dispatch(register());
+    apiRegister(payload).then(response =>{
+    dispatch(registerSuccess({data: response.token}))
+    })
+    .catch(response => {
+        dispatch(registerFail({data: response.errors}))
+    })
 } 
 
 
@@ -26,6 +21,10 @@ export  const Login = (payload) => async(dispatch) =>{
     })
 } 
 
+
+export  const ResetError = ()=>(dispatch)=>{
+    dispatch(resetError({data:null}))
+}
 
 export  const Logout = ()=>(dispatch)=>{
     dispatch(logout({data:null}))

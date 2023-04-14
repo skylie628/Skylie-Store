@@ -1,3 +1,4 @@
+import NotFoundError from "../errors/NotFoundError";
 import db from "../models";
 export const getUserServices = (userId) => new Promise(async (resolve,reject) =>{
     try{
@@ -5,9 +6,7 @@ export const getUserServices = (userId) => new Promise(async (resolve,reject) =>
             attributes: ['id', 'firstName','lastName','email','phonenum','sex','dob'],
             raw:true,
             where :[
-                {
-                    id : userId
-                }
+                {id : userId}
             ]
           });
         resolve({
@@ -22,25 +21,15 @@ export const getUserServices = (userId) => new Promise(async (resolve,reject) =>
 })
 
 export const updateUserServices = (userInfo) => new Promise(async (resolve,reject) =>{
-    try{
-        console.log(userInfo)
-        const response = await db.Account.update({
+        const [response] = await db.Account.update({
             ...userInfo
-        },{
-            where :
-                {
-                    id : userInfo.id
-                }
-          }
-          );
+        },{where :{id : userInfo.id}});
+        console.log("response là",response)
+        response ? 
         resolve({
             err: 0,
             data: response
-        })
-    }
-    catch(err){
-        console.log('Lỗi rùi nè')
-        reject(err)
-    }
+        }) :
+        reject(new NotFoundError('Không tìm thấy user'))
   
 })

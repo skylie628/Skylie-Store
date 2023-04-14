@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FormControl, InputAdornment } from '@mui/material';
+import { useSelector } from 'react-redux';
 import {useForm} from 'react-hook-form';
 import Button from '@mui/material/Button';
 import EmailIcon from '@mui/icons-material/Email';
 import InputField from '../../Components/Form Control/InputField/InputField.js';
+import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner.js';
 import PasswordInputField from '../../Components/Form Control/InputField/PasswordInputField.js';
+import SingleNotify from '../../Components/MultipleNotify/SingleNotify.js';
+import actionTypes from '../../store/actions/actionTypes.js';
 import { yupResolver } from '@hookform/resolvers/yup';
 export default function SignupForm(props) {
     const yup = require("yup");
+    const {errors,action} = useSelector(state => state.auth)
+    useEffect(()=>{
+      console.log('action là', action)
+    },[action])
     const handleFormSubmit = (value)=>{
       const {onSubmit} = props;
     if(onSubmit) {
@@ -32,6 +40,8 @@ export default function SignupForm(props) {
       )
   return (
     <form onSubmit = {form.handleSubmit(handleFormSubmit)}>
+    {(action == actionTypes.REGISTER_FAIL) && <SingleNotify style = {{backgroundColor:'rgba(0,0,0,0.1)',width: '30%',margin:'0 auto'}} severity ='error' msg={errors} ></SingleNotify>}
+    <LoadingSpinner overlay={{backgroundColor: 'white'}} isLoading ={action == actionTypes.REGISTER }>
     <div style = {{ m: 1, width: '30%',minWidth : 380 , display: 'flex',margin : '30px  auto' }}>
     <div style = {{ m: 1, flex: '1 1 auto', display: 'block',margin : '30px 0px 10px 0px', alignSelf : "left" }}>
     <InputField
@@ -78,6 +88,7 @@ export default function SignupForm(props) {
          variant="outlined"
          form = {form} />
      </div>
+     </LoadingSpinner>
      <div>
      <Button variant="outlined" style = {{display: 'block', margin : '10px auto'}} onClick = {form.handleSubmit(handleFormSubmit)}>Đăng Ký</Button>
      </div>

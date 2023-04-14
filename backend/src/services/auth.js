@@ -5,11 +5,8 @@ import jwt from 'jsonwebtoken';
 import UnauthorizedError from "../errors/unauthorizedError";
 import ConflictError from "../errors/ConflictError";
 require('dotenv').config
-
  const hashPasword = (password) => bcrypt.hashSync(password,bcrypt.genSaltSync(12))
  export const registerService = ({firstname,lastname,email,password,confirmpassword}) => new Promise(async (resolve, reject) => {
- 
-
         const [user,isCreated] = await db.Account.findOrCreate({
             where: {email},
             defaults :{
@@ -22,9 +19,9 @@ require('dotenv').config
         }
         )
         if(!isCreated){
-            throw new ConflictError('Email đã được đăng ký trước đó')
+            reject(new ConflictError('Email đã được đăng ký trước đó'))
         }
-        const token = isCreated && jwt.sign({id: response[0].id,email:response[0].email},process.env.SECRET_KEY,{expiresIn:'2d'})
+        const token = isCreated && jwt.sign({id: user.id,email:user.email},process.env.SECRET_KEY,{expiresIn:'2d'})
         resolve({
             err: 0,
             msg: "Đăng ký thành công",

@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import DeleteIcon from '../../assets/images/delete-icon.png'
 import EditIcon from '../../assets/images/edit-icon-thin.png'
 import styles from './DeliveryInfo.module.css'
 import Logo from '../../Components/Logo/Logo'
+import SingleNotify from '../../Components/MultipleNotify/SingleNotify'
+import actionTypes from '../../store/actions/actionTypes'
 import { fetchShippingAddresses,deleteShippingAddresses } from '../../store/actions/shippingAddress'
 import { useSelector,useDispatch } from 'react-redux'
+import { ResetError } from '../../store/actions/auth'
+import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
+import HeaderNofify from '../../Components/MultipleNotify/HeaderNotify'
 export default function DeliveryInfo({setIsOpenModal,selectedId,setSelectedId}) {
      const [isEdited, setIsEdited] = useState(false)
      //const [shippingAddresses,setShippingAddresses] = useState([])
      const userInfo = useSelector(state => state.user).userInfo
      const addresses = useSelector(state => state.shippingAddress).addresses
+     const {action} = useSelector(state => state.shippingAddress);
      const dispatch = useDispatch()
      const fetchShippingData = async()=>{
         /*const defaultIndex = addresses.findIndex(item => item.default);
@@ -17,6 +23,7 @@ export default function DeliveryInfo({setIsOpenModal,selectedId,setSelectedId}) 
         userInfo.id&&dispatch(fetchShippingAddresses(userInfo.id))
         console.log(addresses)
      }
+     const isSuccess =  (action == actionTypes.ADD_SUCCESS || action == actionTypes.UPDATE_SUCCESS || action == actionTypes.DELETE_SUCCESS)
      const handleAddAddress = () =>{
         setSelectedId('');
         setIsOpenModal(true);
@@ -29,10 +36,19 @@ export default function DeliveryInfo({setIsOpenModal,selectedId,setSelectedId}) 
     id&& dispatch(deleteShippingAddresses(id))
      }
      useEffect(()=>{
+        console.log(action)
+        if(isSuccess){
+            setIsOpenModal(false)
+        }
+     },[action])
+
+     useEffect(()=>{
         fetchShippingData()
+        return dispatch(ResetError())
      },[])
   return (
     <div>
+         {(isSuccess) && <HeaderNofify style = {{width: '100%'}} severity ='' msg={'Cập nhật thông tin cho địa chỉ thành công'} ></HeaderNofify>}
         <div className = {styles.mainHeader}>
         <div style ={{fontSize: '30px', fontWeight:'bold'}}>Add & Pick.</div>
         <div style ={{fontSize: '25px'}}>Thêm thông tin vận chuyển để được hỗ trợ ship cod, gửi tặng quà cho người thân, bạn bè.</div>
@@ -44,18 +60,19 @@ export default function DeliveryInfo({setIsOpenModal,selectedId,setSelectedId}) 
        </div>
         </div>
         <div className = {styles.content}>
-            {addresses.map(address =>
+        <LoadingSpinner overlay={{backgroundColor: 'white', height: '40px'}} isLoading ={action == actionTypes.GET_ALL}>
+        </LoadingSpinner>
+            {
+            addresses.map(address =>
+                <Fragment>
                  <div className={styles.addressCard} key ={address.id}>
                  <div>
-                     <div>Tên</div>
                      <div>{address.firstname}" " {address.lastname}</div>
                  </div>
                  <div>
-                     <div>Số điện thoại</div>
                      <div>{address.phonenum}</div>
                  </div>
                  <div>
-                     <div>Địa chỉ</div>
                      <div>{address.address}</div>
                  </div>
                  { isEdited && <div className={styles.cardControl}>
@@ -66,6 +83,7 @@ export default function DeliveryInfo({setIsOpenModal,selectedId,setSelectedId}) 
                  <Logo src={EditIcon} style= {{width: '25px'}}  id ={address.id}></Logo>
                  </div> }
              </div>
+             </Fragment>
             )}
 
         </div>

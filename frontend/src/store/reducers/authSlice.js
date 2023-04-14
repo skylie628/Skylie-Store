@@ -12,9 +12,17 @@ const initialState = {
     name: 'auth',
     initialState,
     reducers: {
+      register: (state,action) =>{
+        return {
+          ...state,
+          action: actionTypes.REGISTER,
+          errors: null,
+        }
+       },
       registerSuccess: (state,action) =>{
          return {
           ...state,
+          action: actionTypes.REGISTER_SUCCESS,
           islogged: true,
           userToken: action.payload.data
       }
@@ -23,14 +31,14 @@ const initialState = {
         return {
          ...state,
          islogged: false,
+         action: actionTypes.REGISTER_FAIL,
+         errors: action.payload.data,
          userToken: null,
-         msg: action.payload.data
      }
      },
      login: (state,action) =>{
       return {
         ...state,
-        isLoading: true,
         action: actionTypes.LOGIN,
         errors: null,
       }
@@ -58,10 +66,16 @@ const initialState = {
      ...state,
      islogged: false,
      userToken: null,
-     msg:''
- }
- },
-    },
-  })
-  export const {registerSuccess,registerFail,login,loginSuccess,loginFail,logout} = authSlice.actions;
+     errors:null,
+     action: null,
+ }},
+    resetError: (state,action) =>{
+    return {
+      ...state,
+      errors:null,
+      action: null
+    }}
+
+  }})
+  export const {registerSuccess,registerFail,loginSuccess,loginFail,login,logout, register,resetError} = authSlice.actions;
   export default authSlice.reducer;

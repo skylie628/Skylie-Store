@@ -1,41 +1,34 @@
-import { fetchSuccess,addSuccess,updateSuccess,dropSuccess } from "../reducers/shippingAddressSlice";
+import {getAll,getAllFail,getAllSuccess,add,addFail,addSuccess,update,updateSuccess,updateFail, drop,dropSuccess,dropFail,resetError} from "../reducers/shippingAddressSlice";
 import { apiGetShippingAddresses, apiAddShippingAddress, apiUpdateShippingAddress,apiDeleteShippingAddress } from "../../services/shippingAddress";
 export  const fetchShippingAddresses = (payload) => async(dispatch) =>{
-    try {
-        const response = await apiGetShippingAddresses(payload);
-        dispatch(fetchSuccess({data: response.data}))
+        dispatch(getAll())
+        apiGetShippingAddresses(payload)
+        .then(response => dispatch(getAllSuccess(response)))
+        .catch(response =>dispatch(getAllFail({data: 'Khong the get duoc'})))
     }
-    catch(err){
-        dispatch(fetchSuccess({data: null}))
-    }
-}
+  
 
 export  const addShippingAddresses = (payload) => async(dispatch) =>{
-    try {
-        const response = await apiAddShippingAddress(payload);
-        dispatch(addSuccess({data: {id : response.data.id,...payload}}))
-    }
-    catch(err){
-        dispatch(addSuccess({data: null}))
-    }
+    dispatch(add())
+    apiAddShippingAddress(payload)
+    .then(response => dispatch(addSuccess({data: {id : response.data.id,...payload}})))
+    .catch(response =>dispatch(addFail({data: response.errors })))
 }
 
 export  const updateShippingAddresses = (payload) => async(dispatch) =>{
-    try {
-        const response = await apiUpdateShippingAddress(payload);
-        dispatch(updateSuccess({data: payload}))
-    }
-    catch(err){
-        dispatch(updateSuccess({data: null}))
-    }
+    dispatch(update())
+    apiUpdateShippingAddress(payload)
+    .then(response => dispatch(updateSuccess({data: {id : response.data.id,...payload}})))
+    .catch(response =>dispatch(updateFail({data: response.errors })))
 }
 
 export  const deleteShippingAddresses = (payload) => async(dispatch) =>{
-    try {
-        const response = await apiDeleteShippingAddress(payload);
-        dispatch(dropSuccess({data: payload}))
-    }
-    catch(err){
-        dispatch(dropSuccess({data: null}))
-    }
+    console.log(payload)
+    dispatch(drop())
+    apiDeleteShippingAddress(payload)
+    .then(response => dispatch(dropSuccess(payload)))
+    .catch(response =>dispatch(dropFail({data: response.errors })))
+}
+export  const ResetError = ()=>(dispatch)=>{
+    dispatch(resetError({data:null}))
 }
