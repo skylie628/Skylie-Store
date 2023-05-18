@@ -8,10 +8,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING
       },
+      name: {
+        type: Sequelize.STRING
+      },
+      showing_img_thumbnail:{
+        type: Sequelize.STRING
+      },
       straight_img: {
         type: Sequelize.STRING
       },
+      straight_img_thumbnail: {
+        type: Sequelize.STRING
+      },
       side_img: {
+        type: Sequelize.STRING
+      },
+      side_img_thumbnail: {
         type: Sequelize.STRING
       },
       product_id: {

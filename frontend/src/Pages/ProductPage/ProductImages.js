@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import side1 from '../../assets/images/ProductImage/side-1.png'
 import side2 from '../../assets/images/ProductImage/side-2.png'
 import productSide3 from '../../assets/images/product-side3.png'
 import productSide4 from '../../assets/images/product-side4.png'
 import styles from './ProductImages.module.css'
-export default function ProductImages({showingImage,setShowingImage}) {
+import { useSelector } from 'react-redux'
+export default function ProductImages() {
+    let productImages = useSelector(state => state.productDetail).productDetail;
+    const [showingImage,setShowingImage] = useState('');
+    const [images,setImages] = useState({});
+    useEffect(()=>{
+      productImages.options.length >0 &&setImages(productImages.options[0]);
+      productImages.options.length >0 &&setShowingImage(productImages.options[0].straight_img)
+    },[productImages])
+    useEffect(()=>{
+      console.log('image là',images)
+    },[images])
     const changeImage = (img) => {
         setShowingImage(img.target.src)
     }
@@ -13,11 +24,11 @@ export default function ProductImages({showingImage,setShowingImage}) {
     <div className = {styles.stickyEle}>
     <div className={styles.thumbnail}>
      <div className = {styles.thumbnailImg}>
-        <img src={side1} style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}>
+        <img src={images.straight_img_thumbnail} style={{width : '100%'}} onClick = {()=>{ setShowingImage(images.straight_img)}}>
         </img>
     </div>   
      <div className = {styles.thumbnailImg}>
-     <img src={side2} style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
+     <img src={images.side_img_thumbnail} style={{width : '100%'}} onClick = {()=>{setShowingImage(images.side_img)}}></img>
      </div>   
      <div className = {styles.thumbnailImg}>
      <img src={productSide3} style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>

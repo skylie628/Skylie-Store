@@ -18,8 +18,8 @@ export  const addShippingAddresses = (payload) => async(dispatch) =>{
 export  const updateShippingAddresses = (payload) => async(dispatch) =>{
     dispatch(update())
     apiUpdateShippingAddress(payload)
-    .then(response => dispatch(updateSuccess({data: {id : response.data.id,...payload}})))
-    .catch(response =>dispatch(updateFail({data: response.errors })))
+    .then(response => setTimeout(()=>dispatch(updateSuccess({data: {id : response.data.id,...payload}})),1000))
+    .catch(response =>setTimeout(()=>dispatch(updateFail({data: response.errors })),1000))
 }
 
 export  const deleteShippingAddresses = (payload) => async(dispatch) =>{

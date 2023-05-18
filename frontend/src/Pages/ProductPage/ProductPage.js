@@ -10,12 +10,14 @@ import ShowHideLayout from '../../Components/Show Hide Layout/ShowHideLayout'
 import SimpleItemList from '../../Components/Simple Item List/SimpleItemList'
 import Suggestion from '../../Components/Suggestion/Suggestion'
 import side1 from '../../assets/images/ProductImage/side-1.png'
+import { getProductDetail } from '../../store/actions/productDetail'
+import { useDispatch, useSelector } from 'react-redux'
 import {gsap} from 'gsap';
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { useParams } from 'react-router-dom'
 export default function ProductPage() {
     gsap.registerPlugin(ScrollToPlugin);
     const brandMenu = useRef();
-    const [showingImage,setShowingImage] = useState(side1);
     const [selectedMaterial,setSelectedMaterial] = useState(-1);
     // state: notActive ---> notTouched ---> Touched
     const [stateMaterialMenu,setStateMaterialMenu] = useState('notTouched');
@@ -26,8 +28,17 @@ export default function ProductPage() {
     const [stateCheckoutBtn,setStateCheckoutBtn] = useState('notActive');
     const [selectedOption,setSelectedOption] = useState(0);
     const [checkoutModal,setCheckoutModal] = useState(false);
+    const [productDetail,setProductDetail] = useState({});
+    const {slug} = useParams();
+    const productInfo = useSelector(state=>state.productDetail).productDetail;
+    const dispatch = useDispatch();
     const addTocart = ()=>{
         setCheckoutModal(true)
+    }
+    
+    const fetchDetail = async() => {
+        console.log('fetchDetail run')
+        dispatch(getProductDetail(slug));
     }
     useEffect(()=>{
         if(stateMaterialMenu == 'Touched'){
@@ -50,6 +61,10 @@ export default function ProductPage() {
         }
     },[stateModel])
 
+    useEffect(()=>{
+        console.log('start fetching slug',slug);
+        fetchDetail();
+    },[])
     const ProductInfo = {
         id:0,
         img:side1,
@@ -69,12 +84,12 @@ export default function ProductPage() {
     <div>
     <div className={styles.container}>
     <CheckoutModal checkoutModal ={checkoutModal} setCheckoutModal = {setCheckoutModal}/>
-    <ProductImages showingImage={showingImage} setShowingImage = {setShowingImage}/>
+    <ProductImages />
     <div className ={styles.information}>
-        <div className={styles.hotTag}>New Comming</div>
-        <div className={styles.name}>Unique Collection x mẫu 01</div>
-        <div className={styles.price}>95.000 vnd</div>
-        <OptionSelection selectedOption={selectedOption} setSelectedOption= {setSelectedOption} OptionList={OptionList}/>
+        <div className={styles.hotTag}>{productInfo.best_sale&&"Hot hit"}</div>
+        <div className={styles.name}>{productInfo.name}</div>
+        <div className={styles.price}>{productInfo.price}</div>
+        <OptionSelection selectedOption={selectedOption} setSelectedOption= {setSelectedOption} OptionList={productInfo.options}/>
         <MaterialSelection setStateMaterialMenu={setStateMaterialMenu} selectedMaterial={selectedMaterial} setSelectedMaterial={setSelectedMaterial}></MaterialSelection>
         <BrandMenu stateBrandMenu ={stateBrandMenu} setStateBrandMenu ={setStateBrandMenu} id='brandMenu' ref={brandMenu} selectedBrand ={selectedBrand} setSelectedBrand ={setSelectedBrand}></BrandMenu>
         <SimpleItemList stateModel = {stateModel} setStateModel = {setStateModel} ListItem={PhoneNames} selectedItem = {selectedModel} setSelectedItem ={setSelectedModel} style ={{}}></SimpleItemList>

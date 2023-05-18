@@ -5,6 +5,7 @@ module.exports = {
     await queryInterface.createTable('Products', {
       id: {
         allowNull: false,
+        primaryKey: true,
         type: Sequelize.STRING
       },
       name: {
@@ -16,17 +17,17 @@ module.exports = {
       best_sale: {
         type: Sequelize.BOOLEAN
       },
-      color: {
+      price: {
         type: Sequelize.INTEGER
       },
-      price: {
+      sales: {
         type: Sequelize.INTEGER
       },
       collection_id: {
         type: Sequelize.STRING
       },
-      productOption_id: {
-        type: Sequelize.STRING
+      slug: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

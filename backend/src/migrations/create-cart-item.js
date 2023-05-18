@@ -8,11 +8,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING
       },
-      product_id: {
+      material_id: {
         type: Sequelize.STRING
       },
       model_id: {
         type: Sequelize.STRING
+      },
+      productoption_id: {
+        type: Sequelize.STRING
+      },
+      order_id: {
+        type: Sequelize.STRING
+      },
+      quantity: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

@@ -44,6 +44,7 @@ const initialState = {
       }
      },
      loginSuccess: (state,action) =>{
+      console.log(action.payload.data)
        return {
         ...state,
         islogged: true,

@@ -1,9 +1,11 @@
 import NotFoundError from "../errors/NotFoundError";
 import db from "../models";
+import moment from 'moment';
+import dayjs from 'dayjs';
 export const getUserServices = (userId) => new Promise(async (resolve,reject) =>{
     try{
         const response = await db.Account.findOne({
-            attributes: ['id', 'firstName','lastName','email','phonenum','sex','dob'],
+            attributes: ['id', 'firstname','lastname','email','phonenum','sex','dob'],
             raw:true,
             where :[
                 {id : userId}

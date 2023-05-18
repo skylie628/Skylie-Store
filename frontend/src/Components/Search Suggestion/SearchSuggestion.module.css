@@ -24,7 +24,7 @@
 }
 .gridContainer{
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: 22% 22%  22% 22%;
     height: 200px;
     grid-gap:10px 20px;
     margin: 30px;

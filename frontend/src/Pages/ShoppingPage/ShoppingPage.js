@@ -8,6 +8,7 @@ import ItemsList from './ItemsList';
 import { display } from '@mui/system';
 export default function ShoppingPage() {
   const [isFixed,setIsFixed] = useState(false);
+
   const [showFilter,setShowFilter] = useState(false);
   const header = useRef();
   useLayoutEffect(()=>{

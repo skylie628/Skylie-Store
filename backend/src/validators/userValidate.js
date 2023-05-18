@@ -39,7 +39,7 @@ const validateUpdateUser = () => {
     .withMessage('Giới tính không hợp lệ'),
 
     body('dob').optional().optional({ checkFalsy: true })
-    .isDate({format:'DD/MM/YYYY'})
+    .isDate({format:'YYYY/MM/DD'})
     .withMessage('Năm sinh không đúng định dạng'),
   ]; 
 }

@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '../Logo/Logo'
 import styles from './ColourCriterion.module.css'
 import ExpandIcon from '../../assets/images/expand-icon.png'
 import NarrowIcon from '../../assets/images/narrow-icon.png'
+import { useDispatch } from 'react-redux'
+import { filterByColors } from '../../store/reducers/productQuerySlice'
+import { apiGetColors } from '../../services/color'
 import CheckIcon from   '../../assets/images/check-icon.png'
 export default function ColourCriterion() {
-    const [showColour, setShowColour] = useState(true)
-    const [colourList, setColourList] = useState([
+    const [showColour, setShowColour] = useState(true);
+    const dispatch = useDispatch();
+    /*const [colourList, setColourList] = useState([
         {
             name:'Trắng',
             code: 'rgb(255,255,255)',
@@ -68,10 +72,18 @@ export default function ColourCriterion() {
             code: 'rgb(76,53,40)',
             select: false,
         },
-    ])
+    ])*/
+const [colourList, setColourList] = useState([])
+useEffect(()=>{
+    apiGetColors().then(
+        rst => {console.log('color list la',rst);setColourList(rst.data);})
+},[])
  const handleOnClick = (x,y) =>{
     const clone = [...colourList];
     clone[3*x+y].select =  !clone[3*x+y].select;
+    const selectedColors = clone.filter(color => color.select).map(color => color.id);
+    console.log('selectedcolor',selectedColors);
+    dispatch(filterByColors(selectedColors));
     setColourList(clone);
  }
   return (
@@ -84,7 +96,7 @@ export default function ColourCriterion() {
     <div className={styles.FilterValue} style = {{maxHeight: showColour? '500px' : '0',overflow: 'hidden',transition:'0.5s ease-in-out'}}>
      
      {
-        [0,1,2,3].map(x=>
+        colourList.length >0 && [0,1,2,3].map(x=>
             { 
             return <div className = {styles.flexRow}>
                 {[0,1,2].map( y => 

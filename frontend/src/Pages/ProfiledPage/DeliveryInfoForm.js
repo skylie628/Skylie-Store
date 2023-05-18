@@ -18,7 +18,6 @@ export default function DeliveryInfoForm(props) {
     const yup = require("yup");
     const selectedId= props.selectedId
     const submitForm = (value)=>{
-      console.log(value)
       props.handleFormSubmit(value)
       }
     const addresses = useSelector(state => state.shippingAddress).addresses;

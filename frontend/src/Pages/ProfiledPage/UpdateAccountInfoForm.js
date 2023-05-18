@@ -1,9 +1,11 @@
 import React from 'react'
 import {useForm} from 'react-hook-form';
-import Button from '@mui/material/Button';
 import DateTimePicker from '../../Components/DateTimePicker/DateTimePicker.js';
+import Button from '../../Components/Button/Button.js';
 import GenderSelection from '../../Components/Form Control/InputField/GenderSelection.js';
+import dayjs from 'dayjs';
 import { RadioGroup,Radio,FormControlLabel } from '@mui/material';
+import moment from 'moment';
 import InputField from '../../Components/Form Control/InputField/InputField.js';
 import PasswordInputField from '../../Components/Form Control/InputField/PasswordInputField.js';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -27,18 +29,20 @@ export default function UpdateAccountInfoForm(props) {
 
     const form = useForm({
         defaultValues : {
-          firstname: userInfo.firstName,
-          lastname: userInfo.lastName,
+          firstname: userInfo.firstname,
+          lastname: userInfo.lastname,
            email : userInfo.email,
           phonenum:userInfo.phonenum || '',
           sex: userInfo.sex ,
+          dob:dayjs(userInfo.dob)
         },
         resolver: yupResolver(schema),
       }
       )
       const submitForm = (value)=>{
-        props.handleSubmitForm(value)
-    }
+        console.log("deli info form",moment(value.dob).format('YYYY-MM-DD'))
+        props.handleSubmitForm({...value,dob: value.dob&&moment(value.dob).format('YYYY-MM-DD')})}
+    
 
   return (
     <div className={styles.container}>
@@ -104,7 +108,7 @@ export default function UpdateAccountInfoForm(props) {
         /></div>
     </div>
     </div>
-    <Button variant="outlined" style = {{display: 'block', margin : '10px auto'}}   onClick = {form.handleSubmit(submitForm)}>Save</Button>
+    <Button bgColor="blue" label ="Save" style = {{display: 'block', margin : '10px auto'}}   onClick = {form.handleSubmit(submitForm)}/>
 </div>
   )
 }

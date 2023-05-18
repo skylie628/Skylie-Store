@@ -5,10 +5,7 @@ module.exports = {
     await queryInterface.createTable('Orders', {
       id: {
         allowNull: false,
-        type: Sequelize.STRING
-      },
-      cart_id: {
-        allowNull: false,
+        primaryKey: true,
         type: Sequelize.STRING
       },
       status: {
@@ -16,7 +13,19 @@ module.exports = {
         type: Sequelize.STRING
       },
       total_price: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
+      },
+      voucherFreeShip:{
+        type:Sequelize.STRING
+      },
+      voucherDiscount : {
+        type:Sequelize.STRING
+      },
+      account_id:{
+        type:Sequelize.STRING
+      },
+      shipping_address_id:{
+        type:Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('orders');
+    await queryInterface.dropTable('Orders');
   }
 };

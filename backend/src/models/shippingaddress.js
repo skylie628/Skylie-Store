@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       ShippingAddress.belongsTo(models.Account,{foreignKey:'account_id',targetKey:'id',as:'account'})
+      ShippingAddress.hasMany(models.Order,{foreignKey:'shipping_address_id',as:'orderAddress'})
     }
   }
   ShippingAddress.init({

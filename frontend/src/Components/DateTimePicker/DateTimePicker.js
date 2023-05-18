@@ -2,6 +2,7 @@ import * as React from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TextField } from '@mui/material';
 import dayjs from 'dayjs';
+import moment from 'moment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {Controller} from 'react-hook-form' 
@@ -16,6 +17,7 @@ export default function DateTimePicker(props) {
       defaultValue={dayjs(props.defaultdob)}
       minDate={dayjs('1950-01-00')}
       maxDate={dayjs('2016-01-00')}
+      formatDate={(date) => moment(date).format('DD-MM-YYYY')}
       format="DD/MM/YYYY"
       slotProps={{
         textField: 
