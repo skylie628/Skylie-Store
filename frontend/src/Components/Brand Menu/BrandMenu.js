@@ -1,21 +1,53 @@
 import React, { useRef } from 'react'
 import styles from './BrandMenu.module.css'
-import apple from '../../assets/images/Brand Logo/apple-logo.png'
 import prev from  '../../assets/images/prev-icon.png'
 import next from '../../assets/images/next-icon.png'
-import huawei from '../../assets/images/Brand Logo/huawei-logo.png'
-import lg from '../../assets/images/Brand Logo/lg-logo.png'
-import oppo from '../../assets/images/Brand Logo/oppo-logo.png'
-import realme from '../../assets/images/Brand Logo/realme-logo.png'
-import samsung from '../../assets/images/Brand Logo/samsung-logo.png'
-import vivo from '../../assets/images/Brand Logo/vivo-logo.png'
-import xiaomi from '../../assets/images/Brand Logo/xiaomi-logo.png'
+import apple from '../../assets/images/Brand Logo/Apple-logo.png'
+import samsung from '../../assets/images/Brand Logo/Samsung-logo.png'
+import oppo from '../../assets/images/Brand Logo/Oppo-logo.png'
+import realme from '../../assets/images/Brand Logo/Realme-logo.png'
+import vivo from '../../assets/images/Brand Logo/Vivo-logo.png'
+import xiaomi from '../../assets/images/Brand Logo/Xiaomi-logo.png'
+import huawei from '../../assets/images/Brand Logo/Huawei-logo.png'
+import sony from '../../assets/images/Brand Logo/Sony-logo.png'
+import nokia from '../../assets/images/Brand Logo/Nokia-logo.png'
+import zenfone from '../../assets/images/Brand Logo/Zenfone-logo.png'
+import vsmart from '../../assets/images/Brand Logo/Vsmart-logo.png'
+import htc from '../../assets/images/Brand Logo/HTC-logo.png'
+import lg from '../../assets/images/Brand Logo/Lg-logo.png'
+import meizu from '../../assets/images/Brand Logo/Meizu-logo.png'
+import motorola from '../../assets/images/Brand Logo/Motorola-logo.png'
+import oneplus from '../../assets/images/Brand Logo/Oneplus-logo.png'
+
 import { useState,useEffect } from 'react'
 export default function BrandMenu({id,stateBrandMenu,setStateBrandMenu,selectedBrand,setSelectedBrand}) {
     const ScrollWidth = useRef(null);
     const [current,setCurrent] = useState(-1)
     const [speed,setSpeed] = useState(100)
-    const numBrands = 8;
+    const brandImgs =[
+        apple,samsung,oppo,realme,vivo,xiaomi,huawei,sony,nokia,zenfone,
+        vsmart,htc,lg,meizu,motorola,oneplus
+    ]
+    const brandNames = 
+    [
+      "Apple",
+      "Samsung",
+      "Oppo",
+      "Realme",
+      "Vivo",
+      "Xiaomi",
+      "Huawei",
+      "Sony",
+      "Nokia",
+      "Zenfone",
+      "Vsmart",
+      "Htc",
+      "Lg",
+      "Meizu",
+      "Motorola",
+      "Oneplus"
+    ]
+    const numBrands = 12;
     useEffect(()=>{
          setSpeed(ScrollWidth?.current?.clientWidth/80);
          console.log(ScrollWidth?.current?.clientWidth);
@@ -45,39 +77,12 @@ export default function BrandMenu({id,stateBrandMenu,setStateBrandMenu,selectedB
         <img src={prev}></img>
     </div>
     <div className= {styles.content} ref ={ScrollWidth}>
-    <div className ={styles.phoneBrandSlider} style={{left: `-${current*speed*60}px`,transition:'0.3s ease-in-out'}}>
-    <div id={id} className ={styles.phoneBrandImage}>
-        <img src ={apple} style={{opacity: selectedBrand == 0 ? 1 : ''}} onClick={()=>changeBrandMenu(0)}></img>
-        <span>Apple</span>
-    </div>
-    <div className ={styles.phoneBrandImage}>
-        <img src ={samsung} style={{opacity: selectedBrand == 1 ? 1 : ''}} onClick={()=>changeBrandMenu(1)}></img>
-        <span>Samsung</span>
-    </div>
-    <div className ={styles.phoneBrandImage}>
-        <img src ={lg} style={{opacity: selectedBrand == 2 ? 1 : ''}} onClick={()=>changeBrandMenu(2)}></img>
-        <span>Lg</span>
-    </div>
-    <div className ={styles.phoneBrandImage}>
-        <img src ={xiaomi} style={{opacity: selectedBrand == 3 ? 1 : ''}} onClick={()=>changeBrandMenu(3)}></img>
-        <span>Xiaomi</span>
-    </div>
-    <div className ={styles.phoneBrandImage}>
-        <img src ={oppo}  style={{opacity: selectedBrand == 4 ? 1 : ''}} onClick={()=>changeBrandMenu(4)}></img>
-        <span>Oppo</span>
-    </div>
-    <div className ={styles.phoneBrandImage}>
-        <img src ={realme} style={{opacity: selectedBrand == 5 ? 1 : ''}} onClick={()=>changeBrandMenu(5)}></img>
-        <span>Realme</span>
-    </div>
-    <div className ={styles.phoneBrandImage}>
-        <img src ={huawei} style={{opacity: selectedBrand == 6 ? 1 : ''}} onClick={()=>changeBrandMenu(6)}></img>
-        <span>Huawei</span>
-    </div>
-    <div className ={styles.phoneBrandImage}>
-        <img src ={vivo} style={{opacity: selectedBrand == 7 ? 1 : ''}} onClick={()=>changeBrandMenu(7)}></img>
-        <span>Vivo</span>
-    </div>
+    <div id="brandMenu" className ={styles.phoneBrandSlider} style={{left: `-${current*speed*60}px`,transition:'0.3s ease-in-out'}}>
+   {brandNames.map((name,index) => 
+   <div id={index} className ={styles.phoneBrandImage}>
+        <img  src ={brandImgs[index]} style={{opacity: selectedBrand == index ? 1 : ''}} onClick={()=>changeBrandMenu(index)}></img>
+        <span>{name}</span>
+    </div>)}
     </div>
     </div>
     <div className={styles.nextBtn} onClick ={()=>handleNextBtn()} >

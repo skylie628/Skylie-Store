@@ -11,7 +11,7 @@ module.exports = {
       account_id: {
         type: Sequelize.STRING
       },
-      cardItem_id: {
+      product_id: {
         type: Sequelize.STRING
       },
       rating: {

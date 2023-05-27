@@ -1,25 +1,26 @@
 import React from 'react'
 import styles from './ItemCard.module.css'
 import product from '../../assets/images/ProductImage/side-1.png'
-export default function ItemCard() {
+import { covertCurrencyFormat } from '../../utils/currencyFortmat'
+export default function ItemCard({itemInfo}) {
   return (
     <div className={styles.productCard}>
     <div className={styles.item}>
-    <div><img src={product}></img></div>
+    <div><img src={itemInfo.option.straight_img_thumbnail}></img></div>
     <div className={styles.productInfo}>
-        <div className={styles.productName}>Unique case 1</div>
+        <div className={styles.productName}>{itemInfo.option.product.name}</div>
         <div className={styles.productDescription}>
-           <div>Option 1</div>
-           <div> Mirror</div> 
-           <div>Samsung Galaxy SS10</div> 
+           <div>{itemInfo.option.name}</div>
+           <div> {itemInfo.material.name}</div> 
+           <div>{itemInfo.model.name}</div> 
             </div>
     </div>
     </div>
     <div className={styles.quantity}>
-    1
+    {itemInfo.quantity}
     </div>
     <div className={styles.subtotal}>
-    95000
+    <div className={styles.price}>{itemInfo?.campaign!= 0 &&<div>{covertCurrencyFormat(itemInfo?.option.product.price*(1-itemInfo?.campaign.value/100))}</div>} <div style={{textDecoration:itemInfo?.campaign?'line-through':'none',color:itemInfo?.campaign?'gray':'black' }}>{covertCurrencyFormat(itemInfo?.option.product.price)}</div></div>
     </div>
 </div>
   )

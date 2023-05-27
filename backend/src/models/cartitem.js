@@ -13,14 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       CartItem.belongsTo(models.BrandModel,{foreignKey:'model_id',targetKey:'id',as:'model'})
       CartItem.belongsTo(models.ProductOption,{foreignKey:'productoption_id',targetKey:'id',as:'option'})
       CartItem.belongsTo(models.Material,{foreignKey:'material_id',targetKey:'id',as:'material'})
-      CartItem.belongsTo(models.Order,{foreignKey:'order_id',targetKey:'id',as:'order'})
+      CartItem.belongsTo(models.Cart,{foreignKey:'cart_id',targetKey:'id',as:'cartItem'})
     }
   }
   CartItem.init({
+    cart_id: DataTypes.STRING,
     model_id: DataTypes.STRING,
     material_id: DataTypes.STRING,
     productoption_id: DataTypes.STRING,
-    order_id: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
   }, {
     sequelize,

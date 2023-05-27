@@ -12,6 +12,7 @@
     align-items: stretch;
     height: 100vh;
     background-color: rgb(246,246,246);
+    overflow: hidden;
 }
 .productImage img{
     top: 50%;
@@ -40,4 +41,10 @@ overflow-y:scroll;
     top:0;
     height: 100vh;
     position:sticky;
+}
+.showingImg{
+    transform-origin: center center;
+}
+.showingImg:hover {
+ transform: scale(1.5);
 }

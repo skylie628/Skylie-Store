@@ -6,6 +6,7 @@ import { getProductImage } from "../utils/getProductImage";
 import db from "../models";
 import { v4 as uuidv4 } from 'uuid';
 import NotFoundError from "../errors/NotFoundError";
+import { getSalesPrice } from "./saleProduct";
 const {Op} = require('sequelize');
 export const addProductServices = ({color,...ProductInfo}) => new Promise(async (resolve, reject) => {
     const id = uuidv4();
@@ -108,11 +109,19 @@ export const getProductsServices = (data) => new Promise(async (resolve, reject)
     const maxCount = rst.length;
     rst = rst.splice(data.offset*data.limit,data.limit);
     console.log('data là',data);
-    const promises = rst.map(product => 
+    //get Image Url
+    let promises = rst.map(product => 
     getProductImage(`Products/Medium/showing image thumnail/${product.options[0].showing_img_thumbnail}.png`)
     .then(rst => ({...product,options:{showing_img_thumbnail:rst[0]}}))
     )
-    const fetchedResponse = await Promise.all(promises); 
+    let fetchedResponse = await Promise.all(promises); 
+
+    //getSalesCampaign 
+    promises = fetchedResponse.map(product => 
+        getSalesPrice(product.id)
+        .then(rs => ({...product,campaign:rs})))
+    fetchedResponse = await Promise.all(promises); 
+
         //product.options.straight_img= await getProductImage(`Products/Medium/str image/${product.options.straight_img}.png`);
         //product.options.straight_img= await getProductImage(`Products/Medium/str image/${product.options.straight_img}.png`);
         //product.options.side_img_thumbnail= await getProductImage(`Products/Medium/side image thumbnail/${product.options.side_img_thumbnail}.png`);
@@ -128,7 +137,7 @@ export const getProductsServices = (data) => new Promise(async (resolve, reject)
 })
 
 export const getProductServices = (ProductInfo) => new Promise(async (resolve, reject) => {
-    try{
+
         console.log(ProductInfo)
     let response = await db.Product.findOne(
         {where :
@@ -136,7 +145,7 @@ export const getProductServices = (ProductInfo) => new Promise(async (resolve, r
                 slug: ProductInfo.slug
             },
         include: [ {model : db.ProductOption,
-            attributes:[ 'showing_img_thumbnail','name','straight_img','straight_img_thumbnail','side_img','side_img_thumbnail'],
+            attributes:[ 'id','showing_img_thumbnail','name','straight_img','straight_img_thumbnail','side_img','side_img_thumbnail'],
             as : 'options'},
             {
             model: db.Color,
@@ -145,7 +154,8 @@ export const getProductServices = (ProductInfo) => new Promise(async (resolve, r
         } ],
         nest: true,
         })
-        response = JSON.parse(JSON.stringify(response));  
+        response = JSON.parse(JSON.stringify(response));
+        console.log('response la',response);  
         await getProductImage(`Products/Medium/showing image thumnail/${response.options[0].showing_img_thumbnail}.png`)   
         .then(rs => response.options[0].showing_img_thumbnail = rs[0] )
         await getProductImage(`Products/Medium/str image/${response.options[0].straight_img}.png`)   
@@ -157,15 +167,19 @@ export const getProductServices = (ProductInfo) => new Promise(async (resolve, r
         await getProductImage(`Products/Medium/side image thumbnail/${response.options[0].side_img_thumbnail}.png`)   
         .then(rs => response.options[0].side_img_thumbnail = rs[0] )
 
+        //getSaleCampaing
+        const campaign = await getSalesPrice(response.id);
+        response.campaign = campaign;
         console.log(response);
+
+        
         response ? resolve({
         err: 0,
         data: response,
         msg: 'get thành công'})
         :
         reject( new InvalidParamError('Không tìm thấy Product tương ứng'))
-    }
-    catch(err){reject(new InvalidParamError('Cập nhật không thành công'))}
+
 })
 
 

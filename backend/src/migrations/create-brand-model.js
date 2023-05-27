@@ -12,7 +12,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      brand_id: {
+      brandmodelgroup_id: {
         type: Sequelize.STRING
       },
       createdAt: {

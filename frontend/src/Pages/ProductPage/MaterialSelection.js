@@ -6,7 +6,8 @@ import TransSilIcon from '../../assets/images/Material Icon/transparent-silicon-
 import BlackSilIcon from '../../assets/images/Material Icon/black-silicon-icon.png'
 import ThreeDIcon from '../../assets/images/Material Icon/3dcase-icon.png'
 export default function MaterialSelection({setStateMaterialMenu,selectedMaterial,setSelectedMaterial}) {
-  const changeSelected = (id) =>{
+  
+const changeSelected = (id) =>{
     setStateMaterialMenu(prev =>'Touched');
     setSelectedMaterial(id);
   }
@@ -19,23 +20,23 @@ export default function MaterialSelection({setStateMaterialMenu,selectedMaterial
         </div>
         <div className={styles.materialsSelection}>
             <div className ={styles.materialsImg} >
-                <img src = {GlassIcon} style={{width:'100%',padding:'5px', borderColor: (selectedMaterial == 0)? 'blue': ''}} onClick ={()=> changeSelected(0)} ></img>
+                <img src = {GlassIcon} style={{width:'100%',padding:'5px', borderColor: (selectedMaterial == 'glass')? 'blue': ''}} onClick ={()=> changeSelected('glass')} ></img>
                 <span>Nano </span><span>Glass</span>
             </div>
             <div className ={styles.materialsImg} >
-                <img src = {MirrorIcon} style={{width:'100%',padding:'5px', borderColor: (selectedMaterial == 1)? 'blue': ''}} onClick ={()=> changeSelected(1)}></img>
+                <img src = {MirrorIcon} style={{width:'100%',padding:'5px', borderColor: (selectedMaterial == 'mirror')? 'blue': ''}} onClick ={()=> changeSelected('mirror')}></img>
                 <span>Mirror</span>
             </div>
             <div className ={styles.materialsImg} >
-                <img src = {TransSilIcon} style={{width:'100%',padding:'5px', borderColor: (selectedMaterial == 2)? 'blue': ''}} onClick ={()=> changeSelected(2)}></img>
+                <img src = {TransSilIcon} style={{width:'100%',padding:'5px', borderColor: (selectedMaterial == 'transSil')? 'blue': ''}} onClick ={()=> changeSelected('transSil')}></img>
                 <span>Alpha </span><span>Silicon</span>
             </div>
             <div className ={styles.materialsImg} >
-                <img src = {BlackSilIcon} style={{width:'100%',padding:'5px', borderColor: (selectedMaterial == 3)? 'blue': ''}} onClick ={()=> changeSelected(3)}></img>
+                <img src = {BlackSilIcon} style={{width:'100%',padding:'5px', borderColor: (selectedMaterial == 'blackSil')? 'blue': ''}} onClick ={()=> changeSelected('blackSil')}></img>
                 <span>Black</span><span> Silicon</span>
             </div>
             <div className ={styles.materialsImg} >
-                <img src = {ThreeDIcon} style={{width:'100%',padding:'5px', borderColor: (selectedMaterial == 4)? 'blue': ''}} onClick ={()=> changeSelected(4)}></img>
+                <img src = {ThreeDIcon} style={{width:'100%',padding:'5px', borderColor: (selectedMaterial == '3d')? 'blue': ''}} onClick ={()=> changeSelected('3d')}></img>
                 <span>3D</span>
             </div>
         </div>

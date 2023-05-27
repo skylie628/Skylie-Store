@@ -3,6 +3,9 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('CartItems', {
+      cart_id: {
+        type: Sequelize.STRING
+      },
       id: {
         allowNull: false,
         primaryKey: true,
@@ -15,9 +18,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       productoption_id: {
-        type: Sequelize.STRING
-      },
-      order_id: {
         type: Sequelize.STRING
       },
       quantity: {

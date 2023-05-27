@@ -12,9 +12,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      total_price: {
-        type: Sequelize.INTEGER
-      },
       status: {
         type: Sequelize.STRING
       },

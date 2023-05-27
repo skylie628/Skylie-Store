@@ -1,0 +1,131 @@
+
+.productCard{
+    border-top:  1px solid rgba(0,0,0,0.1);
+     display: flex;
+    }
+    .item img{
+        width: 100px;
+        background-color: rgb(241,241,241);
+    }
+    .productInfo{
+        margin: 0px 10px;
+        line-height: 1.5em;
+    }
+    .item{
+        margin: 20px 0px;
+        flex-basis: 100%;
+        display: flex;
+        text-align: left;
+    }
+    .subtotal{
+        margin: 20px 0px;
+        width: 100px;
+        display: flex;
+        flex-direction: row;
+        text-align: right;
+        justify-content: space-between;
+    }
+    .quantity{
+        margin: 20px 0px;
+        width: 100px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .ContentWrapper{
+        display: flex;
+    }
+    .leftCol{
+        flex: 6 0 0;
+            border: 1px solid rgb(0,0,0,0.1);
+        border-radius: 10px;
+        margin: 20px 10px 20px 20px;
+    }
+    .rightCol{
+        flex:4 0 0;
+        font-size: 15px;
+        margin: 20px 20px 20px 10px;
+    }
+    .descriptionCard{
+        padding: 20px;
+    }
+    .sticky{
+        position: sticky;
+        top: 64px;
+    }
+    .descriptionCardHeader{
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 10px 0px;
+    display: flex;
+    }
+    .item{
+        margin: 20px 0px;
+        flex-basis: 100%;
+        text-align: left;
+    }
+    .subtotal{
+        margin: 20px 0px;
+        width: 100px;
+        display: flex;
+        flex-direction: row;
+        text-align: right;
+        justify-content: space-between;
+    }
+    .quantity{
+        margin: 20px 0px;
+        width: 100px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .productTotal{
+        text-align: right;
+    }
+    .productTotal div{
+        margin: 5px;
+    }
+    .buttons{
+     display: block;
+     padding: 20px ;
+     margin-bottom: 20px;
+    }
+    .buttons div{
+        display: block;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 10px;
+        color:white;
+        background-color: rgb(128,128,128,1);
+    }
+    .buttons div:hover{
+        background-color: rgb(120,120,120,1);
+        color:white;
+    }
+    .backCartButton{
+        text-align: left;
+        float: left;
+    }
+    .continueShoppingButton{
+        text-align: right;
+        float:right;
+    }
+    .voucherWrapper{
+        margin: 15px 0;
+        display: flex;
+        vertical-align: middle;
+        align-items: center;
+    }
+    .voucherInput{
+        flex: 1 0 0;
+        height: 100%;
+    }
+    .voucherBtn{
+        flex: 1 0 0;
+        background-color: rgba(45,144,239,1);
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+    

@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsTo(models.Collection,{foreignKey:'collection_id',targetKey:'id', as:'collection'})
       Product.belongsToMany(models.Color,{through : 'Product_Color', as : 'colors'})
       Product.hasMany(models.ProductOption,{foreignKey:'product_id',as:'options'})
+      Product.hasMany(models.SaleProduct,{foreignKey:'product_id',as:'sale'})
     }
   }
   Product.init({

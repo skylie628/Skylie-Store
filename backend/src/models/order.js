@@ -10,19 +10,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Order.belongsTo(models.Voucher,{foreignKey:'voucherDiscount',targetKey:'code',as:'discount'});
-      Order.belongsTo(models.Voucher,{foreignKey:'voucherFreeship',targetKey:'code',as:'freeship'});
-      Order.belongsTo(models.Account,{foreignKey:'account_id',targetKey:'id',as:'account'});
+    
       Order.belongsTo(models.ShippingAddress,{foreignKey:'shipping_address_id',targetKey:'id',as:'shippingAddress'});
-      Order.hasMany(models.CartItem,{foreignKey:'id',as:'cartItem'});
+      Order.belongsTo(models.Cart,{foreignKey:'cart_id',as:'cart'});
+      Order.hasMany(models.OrderItem,{foreignKey:'order_id',as:'orderItem'})
     }
   }
   Order.init({
     status: DataTypes.STRING,
     total_price: DataTypes.INTEGER,
-    voucherDiscount : DataTypes.STRING,
-    voucherFreeship: DataTypes.STRING,
-    account_id: DataTypes.STRING,
+    cart_id: DataTypes.STRING,
     shipping_address_id: DataTypes.STRING,
   }, {
     sequelize,

@@ -1,11 +1,19 @@
 .container{
-    margin: 30px 10px;
+    margin:  10px;
 }
 .item{
-    padding: 10px;
+    padding:10px 0px;
     cursor: pointer;
 }
 .listWrapper{
     position: relative;
     overflow: hidden;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    height: 50px;
+    border-top:1px solid rgba(0,0,0,0.3);
 }

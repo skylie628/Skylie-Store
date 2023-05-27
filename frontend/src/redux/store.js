@@ -7,6 +7,9 @@ import shippingAddressReducer from '../store/reducers/shippingAddressSlice'
 import productReducer from '../store/reducers/productSlice'
 import productQueryReducer from '../store/reducers/productQuerySlice'
 import productDetailReducer from '../store/reducers/productDetailSlice'
+import cartItemReducer from '../store/reducers/cartSlice'
+import orderReducer from '../store/reducers/orderSlice'
+import commentReducer from '../store/reducers/commentSlice'
 import { persistReducer, persistStore } from 'redux-persist';
     const AuthpersistConfig = {
         key: 'root',
@@ -29,6 +32,9 @@ import { persistReducer, persistStore } from 'redux-persist';
           product: productReducer,
           productQuery: productQueryReducer,
           productDetail: productDetailReducer,
+          cart: cartItemReducer,
+          order: orderReducer,
+          comment: commentReducer,
         }
       });
     export const persistor  = persistStore(store);

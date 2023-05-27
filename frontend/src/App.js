@@ -14,6 +14,7 @@ import SavedItemPage from './Pages/SavedItemPage/SavedItemPage';
 import DetailedAlbum from './Pages/AlbumPage/DetailedAlbum';
 import ProfilePage from './Pages/ProfiledPage/ProfiledPage';
 import OrdersPage from './Pages/OrdersPage/OrdersPage';
+import OrderDetailedPage from './Pages/OrderDetailedPage/OrderDetailedPage';
 import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
 import ScrollToTop from './Components/Scroll To Top/ScrollToTop';
 import { Route, Routes } from 'react-router-dom';
@@ -50,6 +51,7 @@ function App() {
             <Route path="/saved/:id" element  = {<DetailedAlbum/>}/> 
             <Route path="/profile" element  = {<ProfilePage/>}/> 
             <Route path="/orders" element  = {<OrdersPage/>}/> 
+            <Route path="/orders/:order_id" element  = {<OrderDetailedPage/>}/> 
             <Route path="/materials" element  = {<MaterialDetailPage/>}/> 
             <Route path="*" element={<LandingPage/>}/>
           </Routes>

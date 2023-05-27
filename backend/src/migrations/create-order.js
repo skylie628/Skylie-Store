@@ -15,13 +15,13 @@ module.exports = {
       total_price: {
         type: Sequelize.INTEGER
       },
-      voucherFreeShip:{
-        type:Sequelize.STRING
+      shipping_fee:{
+        type: Sequelize.INTEGER
       },
-      voucherDiscount : {
-        type:Sequelize.STRING
+      product_price:{
+        type: Sequelize.INTEGER
       },
-      account_id:{
+      cart_id:{
         type:Sequelize.STRING
       },
       shipping_address_id:{

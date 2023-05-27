@@ -35,6 +35,31 @@ export const getShippingAddressesServices = ({account_id}) => new Promise(async 
         err: 0,
     }) 
 })
+export const getShippingAddressServices = (shipping_address_id) => new Promise(async (resolve, reject) => {
+    const response = await db.ShippingAddress.findOne({
+        where :{
+        id: shipping_address_id
+        },
+        raw:true
+    })
+    resolve({
+        data: response,
+        err: 0,
+    }) 
+})
+export const getDefaultShippingAddressServices = ({account_id}) => new Promise(async (resolve, reject) => {
+    const response = await db.ShippingAddress.findOne({
+        where :{
+        account_id,
+        default:1
+        },
+        raw:true
+    })
+    resolve({
+        data: response,
+        err: 0,
+    }) 
+})
 
 
 export const updateShippingAddressServices = (addressInfo) => new Promise(async (resolve, reject) => {

@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      BrandModel.belongsTo(models.Brand,{foreignKey:'brand_id',targetKey:'id',as:'brand'})
+      BrandModel.belongsTo(models.BrandModelGroup,{foreignKey:'brandmodelgroup_id',targetKey:'id',as:'brand'})
       BrandModel.hasMany(models.CartItem,{foreignKey:'model_id',as:'model'})
     }
   }
   BrandModel.init({
     name: DataTypes.STRING,
-    brand_id: DataTypes.STRING,
+    brandmodelgroup_id: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'BrandModel',

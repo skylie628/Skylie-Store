@@ -11,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Comment.belongsTo(models.Account,{foreignKey:'account_id',targetKey:'id',as :'account'})
+      Comment.belongsTo(models.Product,{foreignKey:'product_id',targetKey:'id',as :'product'})
     }
   }
   Comment.init({
     account_id: DataTypes.STRING,
-    cardItem_id: DataTypes.STRING,
+    product_id: DataTypes.STRING,
     rating: DataTypes.INTEGER,
     content: DataTypes.TEXT
   }, {

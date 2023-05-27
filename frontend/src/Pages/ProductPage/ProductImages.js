@@ -24,7 +24,7 @@ export default function ProductImages() {
     <div className = {styles.stickyEle}>
     <div className={styles.thumbnail}>
      <div className = {styles.thumbnailImg}>
-        <img src={images.straight_img_thumbnail} style={{width : '100%'}} onClick = {()=>{ setShowingImage(images.straight_img)}}>
+        <img  src={images.straight_img_thumbnail} style={{width : '100%'}} onClick = {()=>{ setShowingImage(images.straight_img)}}>
         </img>
     </div>   
      <div className = {styles.thumbnailImg}>
@@ -38,7 +38,7 @@ export default function ProductImages() {
     </div>   
     </div>
     <div className={styles.productImage}>
-        <img src={showingImage} style={{height:'100%',objectFit:'cover'}}></img>
+        <img className = {styles.showingImg} src={showingImage} style={{height:'100%',objectFit:'cover',cursor:'pointer',transition:'1s ease-in-out'}}></img>
     </div>
     </div>
 </div>

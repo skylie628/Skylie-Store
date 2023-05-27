@@ -10,10 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Brand.hasMany(models.BrandModel,{foreignKey:'brand_id',as:'brand'})
+      Brand.hasMany(models.BrandModelGroup,{foreignKey:'brand_id',as:'brandmodelgroup'})
     }
   }
   Brand.init({
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     name: DataTypes.STRING
   }, {
     sequelize,

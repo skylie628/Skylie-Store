@@ -17,6 +17,11 @@ const add = () => {
     ]; 
   }
 
+  const getOne = () => {
+    return [ 
+      
+    ]; 
+  }
   
   const drop = () => {
     return [ 
@@ -25,6 +30,6 @@ const add = () => {
   }
 
 export const orderValidate = {
-    add,update,get,drop
+    add,update,get,drop,getOne
 };
 
