@@ -11,7 +11,7 @@ export default function HeaderNofify(props) {
     },3000)
   },[])
   return <Fragment>
-    {<div style={{position:'fixed',top:0,zIndex:5,color:'white',opacity:isVisible? '1':'0',transition:'0.5s ease-in-out',backgroundColor:'rgb(0,119,237)',...props.style}}  >
+    {<div style={{position:'fixed',top:0,zIndex:isVisible? 5: 0,color:'white',opacity:isVisible? '1':'0',transition:'0.5s ease-in-out',backgroundColor:'rgb(0,119,237)',...props.style}}  >
       <div style={{ padding:'20px',display:'flex'}}>
       <div><Logo src = {props.severity == 'error' ? ErrorImg : SuccessImg} style={{width: '20px',height:'20px',}}></Logo></div>
       {

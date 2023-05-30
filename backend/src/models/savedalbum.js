@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      SavedAlbum.belongsTo(models.Account,{foreignKey:'account_id',targetKey:'id',as:'account'})
+      SavedAlbum.hasMany(models.SavedProduct,{foreignKey:'album_id',as:'savedProduct'})
     }
   }
   SavedAlbum.init({

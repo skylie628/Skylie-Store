@@ -30,7 +30,8 @@ export default function CheckoutPage() {
     const [deliveryFee,setDeliveryFee] = useState(0);
     const order = useSelector(state=>state.order);
     const addressesData = useSelector(state=> state.shippingAddress).addresses
-    const [selectedAddress,setSelectedAddress] = useState({});
+    const addressAction = useSelector(state=>state.shippingAddress).action
+   const [selectedAddress,setSelectedAddress] = useState({});
     const [total,setTotal] = useState(0);
     const productTotal =  cart.cartItems.reduce((x,y)=> {
         if(y.campaign !=0){
@@ -51,10 +52,14 @@ export default function CheckoutPage() {
     }
     const getShippingAddresses = async ()=>{
         await userInfo.id&&dispatch(fetchShippingAddresses(userInfo.id));
-        const defaultAddress = addressesData.find(address => address.default)||{};
-        console.log('default address là',defaultAddress)
-        setSelectedAddress(defaultAddress)
     }
+    useEffect(()=>{
+        if(addressAction == actionTypes.GET_ALL_SUCCESS){
+            const defaultAddress = addressesData.find(address => address.default);
+            console.log('default address là',defaultAddress)
+            setSelectedAddress(defaultAddress)
+        }
+    },[addressAction])
     const calculateShippingFee =  (pcode,dcode) =>{
     /*const province = await apiLookupProvince(pcode);
     const district = await apiLookupDistrict(dcode);

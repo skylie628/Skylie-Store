@@ -11,8 +11,8 @@ export  const fetchOrders = (payload) => async(dispatch) =>{
 export  const addOrder = (payload) => async(dispatch) =>{
 dispatch(add())
 apiAddOrder(payload)
-.then(response => dispatch(addSuccess({data: {id : response.data.id,...payload}})))
-.catch(response =>dispatch(addFail({data: response.errors })))
+.then(response => setTimeout(()=>dispatch(addSuccess({data: {id : response.data.id,...payload}})),1000))
+.catch(response =>setTimeout(()=>dispatch(addFail({data: response.errors })),1000))
 }
 export  const cancleOrder = (payload) => async(dispatch) =>{
     console.log(payload)

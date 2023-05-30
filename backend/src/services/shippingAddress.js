@@ -5,11 +5,13 @@ import { v4 as uuidv4 } from 'uuid';
 export const addShippingAddressServices = (info) => new Promise(async (resolve, reject) => {
 
     const id = uuidv4();
+
     const response = await db.ShippingAddress.findOrCreate({
         where :info,
         defaults:{
             id,
-            ...info
+            ...info,
+            status: 'enable'
         }
     })
     response[1] ?
@@ -26,7 +28,8 @@ export const addShippingAddressServices = (info) => new Promise(async (resolve, 
 export const getShippingAddressesServices = ({account_id}) => new Promise(async (resolve, reject) => {
     const response = await db.ShippingAddress.findAll({
         where :{
-        account_id
+        account_id,
+        status:'enable',
         },
         raw:true
     })
@@ -38,7 +41,8 @@ export const getShippingAddressesServices = ({account_id}) => new Promise(async 
 export const getShippingAddressServices = (shipping_address_id) => new Promise(async (resolve, reject) => {
     const response = await db.ShippingAddress.findOne({
         where :{
-        id: shipping_address_id
+        id: shipping_address_id,
+        status:'enable',
         },
         raw:true
     })
@@ -51,7 +55,8 @@ export const getDefaultShippingAddressServices = ({account_id}) => new Promise(a
     const response = await db.ShippingAddress.findOne({
         where :{
         account_id,
-        default:1
+        default:1,
+        status:'enable',
         },
         raw:true
     })
@@ -68,7 +73,8 @@ export const updateShippingAddressServices = (addressInfo) => new Promise(async 
         {...addressInfo},
         {where :
             {
-                id: addressInfo.id
+                id: addressInfo.id,
+                status:'enable'
             }
         })
     response[0] ?
@@ -83,13 +89,14 @@ export const updateShippingAddressServices = (addressInfo) => new Promise(async 
 
 export const deleteShippingAddressServices = (addressInfo) => new Promise(async (resolve, reject) => {
 
-    const response = await db.ShippingAddress.destroy(
+    const response = await db.ShippingAddress.update(
+        {...addressInfo,status:'disable'},
         {where :
             {
                 id: addressInfo.id
             }
         })
-        response ? resolve({
+        response[0] ? resolve({
         err: 0,
         msg: 'delete shipping address successfully'})
         :

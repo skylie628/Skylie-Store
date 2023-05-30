@@ -10,6 +10,8 @@ import productDetailReducer from '../store/reducers/productDetailSlice'
 import cartItemReducer from '../store/reducers/cartSlice'
 import orderReducer from '../store/reducers/orderSlice'
 import commentReducer from '../store/reducers/commentSlice'
+import savedAlbumReducer from '../store/reducers/savedAlbumSlice'
+import savedProductReducer from '../store/reducers/savedProductSlice'
 import { persistReducer, persistStore } from 'redux-persist';
     const AuthpersistConfig = {
         key: 'root',
@@ -35,6 +37,8 @@ import { persistReducer, persistStore } from 'redux-persist';
           cart: cartItemReducer,
           order: orderReducer,
           comment: commentReducer,
+          savedAlbum: savedAlbumReducer,
+          savedProduct: savedProductReducer
         }
       });
     export const persistor  = persistStore(store);

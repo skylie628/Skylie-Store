@@ -11,6 +11,8 @@ import seriesRouter from './series.js'
 import cartRouter from './cart.js'
 import modelRouter from './model.js'
 import commentRouter from './comment.js'
+import savedAlbumRouter from './savedAlbum.js'
+import savedProductRouter from './savedProduct.js'
 import errorHandler from '../middlewares/errorHandler.js'
 require('express-async-errors');
 const initRoutes = (app) =>{
@@ -27,6 +29,8 @@ const initRoutes = (app) =>{
     app.use('/api/v1/cart',cartRouter);
     app.use('/api/v1/cartItem',cartItemRouter);
     app.use('/api/v1/comment',commentRouter);
+    app.use('/api/v1/savedAlbum',savedAlbumRouter);
+    app.use('/api/v1/savedProduct',savedProductRouter);
     app.use(errorHandler)
     return app.use('/',(req,res)=>{
         res.send("not ok")

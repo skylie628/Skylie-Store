@@ -8,9 +8,6 @@
     text-decoration: none;
     padding: 0 5px;
 }
-.button :hover {
-    color: white;
-}
 .logo{
     width: 30px ;
     height: 30px ;

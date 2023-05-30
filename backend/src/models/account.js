@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Account.hasMany(models.Comment,{foreignKey:'account_id', as:'account'}),
       Account.hasMany(models.ShippingAddress,{foreignKey:'account_id', as:'shippingaddress'})
       Account.hasMany(models.Cart,{foreignKey:'account_id', as:'cart'});
+      Account.hasMany(models.SavedAlbum,{foreignKey:'account_id', as:'album'});
     }
   }
   Account.init({

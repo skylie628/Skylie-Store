@@ -4,15 +4,13 @@ import actionTypes  from "../actions/actionTypes"
 const initialState = {
   action : null,
   errors: null,
-  orders: [],
+  savedAlbums: []
 };
-const orderSlice = createSlice({
-    name: 'order',
+const savedAlbumSlice = createSlice({
+    name: 'savedAlbum',
     initialState,
     reducers: {
       getAll: (state,action) =>{
-        console.log('aaaa');
-        console.log('getAllSuccess',action.payload);
         return {
           ...state,
           action: actionTypes.GET_ALL,
@@ -27,13 +25,12 @@ const orderSlice = createSlice({
         }
       },
       getAllSuccess: (state,action) =>{
-        console.log('aaaa');
-        console.log('getAllSuccess',action.payload);
+        console.log('getAllSuccess',action.payload)
         return {
           ...state,
           errors: null,
           action: actionTypes.GET_ALL_SUCCESS,
-          orders: action.payload.data,
+          savedAlbums: [...action.payload.data]
         }
       },
       add: (state,action) =>{
@@ -45,11 +42,11 @@ const orderSlice = createSlice({
       },
       addSuccess: (state,action) =>{
          return {
-          ...state,
         action: actionTypes.ADD_SUCCESS,
-        orders:[...state.orders],
-        errors: null,
-        }},
+        errs: null,
+         savedAlbums:[...state.savedAlbums,
+          action.payload.data]}
+        },
       addFail: (state,action) =>{
           return {
             ...state,
@@ -58,23 +55,50 @@ const orderSlice = createSlice({
           }
          },
 
-         drop: (state,action) =>{
+        update: (state,action) =>{
+          return {
+            ...state,
+            action: actionTypes.UPDATE,
+            errors: null
+          }
+        },
+      updateSuccess: (state,action) =>{
+          const {name} = action.payload.data
+          state.savedAlbums.forEach(savedAlbum =>{
+            if (savedAlbum.id == action.payload.data.id){
+                savedAlbum.name =name;
+            }
+          })
+          state.action = actionTypes.UPDATE_SUCCESS
+          state.errors = false;
+         },
+         updateFail: (state,action) =>{
+          return {
+            ...state,
+            action: actionTypes.UPDATE_FAIL,
+            errors: action.payload.data
+          }
+        },
+        drop: (state,action) =>{
           return {
             ...state,
             action: actionTypes.DELETE,
             errors: null
           }
         },
-
         dropSuccess: (state,action) =>{
-         const addresses =[];
+         const savedAlbums =[];
          console.log("reducer drop là",action.payload)
-         state.orders.forEach(order =>{
-          if (order.id == action.payload){
-            order.status = 'Cancel'
-          }})
-          state.action = actionTypes.DELETE_SUCCESS;
-          state.errors = false;
+          state.savedAlbums.forEach((savedAlbum)=>{
+            if(savedAlbum.id !== action.payload.id){
+                savedAlbums.push(savedAlbum)
+            }
+          })
+          return {
+            ...state,
+            action: actionTypes.DELETE_SUCCESS,
+            errors: false,
+            savedAlbums: [...savedAlbums]}
          },
          dropFail: (state,action) =>{
           return {
@@ -84,13 +108,16 @@ const orderSlice = createSlice({
           }
         },
 
+
          resetError: (state,action) =>{
          return {
            ...state,
            errors:null,
-           action: null,
+           action: null
          }}
   }})
 
-export const {get,getAll,getAllFail,getAllSuccess,add,addFail,addSuccess,drop,dropFail,dropSuccess,resetError} = orderSlice.actions
-export default orderSlice.reducer
+export const {getAll,getAllFail,getAllSuccess,add,addFail,addSuccess,update,updateSuccess,updateFail,drop,dropSuccess,dropFail,resetError} = savedAlbumSlice.actions
+export default savedAlbumSlice.reducer
+
+

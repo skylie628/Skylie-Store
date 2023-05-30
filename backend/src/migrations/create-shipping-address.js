@@ -11,6 +11,9 @@ module.exports = {
       account_id: {
         type: Sequelize.STRING
       },
+      status: {
+        type: Sequelize.STRING
+      },
       firstname: {
         type: Sequelize.STRING
       },

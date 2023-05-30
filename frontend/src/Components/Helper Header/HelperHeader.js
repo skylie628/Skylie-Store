@@ -46,7 +46,7 @@ export default function HelperHeader({isFixed,style,showFilter,setShowFilter}) {
     //!event.target.value&&setIsLoading(false);
     const delay = setTimeout(()=>{
       setInputSearch(event.target.value);
-    },3000);
+    },2000);
     return () => clearTimeout(delay);
   }
   const handleEnter = (event) =>{

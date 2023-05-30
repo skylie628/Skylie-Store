@@ -8,15 +8,20 @@ import NotFoundError from "../errors/NotFoundError";
 export const addOrderItemsServices = (orderItems) => new Promise(async (resolve, reject) => {
 
     const id = uuidv4();
-    const response = await db.OrderItem.bulkCreate(orderItems)
-    console.log(orderItems);
-    response[1] ?
+    console.log('orderItem la',orderItems);
+    let response =null;
+    if(orderItems.length>1){
+    response = await db.OrderItem.bulkCreate(orderItems)}
+    else if (orderItems.length==1) {
+        response = await db.OrderItem.create(orderItems[0])
+    }
+    response ?
     resolve({
         id,
         err: 0,
         msg:  'add orderItems successfully' 
     })
     : 
-    reject(new ConflictError('Color đã tồn tại'))
+    reject(new ConflictError('OrderItem đã tồn tại'))
 })
 

@@ -45,7 +45,10 @@ const productQuerySlice = createSlice({
           order: action.payload
         }
       },
+      resetQuery: (state,action) =>{
+        return initialState
+      },
   }})
 
-export const {filterByName,filterByColors,filterByCollection,filterByPrice,sort} = productQuerySlice.actions
+export const {filterByName,filterByColors,filterByCollection,filterByPrice,sort,resetQuery} = productQuerySlice.actions
 export default productQuerySlice.reducer

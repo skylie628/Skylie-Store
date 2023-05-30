@@ -10,10 +10,12 @@ import BrandMenu from '../../Components/Brand Menu/BrandMenu'
 import ShowHideLayout from '../../Components/Show Hide Layout/ShowHideLayout'
 import SimpleItemList from '../../Components/Simple Item List/SimpleItemList'
 import Suggestion from '../../Components/Suggestion/Suggestion'
+import AddAlbumModal from './AddAlbumModal'
 import side1 from '../../assets/images/ProductImage/side-1.png'
 import { apiGetModel, apiGetSeries } from '../../services/phone'
 import { getProductDetail } from '../../store/actions/productDetail'
 import { useDispatch, useSelector } from 'react-redux'
+import AlbumSelection from './AlbumSelection'
 import {gsap} from 'gsap';
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useParams } from 'react-router-dom'
@@ -38,6 +40,8 @@ export default function ProductPage() {
     const [checkoutModal,setCheckoutModal] = useState(false);
     const [listSeries,setListSeries] = useState([]);
     const [listModels,setListModels] = useState([]);
+    const [stateAddAlbumModal,setStateAddAlbumModal] = useState(false);
+    const [stateSavedProductModal,setStateSavedProductModal] = useState(false);
     const [productDetail,setProductDetail] = useState({});
     const {slug} = useParams();
     const productInfo = useSelector(state=>state.productDetail).productDetail;
@@ -53,6 +57,9 @@ export default function ProductPage() {
             material_id: selectedMaterial,
             productoption_id: selectedOption,
         }))
+    }
+    const addToWishlist = async () =>{
+        setStateSavedProductModal(true)
     }
     const fetchDetail = async() => {
         console.log('fetchDetail run')
@@ -107,6 +114,8 @@ export default function ProductPage() {
     const PhoneNames = ['Iphone6', 'Iphone6s','Iphone7s Plus','Iphone XsMax']
   return (
     <div>
+    {stateSavedProductModal && <AlbumSelection setStateSavedProductModal={setStateSavedProductModal} productInfo ={productInfo} setStateAddAlbumModal={setStateAddAlbumModal}></AlbumSelection>}
+    {stateAddAlbumModal && <AddAlbumModal setStateSavedProductModal ={setStateSavedProductModal} setStateAddAlbumModal={setStateAddAlbumModal}></AddAlbumModal>}
     <div className={styles.container}>
     <CheckoutModal checkoutModal ={checkoutModal} setCheckoutModal = {setCheckoutModal}/>
     <ProductImages />
@@ -124,6 +133,7 @@ export default function ProductPage() {
         <SimpleItemList  nameList = 'Series' stateModel = {stateSeries} setStateModel = {setStateSeries} ListItem={listSeries} selectedItem = {selectedSeries} setSelectedItem ={setSelectedSeries} style ={{}}></SimpleItemList>
         <SimpleItemList nameList = 'Models' stateModel = {stateModel} setStateModel = {setStateModel} ListItem={listModels} selectedItem = {selectedModel} setSelectedItem ={setSelectedModel} style ={{}}></SimpleItemList>
         <div id='checkoutBtn' className = {styles.addToCartBtn} style ={{   pointerEvents: stateCheckoutBtn == 'notActive'? 'none' :''}} onClick={()=>{if(stateCheckoutBtn != 'notActive'){addTocart();}}}>Thêm vào giỏ hàng</div>
+        <div id='checkoutBtn' className = {styles.addToCartBtn} style={{marginTop:'10px !important'}}  onClick={addToWishlist}>Lưu</div>
         <ShowHideLayout header='Chính sách vận chuyển'>
             <div style ={{ lineHeight:'2em'}}>
             <div>

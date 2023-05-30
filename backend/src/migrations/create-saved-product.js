@@ -2,16 +2,16 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('SavedAlbumcartItems', {
+    await queryInterface.createTable('SavedProducts', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.STRING
       },
-      savedAlbum: {
+      album_id: {
         type: Sequelize.STRING
       },
-      cartItem: {
+      product_id: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -25,6 +25,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('savedAlbumcartItems');
+    await queryInterface.dropTable('SavedProducts');
   }
 };

@@ -18,10 +18,15 @@ export default function Header(props) {
   const { pathname } = useLocation();
   const {islogged} = useSelector(state=> state.auth);
   const [isRelative, setIsRelative] = useState(false);
+  const [hoverShopping,setHoverShopping] = useState(false);
+  const [isBlack,setIsBlack] = useState(false);
+  const [hoverAbout,setHoverAbout] = useState(false);
+  const [hoverSignin,setHoverSignin] = useState(false);
   const [isExpandHeader,setIsExpandHeader] = useState(false);
   /*useEffect(()=>{
    (pathname =='/shopping' || pathname =='/cart' || matchPath({path : '/product/:id',exact: false},pathname)) ? setIsRelative(true) : setIsRelative(false)
   },[pathname])*/
+  useEffect(()=>{},[])
   useEffect(()=>{
     (pathname =='/' || pathname =='/materials' ) ? setIsRelative(false) : setIsRelative(true)
    },[pathname])
@@ -31,12 +36,12 @@ export default function Header(props) {
   }
   return (
     <AppBar  sx = {{boxShadow: 'inherit',zIndex:2, top:0, position :isRelative ? 'relative' : 'sticky',height:'64px'}} >
-    <Toolbar sx = {{backgroundColor : isRelative? 'rgb(245,245,245)':'black',opacity: 0.9}} style ={{color: isRelative? 'black' : 'white',top:0}}  >
+    <Toolbar sx = {{backgroundColor : isRelative? '#F5F5F5':'black',opacity: 1}} style ={{color: isRelative? 'black' : 'white',top:0}}  >
     <img  src= {isRelative? BlackLogo : Logo} className ={styles.logo} onClick = {() =>{changePath('/')}}/>
     <box className ={styles.buttons}>
-    <span className ={styles.button}><a className ={styles.button} >Về chúng tôi</a></span>
-    <span className ={styles.button}><a className ={styles.button} onClick = {() =>{changePath('/shopping')}}>Shopping</a></span>
-    {!islogged && <span className ={styles.button}><a className ={styles.button} onClick = {() =>{changePath('/signin')}}>Đăng nhập</a></span>}
+    <span className ={styles.button}><a className ={styles.button} onMouseEnter={()=>setHoverAbout(true)} onMouseLeave={()=>setHoverAbout(false)} style ={{color:hoverAbout?(isRelative?'black':'white'): (isRelative?'rgba(0,0,0,0.95)':'rgba(255,255,255,0.95)')}} >Về chúng tôi</a></span>
+    <span className ={styles.button}><a className ={styles.button} onMouseEnter={()=>setHoverShopping(true)} onMouseLeave={()=>setHoverShopping(false)} style = {{color:hoverShopping?(isRelative?'black':'white'): (isRelative?'rgba(0,0,0,0.95)':'rgba(255,255,255,0.95)')}} onClick = {() =>{changePath('/shopping')}}>Shopping</a></span>
+    {!islogged && <span className ={styles.button} onMouseEnter={()=>setHoverSignin(true)} onMouseLeave={()=>setHoverSignin(false)} style = {{color:hoverSignin?(isRelative?'black':'white'): (isRelative?'rgba(0,0,0,0.95)':'rgba(255,255,255,0.95)')}}><a className ={styles.button} onClick = {() =>{changePath('/signin')}}>Đăng nhập</a></span>}
     <span className ={styles.button}><img  src= {isRelative? BlackShoppingBag : WhiteShoppingBag} className ={styles.cart} onClick = {() =>setIsExpandHeader(prev => !prev)}/></span>
     </box>
     </Toolbar>

@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
 import styles from './SearchSuggestion.module.css'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import { useNavigate } from 'react-router-dom'
 import SuggestImage from '../../assets/images/ProductImage/1.png'
 export default function SearchSuggestion({products,isLoading}) {
+  const navigate = useNavigate();
+
   return (
     <div className  = {styles.container}>
     <div className = {styles.searchSuggest}>
@@ -17,7 +20,7 @@ export default function SearchSuggestion({products,isLoading}) {
         </LoadingSpinner>}
         { !isLoading&&products.map(product =>
                 <div className={styles.gridItem}>
-                        <div className = {styles.squareImage}>
+                        <div className = {styles.squareImage} style ={{cursor:'pointer'}} onClick={()=>navigate(`../product/${product.slug}`)}>
                             <img src={product.options?.showing_img_thumbnail} width= '100%' className={styles.img}></img>
                             <div> {`${product.name.substring(0,20)}...`}</div>
                        </div>

@@ -11,14 +11,14 @@ export  const fetchComments = (payload) => async(dispatch) =>{
 export  const addComment = ({account,...payload}) => async(dispatch) =>{
     dispatch(add())
     apiAddComment(payload)
-    .then(response => dispatch(addSuccess({data: {id : response.data.id,...payload,account}})))
-    .catch(response =>dispatch(addFail({data: response.errors })))
+    .then(response => setTimeout(()=>dispatch(addSuccess({data: {id : response.data.id,...payload,account}})),1000))
+    .catch(response =>setTimeout(()=>dispatch(addFail({data: response.errors })),1000))
 }
 
 export  const updateComment = (payload) => async(dispatch) =>{
     dispatch(update())
     apiUpdateComment(payload)
-    .then(response => setTimeout(()=>dispatch(updateSuccess({data: {id : response.data.id,...payload}})),2000))
+    .then(response => setTimeout(()=>dispatch(updateSuccess({data: {id : response.data.id,...payload}})),1000))
     .catch(response =>setTimeout(()=>dispatch(updateFail({data: response.errors })),1000))
 }
 
@@ -26,8 +26,8 @@ export  const deleteComment = (payload) => async(dispatch) =>{
     console.log('deleted payload là',payload)
     dispatch(drop())
     apiDeleteComment(payload)
-    .then(response => dispatch(dropSuccess(payload)))
-    .catch(response =>dispatch(dropFail({data: response.errors })))
+    .then(response => setTimeout(()=>dispatch(dropSuccess(payload)),1000))
+    .catch(response =>setTimeout(()=>dispatch(dropFail({data: response.errors })),1000))
 }
 export  const ResetError = ()=>(dispatch)=>{
     dispatch(resetError({data:null}))

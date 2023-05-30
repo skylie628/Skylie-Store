@@ -31,5 +31,5 @@
     display: flex;
 }
 .AlbumRow > div{
-    flex: 1 0 0;
+    width: 50%;
 }

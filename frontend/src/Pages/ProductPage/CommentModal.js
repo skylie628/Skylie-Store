@@ -82,6 +82,7 @@ const handleCancelEdit = ()=>{
     <Logo src = {CloseIcon} style ={{width:'20px'}}></Logo>
     </div>
     </div>
+    <LoadingSpinner overlay ={{backgroundColor: 'white'}} isLoading={(commentAction == actionTypes.ADD)||(commentAction == actionTypes.DELETE)}>
     {
     enableComment != 0 && <div className={styles.ratingForm}>
     <div className = {styles.rating}>
@@ -92,10 +93,10 @@ const handleCancelEdit = ()=>{
         
         <textarea value ={myContent} onChange={(event)=>setMyContent(event.target.value)}>What is in your mind?</textarea>
         <div className={styles.rateBtn} onClick ={handleRate}>Rate me</div>
-    </div> }
+    </div> }</LoadingSpinner>
     {
         commented && 
-        <LoadingSpinner overlay ={{backgroundColor: 'white'}} isLoading={commentAction == actionTypes.UPDATE}>
+        <LoadingSpinner overlay ={{backgroundColor: 'white'}} isLoading={(commentAction == actionTypes.UPDATE)}>
         <div className={styles.ratingForm}>
     <div className = {styles.rating}>
         {
@@ -105,12 +106,12 @@ const handleCancelEdit = ()=>{
         {!isEdited&&<div style ={{fontSize:'30px',margin:'50px auto',textAlign:'center',color:'rgba(0,0,0,0.5)',fontFamily:'sans-serif',width:'70%'}}><i>{`" ${commented.content} "`}</i></div>}
         {isEdited&&<textarea value ={myContent} onChange={(event)=>setMyContent(event.target.value)}></textarea>}
         {!isEdited&&<div style ={{display:'flex',justifyContent:'space-between'}}>
-        <div className={styles.rateBtn} onClick ={handleEdit}>Edit</div>
-        <div className={styles.rateBtn} onClick ={handleDelete}>Remove</div>
+        <div className={styles.controlBtn} onClick ={handleEdit}>Edit</div>
+        <div className={styles.controlBtn} onClick ={handleDelete}>Remove</div>
         </div>}
         {isEdited&&<div style ={{display:'flex',justifyContent:'space-between'}}>
-        <div className={styles.rateBtn} onClick ={handleSaveEdit}>Save</div>
-        <div className={styles.rateBtn} onClick ={handleCancelEdit}>Cancle</div>
+        <div className={styles.controlBtn} onClick ={handleSaveEdit}>Save</div>
+        <div className={styles.controlBtn} onClick ={handleCancelEdit}>Cancle</div>
         </div>}
     </div>
     </LoadingSpinner>

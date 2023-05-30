@@ -12,7 +12,7 @@ export default function OrderCard({order,deleteOrder}) {
       <div>{order.createdAt}</div>
       <div>{order.status}</div>
       </div>
-    {order.orderItem.map(orderItem=>
+    {order?.orderItem.map(orderItem=>
          <div className={styles.productCard} onClick={()=>navigate(`./${order.id}`)}>
          <div className={styles.item}>
          <div><img src={orderItem.option.straight_img_thumbnail}></img></div>

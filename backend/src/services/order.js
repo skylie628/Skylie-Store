@@ -47,6 +47,7 @@ export const addOrderServices = (info) => new Promise(async (resolve, reject) =>
     })
 
     console.log('after creating order')
+    
     if(response[1]){
     //renewed cart
     await updateCartServices({id:info.cart_id,status:'Order'});
@@ -120,7 +121,6 @@ export const getOrdersServices = ({account_id}) => new Promise(async (resolve, r
         return Promise.all(innerPromise).then(rs => {return {...order,orderItem:rs}})
     })
     const fectchresult = await Promise.all(promises)
-    console.log('fetch là',fectchresult[0].orderItem)
     resolve({
         data: fectchresult,
         err: 0,

@@ -117,3 +117,8 @@ padding: 5px;
 .postedTime{
     color: gray
 }
+.controlBtn{
+    margin: 10px;
+    cursor:pointer;
+    color: #0B62D3;
+}
