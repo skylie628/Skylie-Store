@@ -1,0 +1,61 @@
+.container{
+    top: 64;
+    position: relative;
+    display: flex;
+    height: 80px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    background-color: white;
+}
+.searchWrapper{
+    transition: 0.5s ease-in-out;
+    height: 100%;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.rightAlignWrapper {
+    height:100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+.brandName{
+}
+
+.filterWrapper, .sortWrapper{
+    display: block;
+    position: relative;
+    height: 100%;
+    margin: auto 20px;
+    cursor: pointer;
+}
+
+.filterWrapper span , .sortWrapper span {
+    display: inline-block;
+    margin: 0 10px;
+}
+.filterWrapper img, .sortWrapper img{
+    display: inline-block;
+}
+.searchSuggest{
+    position: absolute;
+    display: block;
+    background-color: white;
+    width: 100%;
+    transition: 0.5s ease-in-out;
+    overflow: hidden;
+}
+.sortPopup{
+    background-color: white;
+    position: absolute;
+    height: auto;
+    width: 150px;
+    top:80px;
+    right: 0px;
+    text-align: left;
+}

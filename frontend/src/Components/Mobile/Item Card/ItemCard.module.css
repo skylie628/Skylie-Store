@@ -1,0 +1,63 @@
+
+
+.card{
+    flex:0 0 calc(50% - 20px);
+    margin: 10px 10px;
+    background-color: white;
+    cursor: pointer;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    }
+.square{
+    background-color: #F6F6F6;
+    width:100%;
+    height: 0;
+    padding-bottom: 100%;
+  }
+.square img{
+    width: 100%;
+}
+.description{
+    margin: 10px;
+    text-align: left;
+}
+.description div{
+    padding: 2px 2px
+}
+.name {
+    font-size: 18px;
+    font-weight: 500;
+}
+.hotTag{
+    font-size: 18px;
+    font-weight: 500;
+    color: orange
+}
+.option{
+ color: gray   
+}
+.sold{
+    color: gray;
+}
+.FilterCriterion{
+    display: flex;
+    cursor: pointer;
+}
+
+.percentSale{
+    margin: 5px 0px;
+    color: green;
+    font-weight: 500;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.campaignName{
+border: 0.5px solid green;
+color: green;
+font-size: 16px;
+font-weight: 500;
+border-radius: 5px;
+padding: 5px !important;
+display: block;
+}

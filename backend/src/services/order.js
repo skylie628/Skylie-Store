@@ -6,8 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { getShippingAddressServices } from "./shippingAddress";
 import { getProductImage } from "../utils/getProductImage";
 import { addOrderItemsServices } from "./orderItem";
+import { apiGetFee } from "./giaohangtietkiem";
 import { addCartServices, getTotalCartPrice, updateCartServices } from "./cart";
 import { Model } from "sequelize";
+import { updateProductSalesServices } from "./product";
 const {Op} = require('sequelize');
 export const addOrderServices = (info) => new Promise(async (resolve, reject) => {
     const t = await sequelize.transaction();
@@ -15,23 +17,19 @@ export const addOrderServices = (info) => new Promise(async (resolve, reject) =>
     console.log('info order la',info);
     //get all inco
     //calculate total product price
-    const  {price,orderItems} = await getTotalCartPrice(info.cart_id,id)
+    const  {price,products,orderItems} = await getTotalCartPrice(info.cart_id,id)
     console.log('price là',price)
     //get shipping address infomation
-    const shippingAddress = getShippingAddressServices(info.shipping_address_id);
+    const shippingAddress =  await getShippingAddressServices(info.shipping_address_id);
     //calculate shipping fee
-    let shippingfee = 30000;
+    console.log('shipping address la',shippingAddress);
+    let shippingFee = 32000;
     const quantity = orderItems.reduce((x,y)=> (x+ y.quantity),0);
-    if(quantity>2){
-        shippingfee = 0;
-    }
-    if (shippingAddress.province == 72){
-        shippingfee = 15000
-    }
+    shippingFee = await apiGetFee({province:+shippingAddress?.data?.province,district: +shippingAddress?.data?.district,quantity}).then(rst =>{console.log('phi la',rst.fee);return rst.fee; });
 
     // calculate total
-    const total = price + shippingfee;
-
+    const total = price + shippingFee;
+    console.log('',total);
 
     //create order
    const response = await db.Order.findOrCreate({
@@ -40,6 +38,7 @@ export const addOrderServices = (info) => new Promise(async (resolve, reject) =>
             id,
             status: info.status,
             shipping_address_id: info.shipping_address_id,
+            shipping_fee:shippingFee,
             cart_id: info.cart_id,
             total_price: total,
             status:'Created'
@@ -52,14 +51,20 @@ export const addOrderServices = (info) => new Promise(async (resolve, reject) =>
     //renewed cart
     await updateCartServices({id:info.cart_id,status:'Order'});
     addCartServices(info.account_id)
-    
     //add CartItem
     await addOrderItemsServices(orderItems);
+    
+    //update product sales
+    console.log('orderItems là',orderItems);
+    console.log('product là',products);
+    const promises = products.map((product,index)=>updateProductSalesServices({best_sale:product.best_sale,product_id:product.id,quantity: orderItems[index].quantity}));
+    const fetchrst = await Promise.all(promises);
     resolve({
         id,
         err: 0,
         msg:  'add order thành công' 
     })
+
    // const itemsInfo = optionsInfo.map(option => {})
 }
     else{
@@ -74,6 +79,7 @@ export const getOrdersServices = ({account_id}) => new Promise(async (resolve, r
         where: {
             '$cart.account_id$': { [Op.eq]: account_id }
           },
+        order: [['createdAt', 'DESC']],
         include: [
             {
                 model: db.Cart,
@@ -128,6 +134,7 @@ export const getOrdersServices = ({account_id}) => new Promise(async (resolve, r
 })
 
 export const getOneOrderServices = ({order_id}) => new Promise(async (resolve, reject) => {
+    try{
     let response = await db.Order.findOne({
         nest:true,
         where: {
@@ -139,6 +146,7 @@ export const getOneOrderServices = ({order_id}) => new Promise(async (resolve, r
                 as:'orderItem',
                 raw:true,
                 nested: true,
+                order: [['createdAt', 'DESC']],
                 nest:true,
                 include: [
                     {model:db.BrandModel,
@@ -178,7 +186,9 @@ export const getOneOrderServices = ({order_id}) => new Promise(async (resolve, r
     resolve({
         data: fetchOrder,
         err: 0,
-    }) 
+    }) } catch(err){
+        return reject(new InvalidParamError('Order khong tồn tại'))
+    }
 })
 
 export const updateOrderServices = (orderInfo) => new Promise(async (resolve, reject) => {

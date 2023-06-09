@@ -4,6 +4,8 @@ import Suggestion from '../../Components/Suggestion/Suggestion'
 import ItemCard from './ItemCard'
 import HeaderNofify from '../../Components/MultipleNotify/HeaderNotify'
 import actionTypes from '../../store/actions/actionTypes'
+import EmptyCard from '../../Components/EmptyCard/EmptyCard'
+
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
 import { covertCurrencyFormat } from '../../utils/currencyFortmat'
 import { useEffect } from 'react'
@@ -11,9 +13,11 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchCartItem } from '../../store/actions/cartItem'
 import { getCartId } from '../../store/actions/cartItem'
+import { useMediaQuery } from 'react-responsive'
 export default function CartPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
     const [totalPrice,setTotalPrice] = useState(0);
     const userInfo = useSelector(state => state.user).userInfo;
     const cart = useSelector(state => state.cart);
@@ -41,12 +45,16 @@ export default function CartPage() {
         <div style={{fontSize: '35px', textAlign:'left', fontWeight:'600'}}>Xem giỏ hàng.</div>
         <div style={{fontSize: '20px', textAlign:'left',color:'gray',fontWeight:'100'}}>Miễn phí ship khi mua từ 2 sản phẩm.</div>
         </div>
-        <LoadingSpinner overlay={{backgroundColor: 'white', height:'300px'}} isLoading ={cart.action == actionTypes.GET_ALL ||  cart.action == actionTypes.GET }>
+        <LoadingSpinner overlay={{backgroundColor: 'white'}} isLoading ={cart.action == actionTypes.GET_ALL ||  cart.action == actionTypes.GET }>
+        {
+        cart.cartItems?.length == 0 && <EmptyCard style = {{margin:isTabletOrMobile?'0px':'30px'}}msg ='Giỏ hàng của bạn đang trống, shopping thôi nào'></EmptyCard>
+        }
         { cart.cartItems.map(item => 
         <ItemCard itemInfo = {item}/>
         )}
          </LoadingSpinner>
-        <div className ={styles.totalWrapper}>
+         { cart.cartItems?.length != 0 &&
+        <div className ={styles.totalWrapper} style ={{fontSize:isTabletOrMobile?'16px':'20px',margin: isTabletOrMobile?'20px': ''}}>
             <div style={{display:'flex'}}>
             <div style={{flex:'1 0 0',textAlign:'left'}}>Tổng tiền hàng</div>
             <div>{covertCurrencyFormat(totalPrice)}</div>
@@ -59,8 +67,8 @@ export default function CartPage() {
             <div style={{flex:'1 0 0',textAlign:'left'}}>Tổng </div>
             <div>275000</div>
             </div>
-            <div className={styles.checkoutButton} onClick ={()=>navigate('/checkout')}>Checkout ngay!</div>
-        </div>
+            <div className={styles.checkoutButton} style ={{marginTop:isTabletOrMobile?'20px':'', width:  isTabletOrMobile?'200px':''}} onClick ={()=>navigate('/checkout')}>Checkout ngay!</div>
+        </div>}
         <Suggestion/>
     </div>
   )

@@ -66,12 +66,13 @@ export const getTotalCartPrice = (cartId,order_id) => new Promise(async (resolve
                 as:'option',
                 include:[
                     {model: db.Product,
-                    attributes:['id','price'],
+                    attributes:['id','price','best_sale'],
                     as: 'product'}
                 ]
             }
             ]
           });
+          
           let products = cartItems.map(cartItem=>cartItem.option.product);
           const promises = products.map(product => 
             getSalesPrice(product.id)
@@ -79,7 +80,7 @@ export const getTotalCartPrice = (cartId,order_id) => new Promise(async (resolve
             products = await Promise.all(promises); 
           // get Price
           const price = 
-          products.map(product =>{return product.campaign?(product.price*(1-product.campaign.value/100)):product.price}).reduce((x,y)=>x+y,0) || 0;
+          products.map((product,i) =>{return product.campaign?(product.price*(1-product.campaign.value/100)*cartItems[i].quantity):product.price*cartItems[i].quantity}).reduce((x,y)=>x+y,0) || 0;
         const orderItems = cartItems.map((item,index) => {
             const campaign_id = products[index].campaign? products[index].campaign.id : null;
             return {
@@ -97,6 +98,7 @@ export const getTotalCartPrice = (cartId,order_id) => new Promise(async (resolve
           resolve({
             err: 0,
             price,
+            products,
             orderItems,
         })
     }

@@ -5,10 +5,13 @@ import Logo from '../../Components/Logo/Logo'
 import { useEffect,useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { updateSavedAlbums,ResetError } from '../../store/actions/savedAlbum'
+import { useMediaQuery } from 'react-responsive'
+import Modal from '../../Components/Modal/Modal'
 import actionTypes from '../../store/actions/actionTypes'
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
 export default function RenameModal({selectedAlbum,setSelectedAlbum}) {
   const dispatch = useDispatch();
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
   const [inputText,setInputText] = useState(selectedAlbum.name);
   const {action}  = useSelector(state => state.savedAlbum);
 
@@ -25,7 +28,8 @@ export default function RenameModal({selectedAlbum,setSelectedAlbum}) {
     return ()=>{dispatch(ResetError())}
   },[]);
   return (
-    <div className={styles.RenameModalContainer}>
+    <Modal>
+    <div className={styles.RenameModalContainer} style ={{width: isTabletOrMobile?'100%':'',height:isTabletOrMobile?'100%':''}}>
         <Logo src={CloseIcon} onClick = {()=> setSelectedAlbum(null)} style ={{width: '30px', position: 'absolute',top:'30px',left:'30px'}}></Logo>
        <LoadingSpinner overlay={{backgroundColor:'white'}} isLoading ={action == actionTypes.UPDATE}>
        <div className={styles.controls}>
@@ -35,5 +39,6 @@ export default function RenameModal({selectedAlbum,setSelectedAlbum}) {
         </div>
         </LoadingSpinner>
     </div>
+    </Modal>
   )
 }

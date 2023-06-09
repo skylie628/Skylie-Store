@@ -48,7 +48,7 @@ export default function CheckoutPage() {
     }
     const handleOrder =()=>{
         const checkvalid = userInfo.id&&selectedAddress&& cart.cartId?.id;
-        checkvalid&&dispatch(addOrder({account_id:userInfo.id,shipping_address_id:selectedAddress.id,cart_id:cart.cartId.id}))
+        if(checkvalid){dispatch(addOrder({account_id:userInfo.id,shipping_address_id:selectedAddress.id,cart_id:cart.cartId.id}))}
     }
     const getShippingAddresses = async ()=>{
         await userInfo.id&&dispatch(fetchShippingAddresses(userInfo.id));
@@ -60,25 +60,29 @@ export default function CheckoutPage() {
             setSelectedAddress(defaultAddress)
         }
     },[addressAction])
-    const calculateShippingFee =  (pcode,dcode) =>{
-    /*const province = await apiLookupProvince(pcode);
-    const district = await apiLookupDistrict(dcode);
-    apiGetFee({province:province.name,district:district.name,quantity:1}).then(rst => console.log(rst)).catch(err => 0)*/
-    const quantity = cart.cartItems.reduce((x,y)=> (x+ y.quantity),0);
+    const calculateShippingFee =  async (pcode,dcode) =>{
+    const fee = await apiGetFee({province:pcode,district:dcode,quantity:1})
+    .then(rst => rst.fee)
+    .catch(err => 30000)
+    console.log('fee là',fee)
+    return fee;
+    /* const quantity = cart.cartItems.reduce((x,y)=> (x+ y.quantity),0);
     if(quantity>2){
         return 0;
     }
     if (pcode == 72){
         return 15000
     }
-    return 30000
+    return 30000*/
+
 }
     useEffect(()=>{
         setTotal(productTotal+deliveryFee)},[productTotal,deliveryFee])
     useEffect(()=>{
         console.log(selectedAddress);
-        const shippingFee = (selectedAddress.province&&calculateShippingFee(selectedAddress.province,selectedAddress.district))||0;
-        setDeliveryFee(shippingFee);
+        if(selectedAddress && selectedAddress.province){
+calculateShippingFee(selectedAddress.province,selectedAddress.district).then(rst =>  setDeliveryFee(rst))
+       }
     },[selectedAddress])
     useEffect(()=>{
         if(order.action == actionTypes.ADD_SUCCESS){
@@ -115,14 +119,14 @@ export default function CheckoutPage() {
                 <div  style ={{fontSize: '18px'}}>{covertCurrencyFormat(productTotal)}</div>
             </div>
             <div className={styles.buttons}>
-            <div className={styles.backCartButton}>Trở về giỏ hàng</div>
-            <div className={styles.continueShoppingButton}>Tiếp tục shopping</div>
+            <div className={styles.backCartButton} onClick = {()=>navigate('../cart')}>Trở về giỏ hàng</div>
+            <div className={styles.continueShoppingButton} onClick = {()=>navigate('../shopping')}>Tiếp tục shopping</div>
             </div>
             </div>
         </div>
         <div className={styles.rightCol}>
             <div className={styles.sticky}>
-        <AddressInfomation stateAddModalAddresses ={stateAddModalAddresses} setStateAddModalAddresses ={setStateAddModalAddresses} selectedAddress={selectedAddress} setStateModalAddresses ={setStateModalAddresses}/>
+        <AddressInfomation addressesData ={addressesData} stateAddModalAddresses ={stateAddModalAddresses} setStateAddModalAddresses ={setStateAddModalAddresses} selectedAddress={selectedAddress} setStateModalAddresses ={setStateModalAddresses}/>
            
           { /*<div className ={styles.voucherWrapper}>
                 <div className={styles.voucherInput}>
@@ -133,7 +137,7 @@ export default function CheckoutPage() {
                 </div>
 </div>*/}
 
-        <PaymentSummary handleOrder ={handleOrder} productTotal={productTotal} deliveryFee ={deliveryFee} total={total}/>
+        <PaymentSummary selectedAddress ={selectedAddress} handleOrder ={handleOrder} productTotal={productTotal} deliveryFee ={deliveryFee} total={total}/>
         </div>
         </div>
     </div>

@@ -8,15 +8,17 @@ import { deleteSavedAlbums } from '../../store/actions/savedAlbum'
 import side1 from '../../assets/images/ProductImage/side-1.png'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { useMediaQuery } from 'react-responsive'
 export default function MyAlbumCard({setSelectedAlbum,savedAlbum,isEdited,style}) {
   const navigate = useNavigate()
   const dispatch = useDispatch();
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
   const handleDelete = async() =>{
     dispatch(deleteSavedAlbums({id: savedAlbum.id}))
   }
   return (
     <div className={styles.cardContainer} style ={{...style}}>
-      <div className = {styles.cardWrapper} >
+      <div className = {styles.cardWrapper} style ={{height: isTabletOrMobile?'50vw':'25vw'}} >
       <div className={styles.cardItem}>
       <img src={savedAlbum.savedProduct.length>=1? savedAlbum.savedProduct[0].product.option.straight_img_thumbnail :''} style={{width: '100%'}}></img>
       </div>

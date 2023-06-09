@@ -1,0 +1,50 @@
+.container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index:3;
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.2);
+    top:50%;
+    overflow: hidden;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.controls{
+    display: flex;
+    justify-content: space-between;
+}
+.mainHeader {
+    padding: 100px 0px;
+}
+.controls {
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding: 20px 0px;
+    margin: 0px 20px;
+}
+.controls div{
+    display: block;
+    font-size: 18px;
+}
+.addressCard {
+    text-align: left;
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+    margin: 0 50px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.addressCard > div>div{
+    margin: 5px 5px;
+}
+.cardControl{
+    display: flex;
+    justify-content: space-between;
+}
+.editBtn{
+    display: block;
+    position: absolute;
+    top:0;
+    z-index: 3;
+    right: 0;
+}

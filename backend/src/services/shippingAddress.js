@@ -31,6 +31,7 @@ export const getShippingAddressesServices = ({account_id}) => new Promise(async 
         account_id,
         status:'enable',
         },
+        order: [['createdAt', 'DESC']],
         raw:true
     })
     resolve({

@@ -1,0 +1,16 @@
+.card{
+    font-size: 18px;
+    width: 50%;
+    margin: 50px auto;
+}
+.control{
+    margin: 50px 0px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.control > div{
+ font-weight: bold;
+ cursor: pointer;
+ color: #0B62D3;
+}

@@ -1,11 +1,13 @@
 import React from 'react'
 import styles from './ItemCard.module.css'
+import { useNavigate } from 'react-router-dom'
 import product from '../../assets/images/ProductImage/side-1.png'
 import { covertCurrencyFormat } from '../../utils/currencyFortmat'
 export default function ItemCard({itemInfo}) {
+  const navigate = useNavigate()
   return (
     <div className={styles.productCard}>
-    <div className={styles.item}>
+    <div className={styles.item} style ={{cursor:'pointer'}} onClick = {()=>navigate(`../product/${itemInfo.option.product.slug}`)}>
     <div><img src={itemInfo.option.straight_img_thumbnail}></img></div>
     <div className={styles.productInfo}>
         <div className={styles.productName}>{itemInfo.option.product.name}</div>

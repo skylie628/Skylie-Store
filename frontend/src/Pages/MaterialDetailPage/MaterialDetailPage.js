@@ -50,7 +50,7 @@ const imagelist = useMemo(() => {
       // ease: "steps(" + frame_count + ")", // use a stepped ease for the sprite sheet
       index: 18,
       scrollTrigger: {
-      start: windowDimensions.height,
+      start: 2*windowDimensions.height,
       end: "+=" + windowDimensions.height,
       scrub: 1 ,
       },

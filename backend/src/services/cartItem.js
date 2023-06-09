@@ -44,6 +44,7 @@ export const getCartItemsServices = ({cart_id}) => new Promise(async (resolve, r
             cart_id
         },
         attributes: ['id','quantity'],
+        order: [['createdAt', 'DESC']],
         raw:true,
         nest:true,
         include:[

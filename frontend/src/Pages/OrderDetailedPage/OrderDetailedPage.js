@@ -15,21 +15,13 @@ import { apiGetOrder } from '../../services/order'
 export default function OrderDetailedPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [deliveryFee,setDeliveryFee] = useState(0);
-    const [ptotal,setPtotal] = useState(0);
-    const [total,setTotal] = useState(0);
     const [order,setOrder] = useState(null);
-    const [status,setStatus] = useState(''); 
     const {order_id} = useParams();
-    const productTotal = ()=> order.orderItem.reduce((x,y)=> {
-        if(y.saleCampaign){
-            return (x+ y.quantity * (y.option?.product.price)*(1-y.saleCampaign.value/100))
-        }
-        return (x+ y.quantity * y.option?.product.price)
-    },0)
 
     const getOrderInfo = async (order_id) =>{
-        const orderInfo = await apiGetOrder(order_id);
+        const orderInfo = await apiGetOrder(order_id).catch(
+            err => navigate('../notfound')
+        );
         console.log('orderInfo',orderInfo);
         setOrder(orderInfo.data);
     }
@@ -37,29 +29,6 @@ export default function OrderDetailedPage() {
         dispatch(cancleOrder(order_id));
         setOrder(prev => ({...prev,status: 'Cancel'}))
     }
-    useEffect(()=>{
-        if(order !== null){
-            const shippingFee = calculateShippingFee();
-            setDeliveryFee(shippingFee);
-            const totalprice = productTotal();
-            setPtotal(totalprice);
-            setTotal(shippingFee+totalprice);
-        }
-    },[order])
-    const calculateShippingFee =  () =>{
-    /*const province = await apiLookupProvince(pcode);
-    const district = await apiLookupDistrict(dcode);
-    apiGetFee({province:province.name,district:district.name,quantity:1}).then(rst => console.log(rst)).catch(err => 0)*/
-    const quantity = order.orderItem.reduce((x,y)=> (x+ y.quantity),0);
-    if(quantity>2){
-        return 0;
-    }
-    if (order.shippingAddress.province == 72){
-        return 15000
-    }
-    return 30000
-}
-
     useEffect(()=>{
     getOrderInfo(order_id);
    return ()=>{dispatch(ResetError)}
@@ -83,7 +52,7 @@ export default function OrderDetailedPage() {
             {order.orderItem.map(item =>  <ItemCard itemInfo = {item}/>)}
             <div className={styles.productTotal}>
                 <div  style ={{fontSize: '20px'}}>Total</div>
-                <div  style ={{fontSize: '18px'}}>{covertCurrencyFormat(ptotal)}</div>
+                <div  style ={{fontSize: '18px'}}>{covertCurrencyFormat(order.total_price - order.shipping_fee)}</div>
             </div>
             <div className={styles.buttons}>
             <div className={styles.backCartButton} onClick={()=>navigate('../orders')}>Trở về </div>
@@ -104,7 +73,7 @@ export default function OrderDetailedPage() {
                 </div>
 </div>*/}
 
-        <PaymentSummary handleCancel ={handleCancel} status ={order.status} productTotal={ptotal} deliveryFee ={deliveryFee} total={total}/>
+        <PaymentSummary handleCancel ={handleCancel} status ={order.status} productTotal={order.total_price - order.shipping_fee} deliveryFee ={order.shipping_fee} total={order.total_price}/>
         </div>
         </div>
     </div></Fragment>}

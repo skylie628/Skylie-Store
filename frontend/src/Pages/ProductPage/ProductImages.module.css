@@ -45,6 +45,3 @@ overflow-y:scroll;
 .showingImg{
     transform-origin: center center;
 }
-.showingImg:hover {
- transform: scale(1.5);
-}

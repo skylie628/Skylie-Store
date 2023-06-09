@@ -25,7 +25,7 @@ export default function Comment({productInfo,userInfo}) {
         comments.length>0 && setScore(calculateRating());
     },[comments])
     useEffect(()=>{
-    if(userInfo.id&&productInfo.id)
+    if(userInfo&&productInfo.id)
     {getComments({account_id:userInfo.id,product_id: productInfo.id});}
     },[userInfo,productInfo])
     document.body.style.overflowY = writeComment? "hidden" :"visible";

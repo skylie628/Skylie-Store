@@ -182,6 +182,12 @@ const add = () => {
     ]
   }
 
+  const getFee = () => {
+    return [
+    ]
+  }
+
+
   
   const drop = () => {
     return [
@@ -193,5 +199,5 @@ const add = () => {
   }
   
 export const shippingAddressValidate = {
-    add,update,get,drop
+    add,update,get,drop,getFee
 };

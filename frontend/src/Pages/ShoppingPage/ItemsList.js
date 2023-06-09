@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { getProducts,ResetError } from '../../store/actions/product'
 import { resetProducts } from '../../store/reducers/productSlice';
+import EmptyCard from '../../Components/EmptyCard/EmptyCard';
 import { useNavigate } from 'react-router-dom'
 import ProductPage from '../ProductPage/ProductPage'
 export default function ItemsList() {
@@ -71,6 +72,9 @@ export default function ItemsList() {
         }
         </div>    
             )}
+        {products.length == 0 && !isFetching &&
+        <EmptyCard msg="Không có sản phẩm nào phù hợp với tiêu chí tìm kiếm"></EmptyCard>
+        }
     {isFetching && <LoadingSpinner overlay={{backgroundColor: 'white',zIndex:0}} isLoading ={isFetching}>
     <div style ={{height:'200px'}}>
     </div>

@@ -20,7 +20,7 @@ export default function CommentModal({enableComment,score,userInfo,comments,prod
     const [commented,setCommented] = useState(null);
     const commentAction = useSelector(state => state.comment).action
     useEffect(()=>{
-        if(!enableComment ){
+        if(!enableComment&& userInfo ){
             console.log('enable Comment',enableComment);
             comments.forEach(comment => {
                 if(comment.account_id == userInfo.id){
@@ -82,7 +82,8 @@ const handleCancelEdit = ()=>{
     <Logo src = {CloseIcon} style ={{width:'20px'}}></Logo>
     </div>
     </div>
-    <LoadingSpinner overlay ={{backgroundColor: 'white'}} isLoading={(commentAction == actionTypes.ADD)||(commentAction == actionTypes.DELETE)}>
+    {
+    userInfo&&<LoadingSpinner overlay ={{backgroundColor: 'white'}} isLoading={(commentAction == actionTypes.ADD)||(commentAction == actionTypes.DELETE)}>
     {
     enableComment != 0 && <div className={styles.ratingForm}>
     <div className = {styles.rating}>
@@ -94,6 +95,7 @@ const handleCancelEdit = ()=>{
         <textarea value ={myContent} onChange={(event)=>setMyContent(event.target.value)}>What is in your mind?</textarea>
         <div className={styles.rateBtn} onClick ={handleRate}>Rate me</div>
     </div> }</LoadingSpinner>
+}
     {
         commented && 
         <LoadingSpinner overlay ={{backgroundColor: 'white'}} isLoading={(commentAction == actionTypes.UPDATE)}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './PaymentSummary.module.css'
 import { covertCurrencyFormat } from '../../utils/currencyFortmat'
-export default function PaymentSummary({handleOrder,productTotal,deliveryFee,total}) {
+export default function PaymentSummary({selectedAddress,handleOrder,productTotal,deliveryFee,total}) {
   return (
     <div className={styles.paymentSummary}>
     <div style={{fontSize: '20px',flex:'1 0 0'}}>Tóm tắt thanh toán</div>

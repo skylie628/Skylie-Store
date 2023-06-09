@@ -6,6 +6,7 @@ import { Radio } from '@mui/material';
 import AddIcon from '../../assets/images/add-icon.png';
 import { useEffect } from 'react';
 import { Button } from '@mui/material';
+import Modal from '../../Components/Modal/Modal';
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner';
 import Logo from '../../Components/Logo/Logo';
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,8 +51,8 @@ export default function AlbumSelection({setStateSavedProductModal,productInfo,se
         return ()=>dispatch(ResetError())
     },[])
     return (
+    <Modal>
     <div className ={styles.container}>
-    
         <div style ={{fontSize: '20px', margin: '20px',textAlign:'left'}}>Danh sách Album</div>
         <div style ={{height:'80%',overflowY:'scroll',scrollbarWidth:'none'}}>
       <LoadingSpinner overlay={{backgroundColor:'white'}} isLoading ={savedAlbumAction == actionTypes.GET_ALL || savedProductAction == actionTypes.ADD} >
@@ -87,10 +88,11 @@ export default function AlbumSelection({setStateSavedProductModal,productInfo,se
           </div>
           <div style ={{position:'fixed',bottom:0,backgroundColor:'white',width:'100%',height: '50px'}}>
  <div style ={{display: 'flex',justifyContent:'right',marginBottom:'20px'}}>
-<Button variant="outlined" style = {{display: 'block',margin: '5px'}} onClick = {()=>handleCancelButton()}>Hủy</Button>
-<Button variant="outlined" style = {{display: 'block',margin: '5px'}} onClick = {()=>handleSaveButton()}>Xác nhận</Button>
+<Button variant="outlined"  style = {{display: 'block',margin: '5px'}} onClick = {()=>handleCancelButton()}>Hủy</Button>
+<Button variant="outlined" disabled ={!selectedAlbum.id} style = {{display: 'block',margin: '5px'}} onClick = {()=>handleSaveButton()}>Xác nhận</Button>
 </div>   
 </div>
     </div>
+    </Modal>
   )
 }

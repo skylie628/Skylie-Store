@@ -2,15 +2,18 @@ import React, { Fragment, useEffect, useState } from 'react'
 import styles from './SavedItemPage.module.css'
 import MyAlbumCard from './MyAlbumCard'
 import RenameModal from './RenameModal'
+import EmptyCard from '../../Components/EmptyCard/EmptyCard'
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
 import HeaderNofify from '../../Components/MultipleNotify/HeaderNotify'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchSavedAlbums } from '../../store/actions/savedAlbum'
+import { useMediaQuery } from 'react-responsive'
 import actionTypes from '../../store/actions/actionTypes'
 export default function SavedItemPage() {
   const [isEdited,setIsEdited] = useState(false);
   const [selectedAlbum,setSelectedAlbum] = useState(null);
   const {action} = useSelector(state=>state.savedAlbum);
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
   const savedAlbums = useSelector(state=>state.savedAlbum).savedAlbums;
   const userInfo = useSelector(state=>state.user).userInfo;
   const dispatch = useDispatch();
@@ -31,9 +34,9 @@ export default function SavedItemPage() {
         <div>Wishlist
             </div>
     </div>
-    <div className ={styles.mainHeadline}>
-        <div style= {{fontWeight: 'bold',fontSize:'35px'}}>Save & Share.</div>
-        <div>Lưu lại mẫu mà bạn ưng ý để cân nhắc. Chia sẻ Wishlist cho bạn bè, gia đình sẽ giúp bạn có được sự lựa chọn phù hợp</div>
+    <div className ={styles.mainHeadline} style ={{lineHeight:isTabletOrMobile?'1em':'1.5em'}}>
+        <div style= {{fontWeight: 'bold',fontSize:isTabletOrMobile?'25px':'35px'}}>Save & Share.</div>
+        <div style ={{fontSize: isTabletOrMobile?'18px':''}}>Lưu lại mẫu mà bạn ưng ý để cân nhắc. Chia sẻ Wishlist cho bạn bè, gia đình sẽ giúp bạn có được sự lựa chọn phù hợp</div>
     </div>
     <div className ={styles.Album}>
     <div className ={styles.AlbumHeader}>
@@ -43,9 +46,9 @@ export default function SavedItemPage() {
 
       <LoadingSpinner overlay={{backgroundColor:'white'}} isLoading ={action == actionTypes.DELETE}>
       <div className = {styles.AlbumList}>
-    
+    {savedAlbums.length == 0 && <EmptyCard msg = 'Không có album nào được tạo'></EmptyCard>}
     {
-    savedAlbums&&Array.from(Array(Math.ceil(savedAlbums.length/2)).keys()).map(
+    !isTabletOrMobile&&savedAlbums&&Array.from(Array(Math.ceil(savedAlbums.length/2)).keys()).map(
       i =>{
       console.log('save album loop',savedAlbums,i);
       return <div className = {styles.AlbumRow}>
@@ -54,7 +57,15 @@ export default function SavedItemPage() {
         </div>}
     )
     }
-
+    {
+    isTabletOrMobile&&savedAlbums&&savedAlbums.map(
+      (saveAlbum,i) =>{
+      console.log('save album loop',savedAlbums,i);
+      return <div className = {styles.AlbumRow}>
+        <MyAlbumCard setSelectedAlbum={setSelectedAlbum} savedAlbum ={savedAlbums[i]} isEdited = {isEdited} style={{marginRight:isTabletOrMobile?'':'10%',width:isTabletOrMobile?'100%':'50%'}} />
+        </div>}
+    )
+    }
       </div>
 </LoadingSpinner>
     </div>

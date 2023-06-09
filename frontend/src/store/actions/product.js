@@ -1,4 +1,4 @@
-import {getAll,getAllFail,getAllSuccess,resetError} from "../reducers/productSlice";
+import {getAll,getAllFail,getAllSuccess,resetError,resetProducts} from "../reducers/productSlice";
 import { apiGetProducts } from "../../services/product";
 export  const getProducts = (payload) => async(dispatch) =>{
     console.log('fetching with query',payload)
@@ -9,4 +9,7 @@ export  const getProducts = (payload) => async(dispatch) =>{
 }
 export  const ResetError = ()=>(dispatch)=>{
     dispatch(resetError({data:null}))
+}
+export  const ResetProduct = ()=>(dispatch)=>{
+    dispatch(resetProducts({data:null}))
 }

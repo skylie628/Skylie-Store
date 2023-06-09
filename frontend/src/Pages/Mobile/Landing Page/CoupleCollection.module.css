@@ -1,0 +1,39 @@
+.coupleCollectionImg {
+    height: 80%;
+    object-fit: cover;
+    display: block;
+  }
+  .coupleCollectionWrapper{
+    margin-top: 20px;
+    position: relative;
+    display: block;
+    background-color : #f5f5f7;
+  }
+  .coupleCollectioncontentWrapper{
+    display: block;
+    color: black;
+  }
+  .coupleCollectionName{
+    margin-top: 30px;
+    display: block;
+    font-weight: bold;
+    font-size: 25px;}
+.productName{
+    margin-top: 30px;
+    display: block;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  .productProperty{
+    display: block;
+    margin-top: 5px;
+    font-size: 15px;
+  }
+  .morebtn{
+    top:40px;
+    margin-top: 10px ;
+    display: block;
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(190, 0, 0)
+  }

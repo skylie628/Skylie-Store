@@ -16,6 +16,9 @@
 .cart{
     width: 16px;
     height: 16px;
-    z-index: 3;
+    z-index: 5;
     position: absolute;
+}
+.header > * {
+    -webkit-transform: translateZ(0);
 }

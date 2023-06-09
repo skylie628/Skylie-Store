@@ -1,0 +1,14 @@
+.container{
+    position: relative;
+    background-color: black;
+    overflow-x: hidden ;
+}
+.container img{
+    opacity: 0;
+    height:50%;
+    object-fit: cover;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

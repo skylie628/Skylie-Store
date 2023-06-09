@@ -11,16 +11,21 @@ import ShowHideLayout from '../../Components/Show Hide Layout/ShowHideLayout'
 import SimpleItemList from '../../Components/Simple Item List/SimpleItemList'
 import Suggestion from '../../Components/Suggestion/Suggestion'
 import AddAlbumModal from './AddAlbumModal'
+import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
 import side1 from '../../assets/images/ProductImage/side-1.png'
 import { apiGetModel, apiGetSeries } from '../../services/phone'
 import { getProductDetail } from '../../store/actions/productDetail'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import AlbumSelection from './AlbumSelection'
 import {gsap} from 'gsap';
+import { ResetProduct } from '../../store/actions/productDetail'
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useParams } from 'react-router-dom'
 import { getCartId,fetchCartItem, addCartItem } from '../../store/actions/cartItem'
 import { ResetState } from '../../store/actions/comment'
+import actionTypes from '../../store/actions/actionTypes'
+import HeaderNofify from '../../Components/MultipleNotify/HeaderNotify'
 export default function ProductPage() {
     gsap.registerPlugin(ScrollToPlugin);
     const brandMenu = useRef();
@@ -44,8 +49,12 @@ export default function ProductPage() {
     const [stateSavedProductModal,setStateSavedProductModal] = useState(false);
     const [productDetail,setProductDetail] = useState({});
     const {slug} = useParams();
+    const [showsigninNotify,setShowSigninNotify] = useState(false) 
     const productInfo = useSelector(state=>state.productDetail).productDetail;
+    const action = useSelector(state=>state.productDetail).action;
+    const actionProductDetail = useSelector(state=>state.productDetail).action;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const addTocart = async ()=>{
         setCheckoutModal(true);
         console.log('aaaa');
@@ -59,7 +68,13 @@ export default function ProductPage() {
         }))
     }
     const addToWishlist = async () =>{
-        setStateSavedProductModal(true)
+        if(userInfo){
+        setStateSavedProductModal(true);
+        }
+        else{
+            setShowSigninNotify(true);
+            setTimeout(()=>{setShowSigninNotify(false)},3000)
+        }
     }
     const fetchDetail = async() => {
         console.log('fetchDetail run')
@@ -77,8 +92,13 @@ export default function ProductPage() {
         cart.cartId&&dispatch(fetchCartItem(cart.cartId.id));
     },[cart.cartId])
     useEffect(()=>{
-        dispatch(getCartId(userInfo.id));
+        userInfo&&dispatch(getCartId(userInfo.id));
     },[])
+    useEffect(()=>{
+        if(action == actionTypes.GET_ALL_FAIL){
+            navigate('../notfound')
+        }
+    },[action])
     useEffect(()=>{
         if(stateBrandMenu == 'Touched'){
          gsap.to(window,{duration:1,scrollTo:{y:'#Series',offsetY:300}}); 
@@ -93,7 +113,6 @@ export default function ProductPage() {
     },[stateSeries])
     useEffect(()=>{
         if(stateModel == 'Touched'){
-
          gsap.to(window,{duration:1,scrollTo:{y:'#checkoutBtn',offsetY:300}}); 
          setStateCheckoutBtn('notTouched')
         }
@@ -109,13 +128,15 @@ export default function ProductPage() {
     useEffect(()=>{
         console.log('start fetching slug',slug);
         fetchDetail();
-        return ()=> {dispatch(ResetState())}
+        return ()=> {dispatch(ResetState());dispatch(ResetProduct())}
     },[])
     const PhoneNames = ['Iphone6', 'Iphone6s','Iphone7s Plus','Iphone XsMax']
   return (
     <div>
+    {showsigninNotify&&<HeaderNofify style={{width: '100%'}} severity ='' msg={'Đăng nhập để thêm vào giỏ hàng'}></HeaderNofify>}
     {stateSavedProductModal && <AlbumSelection setStateSavedProductModal={setStateSavedProductModal} productInfo ={productInfo} setStateAddAlbumModal={setStateAddAlbumModal}></AlbumSelection>}
     {stateAddAlbumModal && <AddAlbumModal setStateSavedProductModal ={setStateSavedProductModal} setStateAddAlbumModal={setStateAddAlbumModal}></AddAlbumModal>}
+    <LoadingSpinner overlay ={{backgroundColor:'white'}} isLoading ={actionProductDetail == actionTypes.GET_ALL}>
     <div className={styles.container}>
     <CheckoutModal checkoutModal ={checkoutModal} setCheckoutModal = {setCheckoutModal}/>
     <ProductImages />
@@ -132,7 +153,7 @@ export default function ProductPage() {
         <BrandMenu stateBrandMenu ={stateBrandMenu} setStateBrandMenu ={setStateBrandMenu} id='brandMenu' ref={brandMenu} selectedBrand ={selectedBrand} setSelectedBrand ={setSelectedBrand}></BrandMenu>
         <SimpleItemList  nameList = 'Series' stateModel = {stateSeries} setStateModel = {setStateSeries} ListItem={listSeries} selectedItem = {selectedSeries} setSelectedItem ={setSelectedSeries} style ={{}}></SimpleItemList>
         <SimpleItemList nameList = 'Models' stateModel = {stateModel} setStateModel = {setStateModel} ListItem={listModels} selectedItem = {selectedModel} setSelectedItem ={setSelectedModel} style ={{}}></SimpleItemList>
-        <div id='checkoutBtn' className = {styles.addToCartBtn} style ={{   pointerEvents: stateCheckoutBtn == 'notActive'? 'none' :''}} onClick={()=>{if(stateCheckoutBtn != 'notActive'){addTocart();}}}>Thêm vào giỏ hàng</div>
+        <div id='checkoutBtn' className = {styles.addToCartBtn} style ={{   pointerEvents: stateCheckoutBtn == 'notActive'? 'none' :''}} onClick={()=>{if(stateCheckoutBtn != 'notActive'){if(userInfo){addTocart();}else{setShowSigninNotify(true)}}}}>Thêm vào giỏ hàng</div>
         <div id='checkoutBtn' className = {styles.addToCartBtn} style={{marginTop:'10px !important'}}  onClick={addToWishlist}>Lưu</div>
         <ShowHideLayout header='Chính sách vận chuyển'>
             <div style ={{ lineHeight:'2em'}}>
@@ -167,7 +188,9 @@ export default function ProductPage() {
         <Comment productInfo ={productInfo} userInfo={userInfo} />
     </div>
     </div>
+    </LoadingSpinner>
     <Suggestion></Suggestion>
     </div>
+    
   )
 }

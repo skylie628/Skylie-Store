@@ -30,6 +30,7 @@ export const getCommentsServices = ({product_id,account_id}) => new Promise(asyn
         where :{
         product_id
         },
+        order: [['createdAt', 'DESC']],
         include: [
             {
                 model: db.Account,

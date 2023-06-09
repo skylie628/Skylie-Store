@@ -2,7 +2,7 @@
 .productCard{
     border-bottom:  1px solid rgba(0,0,0,0.1);
      display: flex;
-     margin: 20px;
+     margin: 10px;
     cursor: pointer;
     }
     .item img{
@@ -14,13 +14,13 @@
         line-height: 1.5em;
     }
     .item{
-        margin: 20px 0px;
+        margin: 10px 0px;
         flex-basis: 100%;
         display: flex;
         text-align: left;
     }
     .subtotal{
-        margin: 20px 0px;
+        margin: 10px 0px;
         width: 100px;
         display: flex;
         flex-direction: row;
@@ -28,7 +28,7 @@
         justify-content: space-between;
     }
     .quantity{
-        margin: 20px 0px;
+        margin: 10px 0px;
         width: 100px;
         display: flex;
         flex-direction: row;
@@ -59,9 +59,9 @@
         cursor: pointer;
     }
 .productName{
-    font-size: 20px;
+    font-size: 18px;
 }
     .productDescription > span {
         color: rgba(0,0,0,0.8);
-        font-size: 15px;
+        font-size: 14px;
     }

@@ -1,0 +1,20 @@
+.infoControl div{
+color: gray;
+margin: 0 5px;
+}
+.infoControl{
+margin: 20px;
+}
+.accountInfo, .adressInfo{
+    font-size: 16px;
+
+    cursor: pointer;
+}
+.accountInfo:hover, .adressInfo:hover{
+    color: black;
+}
+.accountInfo {
+}
+.profileHeader{
+    margin: 30px 20px;
+}

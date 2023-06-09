@@ -87,7 +87,7 @@ export const getProductsServices = (data) => new Promise(async (resolve, reject)
     }
     let response = await db.Product.findAll({
         where: whereQuery,
-        order: data.order == 0? [['createdAt','DESC']] : data.order == 1? [['best_sale','DESC']]: [['price','DESC']],
+        order: data.order == 0? [['createdAt','DESC']] : data.order == 1? [['sales','DESC']]: [['price','DESC']],
         include: [ {model : db.ProductOption,
             attributes:[ 'showing_img_thumbnail'],
             as : 'options'},
@@ -137,7 +137,7 @@ export const getProductsServices = (data) => new Promise(async (resolve, reject)
 })
 
 export const getProductServices = (ProductInfo) => new Promise(async (resolve, reject) => {
-
+try{
         console.log(ProductInfo)
     let response = await db.Product.findOne(
         {where :
@@ -179,7 +179,10 @@ export const getProductServices = (ProductInfo) => new Promise(async (resolve, r
         msg: 'get thành công'})
         :
         reject( new InvalidParamError('Không tìm thấy Product tương ứng'))
-
+        }
+        catch(err){
+            reject(new InvalidParamError('Không tìm thấy Product tương ứng'))
+        }
 })
 
 
@@ -208,6 +211,13 @@ export const updateProductServices = ({color,options,...ProductInfo}) => new Pro
     else {
         reject(new InvalidParamError('Sản phẩm không tồn tại'))
     }
+}
+)
+
+export const updateProductSalesServices = ({best_sale,product_id,quantity}) => new Promise(async (resolve, reject) => {
+    const response = await db.Product.increment('sales',{by:quantity,
+    where:{id:product_id}});
+    resolve(response);
 }
 )
 

@@ -2,19 +2,22 @@ import db from "../models";
 import bcrypt from "bcryptjs"
 import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
+import { addCartServices } from "./cart";
 import UnauthorizedError from "../errors/unauthorizedError";
 import ConflictError from "../errors/ConflictError";
 require('dotenv').config
  const hashPasword = (password) => bcrypt.hashSync(password,bcrypt.genSaltSync(12))
  export const registerService = ({firstname,lastname,email,password,confirmpassword}) => new Promise(async (resolve, reject) => {
-        const [user,isCreated] = await db.Account.findOrCreate({
+   const id = uuidv4();
+    await addCartServices(id);   
+    const [user,isCreated] = await db.Account.findOrCreate({
             where: {email},
             defaults :{
                 firstname,
                 lastname,
                 email,
                 password: hashPasword(password),
-                id: uuidv4()
+                id
             }
         }
         )

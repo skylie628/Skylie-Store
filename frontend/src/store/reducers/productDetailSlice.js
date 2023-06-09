@@ -51,8 +51,10 @@ const productDetailSlice = createSlice({
            ...state,
            errors:null,
            action: null,
-         }}
+         }},
+         resetProduct: (state,action) =>{
+          return initialState},
   }})
 
-export const {getAll,getAllFail,getAllSuccess,resetError,resetproductDetail} = productDetailSlice.actions
+export const {getAll,getAllFail,getAllSuccess,resetError,resetproductDetail,resetProduct} = productDetailSlice.actions
 export default productDetailSlice.reducer

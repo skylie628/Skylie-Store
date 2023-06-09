@@ -34,7 +34,6 @@ export const getSavedAlbumsServices = ({account_id}) => new Promise(async (resol
         {
             model: db.SavedProduct,
             as:'savedProduct',
-            limit:2,
             include:[
                 {model: db.Product,
                 attributes:['id','name'],
@@ -83,7 +82,7 @@ export const getSavedAlbumServices = (id) => new Promise(async (resolve, reject)
             as:'savedProduct',
             include:[
                 {model: db.Product,
-                attributes:['id','name'],
+                attributes:['id','name','slug'],
                 as: 'product',
                 include: [{
                     model: db.ProductOption,

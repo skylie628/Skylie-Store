@@ -1,0 +1,22 @@
+.materialsSelection{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.materialsSelection div{
+    flex: 1 0 0;
+    margin: 0 10px;
+    cursor: pointer;
+
+}
+.materialsSelection img{
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.materialsSelection img:hover{
+    border: 1px solid gray;
+}
+.materialsSelection span{
+    display: block;
+}

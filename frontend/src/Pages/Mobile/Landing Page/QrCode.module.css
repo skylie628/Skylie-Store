@@ -1,0 +1,115 @@
+.container{
+height: 80vh;
+margin: 15px 0px;
+width: 100%;
+position: relative
+}
+
+
+.handImg{
+height: 100%;
+object-fit: cover;   
+display: block;
+}
+.handImgWrapper{
+    position: relative;
+    overflow: hidden;
+}
+.ZoomContainer{
+    width: 30%;
+    position: absolute;
+    right:0;
+    display: flex;
+    z-index: 4;
+    align-items: center;
+    justify-content: center;
+}
+.ZoomWrapper{
+    width: 20px;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.verticalSlider{
+    width: 7px;
+    border-radius:  20px;
+    height: 70%;
+    margin: 10px auto;
+    position: relative;
+    background-color: gray;
+}
+.sliderDot{
+    border-radius: 100%;
+    left: 50%;
+    top:100%;
+    border: 1px solid gray;
+    transform: translate(-50%,-50%);
+    background-color: rgb(24, 85, 255);
+    position: absolute;
+    width: 20px;
+    height:20px;
+    align-items: center;
+}
+.shoppingButtonWrapper{
+    position: absolute;
+    width: 200px;
+    cursor: pointer;
+    z-index: 3;
+    bottom: -50px;
+    right: 50px;
+  }
+  .shoppingButton{
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+      align-items: center;      
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    text-align: center;
+    z-index: 3;
+  }
+  .shoppingButton span{
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    margin: 5px;
+    }
+    .shoppingButton img{
+      display: block;
+      width: 30px;
+      height: 30px;
+      margin: 5px;
+    }
+
+    .coupleCollectioncontentWrapper{
+        display: block;
+        color: black;
+      }
+      .coupleCollectionName{
+        margin-top: 30px;
+        display: block;
+        font-weight: bold;
+        font-size: 25px;}
+    .productName{
+        margin-top: 30px;
+        display: block;
+        font-weight: bold;
+        font-size: 25px;
+      }
+      .productProperty{
+        display: block;
+        margin-top: 5px;
+        font-size: 15px;
+      }
+      .morebtn{
+        top:40px;
+        margin-top: 10px ;
+        display: block;
+        text-decoration: none;
+        font-size: 18px;
+        color: rgb(190, 0, 0)
+      }

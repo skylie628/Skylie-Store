@@ -6,9 +6,11 @@ import { Radio } from '@mui/material';
 import AddIcon from '../../assets/images/add-icon.png';
 import { useEffect } from 'react';
 import { Button } from '@mui/material';
+import EmptyCard from '../../Components/EmptyCard/EmptyCard'
+import Modal from '../../Components/Modal/Modal';
 import Logo from '../../Components/Logo/Logo';
 export default function AddressSelection({addressesData,setStateAddModalAddresses,setStateModalAddresses,selectedAddress,setSelectedAddress}) {
-    const [localSelectedAddress,setLocalSelectedAddress] = useState(selectedAddress)
+    const [localSelectedAddress,setLocalSelectedAddress] = useState(selectedAddress)||{};
      const handleSelectAddress = (address) =>{
         setLocalSelectedAddress(address)
      }
@@ -27,6 +29,7 @@ export default function AddressSelection({addressesData,setStateAddModalAddresse
 
     },[])
     return (
+        <Modal>
     <div className ={styles.container}>
     
         <div style ={{fontSize: '20px', margin: '20px',textAlign:'left'}}>Địa chỉ nhận hàng</div>
@@ -37,7 +40,7 @@ export default function AddressSelection({addressesData,setStateAddModalAddresse
                  <div className={styles.addressCard} key ={address.id}>
                  <div >
                  <Radio
-  checked={localSelectedAddress.id === address.id}
+  checked={localSelectedAddress?.id === address.id}
   onChange={()=>handleSelectAddress(address)}
   value={address.id}
   name="radio-buttons"
@@ -70,9 +73,10 @@ export default function AddressSelection({addressesData,setStateAddModalAddresse
           <div style ={{position:'fixed',bottom:0,backgroundColor:'white',width:'100%',height: '50px'}}>
  <div style ={{display: 'flex',justifyContent:'right',marginBottom:'20px'}}>
 <Button variant="outlined" style = {{display: 'block',margin: '5px'}} onClick = {()=>handleCancelButton()}>Hủy</Button>
-<Button variant="outlined" style = {{display: 'block',margin: '5px'}} onClick = {()=>handleSaveButton()}>Xác nhận</Button>
+<Button variant="outlined" disabled ={!localSelectedAddress?.id} style = {{display: 'block',margin: '5px'}} onClick = {()=>handleSaveButton()}>Xác nhận</Button>
 </div>   
 </div>
     </div>
+    </Modal>
   )
 }

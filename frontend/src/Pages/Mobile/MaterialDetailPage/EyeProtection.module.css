@@ -1,0 +1,10 @@
+.container{
+    background-color: black;
+    color: white;
+    overflow-x: hidden ;
+    height: 50vh;
+}
+.img{
+    width: 35%;
+
+}

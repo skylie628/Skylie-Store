@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './AddAlbumModal.module.css'
 import CloseIcon from '../../assets/images/close-icon-black.png'
 import Logo from '../../Components/Logo/Logo'
+import Modal from '../../Components/Modal/Modal'
 import { useEffect,useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import {addSavedAlbums,ResetError } from '../../store/actions/savedAlbum'
@@ -25,6 +26,7 @@ export default function AddAlbumModal({setStateAddAlbumModal,setStateSavedProduc
     return ()=>{dispatch(ResetError())}
   },[]);
   return (
+    <Modal>
     <div className={styles.RenameModalContainer}>
         <Logo src={CloseIcon} onClick = {()=> setStateAddAlbumModal(false)} style ={{width: '30px', position: 'absolute',top:'30px',left:'30px'}}></Logo>
        <LoadingSpinner overlay={{backgroundColor:'white'}} isLoading ={action == actionTypes.ADD}>
@@ -35,5 +37,6 @@ export default function AddAlbumModal({setStateAddAlbumModal,setStateSavedProduc
         </div>
         </LoadingSpinner>
     </div>
+    </Modal>
   )
 }

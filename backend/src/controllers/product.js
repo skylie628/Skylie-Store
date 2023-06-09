@@ -17,6 +17,7 @@ export const getProduct = async(req,res) =>{
     }
     console.log(req.params)
     const response = await getProductServices(req.params);
+    console.log('res laa',response)
     return res.status(200).json(response)
 }
 

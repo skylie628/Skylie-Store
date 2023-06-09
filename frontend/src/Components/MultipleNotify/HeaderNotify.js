@@ -2,8 +2,10 @@ import React, { Fragment, useEffect, useState } from 'react'
 import Logo from '../Logo/Logo'
 import ErrorImg from '../../assets/images/error-icon.png'
 import SuccessImg from '../../assets/images/success-icon.png'
+import { useMediaQuery } from 'react-responsive'
 export default function HeaderNofify(props) {
-  const [isVisible,setIsVisible] = useState(false)
+  const [isVisible,setIsVisible] = useState(false);
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
   useEffect(()=>{
     setIsVisible(true)
     setTimeout(()=>{
@@ -21,7 +23,7 @@ export default function HeaderNofify(props) {
           <div>{x.msg}</div>
           )}
         </div>
-        :<div style={{flex:'1 0 0'}}>{props.msg}</div>
+        :<div style={{flex:'1 0 0',fontSize: isTabletOrMobile?'18px':'20px'}}>{props.msg}</div>
         }
       </div>
     </div>}

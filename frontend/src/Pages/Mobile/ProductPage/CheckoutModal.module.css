@@ -1,0 +1,25 @@
+.checkoutModal{
+    position: fixed;
+    display: flex;
+    top: 0;
+    left:0;
+    flex-direction: column;
+    background-color: white;
+
+    width: 100%;
+    z-index: 5;
+    overflow: hidden;
+}
+.reviewCartButton{
+    display: flex;
+    justify-content: center;
+}
+.reviewCartButton div{
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgb(11, 98, 211);
+    color: white;
+    width: 100px;
+    cursor: pointer;
+    margin: 20px;
+}

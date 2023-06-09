@@ -1,0 +1,42 @@
+
+.images{
+    display: block;
+    flex: 6 0 0;
+}
+
+.productImage{
+    position: relative;
+   width: 100%;
+    align-items: stretch;
+    background-color: rgb(246,246,246);
+    overflow: hidden;
+}
+.productImage img{
+    width: 100%;
+}
+.thumbnailImg{
+    background-color: rgb(246,246,246);
+    cursor:pointer;
+    margin:5px;
+    width: calc(25% - 12.5px);
+}
+
+.thumbnailImg::after{
+    content: '';
+    padding-top: 100%;
+}
+
+
+.thumbnail{
+    margin-top: 5px;
+display: flex;
+flex-direction: row;
+overflow-x:scroll;
+}
+.stickyEle{
+    display: flex;
+    flex-direction: column;
+}
+.showingImg{
+    transform-origin: center center;
+}

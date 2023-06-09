@@ -1,0 +1,63 @@
+.FilterCriterion{
+    display: block;
+    border-top: 1px solid rgba(100, 100, 100, 0.3);
+    margin: 20px ;
+}
+.FilterValue{
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition:'0.5s ease-in-out';
+    overflow: 'hidden';
+}
+.FilterCriterionName{
+    display:block;
+    position:relative;
+    width:100%;
+    cursor:pointer;
+    margin: 20px 0;   
+}
+.flexRow{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.Option{
+    flex: 1 0 calc(33% - 25px);
+    display: block;
+    margin: 12.5px;
+}
+.OptionLeft{
+    flex: 1 0 calc(33% - 25px);
+    display: block;
+    margin: 12.5px;
+}
+.OptionMiddle{
+    flex: 1 0 calc(33% - 25px);
+    display: block;
+    margin: 12.5px;
+}
+.OptionRight{
+    flex: 1 0 calc(33% - 25px);
+    display: block;
+    margin: 12.5px;
+}
+.ColorDot{
+    width: 100%;
+    border-radius: 100%;
+    padding-top: 100%;
+    position: relative;
+    cursor:pointer;
+    
+}
+.color {
+    display: block;
+    margin-top: 10px;
+    font-size: 13px;
+}
+.ColorDot div{
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
