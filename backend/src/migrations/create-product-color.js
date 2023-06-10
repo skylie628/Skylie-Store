@@ -2,31 +2,32 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('BrandModelGroups', {
-      id: {
+    await queryInterface.createTable('Product_Color', {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+          },
+      ColorId: {
         allowNull: false,
-        primaryKey: true,
         type: Sequelize.STRING
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      brand_id: {
+      ProductId: {
         type: Sequelize.STRING
       },
       createdAt: {
-        defaultValue: Sequelize.fn('NOW'),
         allowNull: false,
+        defaultValue: Sequelize.fn('NOW'),
         type: Sequelize.DATE
       },
       updatedAt: {
-        defaultValue: Sequelize.fn('NOW'),
         allowNull: false,
+        defaultValue: Sequelize.fn('NOW'),
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('BrandModelGroups');
+    await queryInterface.dropTable('Product_Color');
   }
 };

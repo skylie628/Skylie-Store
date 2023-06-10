@@ -21,10 +21,12 @@ module.exports = {
         type: Sequelize.TEXT
       },
       createdAt: {
+        defaultValue: Sequelize.fn('NOW'),
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
+        defaultValue: Sequelize.fn('NOW'),
         allowNull: false,
         type: Sequelize.DATE
       }

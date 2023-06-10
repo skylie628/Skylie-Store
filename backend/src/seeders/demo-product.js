@@ -1480,7 +1480,7 @@ module.exports = {
         slug: slugify(x.name)
      })), {});
 
-     const colorList = productsList.map(product =>product.color.map(color=>({ColorId:color,productId:product.id }))).flat()
+     const colorList = productsList.map(product =>product.color.map(color=>({ColorId:color,ProductId:product.id }))).flat()
      const optionsList = productsList.map(product =>product.options.map(option=>({
         id: optionId++,
         name:option.name,

@@ -6,14 +6,43 @@ const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
+console.log('config...')
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  //sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize('postgres', 'postgres','dinhvinhkhuong', {
+    host: 'db.lkmrqtakugzjncocpguw.supabase.co',
+    dialect: 'postgres' ,
+    port: 5432,
+    dialectOptions: 
+        'false' === 'true' ?
+        {
+            ssl:{
+                require: true,
+                rejectUnauthorized: false,
+            }
+        }:{},
+    logging: false,
+  });
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+ // sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize('postgres', 'postgres','dinhvinhkhuong', {
+  host: 'db.lkmrqtakugzjncocpguw.supabase.co',
+  dialect: 'postgres' ,
+  port: 5432,
+  dialectOptions: 
+      'true' === 'true' ?
+      {
+          ssl:{
+              require: true,
+              rejectUnauthorized: false,
+          }
+      }:{},
+  logging: false,
+});
 }
 
 fs

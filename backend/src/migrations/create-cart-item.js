@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       model_id: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       productoption_id: {
         type: Sequelize.STRING
@@ -24,10 +24,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       createdAt: {
+        defaultValue: Sequelize.fn('NOW'),
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
+        defaultValue: Sequelize.fn('NOW'),
         allowNull: false,
         type: Sequelize.DATE
       }

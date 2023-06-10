@@ -1,5 +1,5 @@
 import express  from "express";
-import connectDatabase from "./src/config/connectDatabase";
+import connectDatabase from "./src/config/connectPostgres";
 import {allowCrossDomain} from "./src/config/corsConfig";
 import initRoutes from './src/routes'
 require('express-async-errors');
