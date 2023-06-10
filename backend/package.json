@@ -33,7 +33,8 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.3",
+    "@babel/cli": "^7.22.5",
+    "@babel/core": "^7.22.5",
     "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.20.2",
     "sequelize-cli": "^6.6.0",
