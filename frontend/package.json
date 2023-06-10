@@ -1,7 +1,7 @@
 {
   "name": "skylie-store",
   "version": "0.1.0",
- "homepage": "https://skylie-store.vercel.app/",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -37,6 +37,7 @@
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
+    "serve": "^14.2.0",
     "slugify": "^1.6.6",
     "smooth-scrollbar": "^8.8.1",
     "web-vitals": "^2.1.4",
