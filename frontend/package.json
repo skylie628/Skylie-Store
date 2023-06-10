@@ -1,7 +1,7 @@
 {
   "name": "skylie-store",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://skylie-store.vercel.app/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
