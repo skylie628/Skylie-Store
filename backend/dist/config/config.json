@@ -1,0 +1,33 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "dinhvinhkhuong",
+    "database": "postgres",
+    "host": "db.lkmrqtakugzjncocpguw.supabase.co",
+    "dialect": "postgres",
+    "logging": false
+  },
+  "developmentsql": {
+    "username": "root",
+    "password": null,
+    "database": "skylie store",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "logging": false
+  }
+  ,
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
