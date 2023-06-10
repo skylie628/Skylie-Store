@@ -1,4 +1,4 @@
-import {addShippingAddressServices,getDefaultShippingAddressServices, getShippingAddressesServices,updateShippingAddressServices,deleteShippingAddressServices} from '../services/shippingAddress'
+import {addShippingAddressServices,getDefaultShippingAddressServices, getShippingAddressesServices,updateShippingAddressServices,deleteShippingAddressServices,setDefaultShippingAddressServices} from '../services/shippingAddress'
 import { apiGetFee } from '../services/giaohangtietkiem';
 import { validationResult } from "express-validator"
 import InvalidParamError from '../errors/InvalidParamError';
@@ -27,6 +27,15 @@ export const getDefaultShippingAddress = async(req,res) =>{
         throw new InvalidParamError(errors.errors)
     }
     const response = await getDefaultShippingAddressServices(req.query);
+    return res.status(200).json(response)
+}
+
+export const setDefaultShippingAddress = async(req,res) =>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()){
+        throw new InvalidParamError(errors.errors)
+    }
+    const response = await setDefaultShippingAddressServices(req.body);
     return res.status(200).json(response)
 }
 

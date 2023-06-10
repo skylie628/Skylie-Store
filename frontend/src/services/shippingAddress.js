@@ -27,6 +27,21 @@ export const apiUpdateShippingAddress = (payload) => new Promise(async(resolve,r
     }))
 })
 
+export const apiSetDefaultShippingAddress = (payload) => new Promise(async(resolve,reject)=>{
+    console.log(payload)
+    axiosConfig({
+        method: 'put',
+        url: 'api/v1/shippingAddress/setDefault',
+        data: payload
+    }).then((res)=>{
+        console.log("service",res);
+        resolve(res)
+    }).catch((err=>{
+        console.log("service err",err)
+        reject(err.response.data)
+    }))
+})
+
 export const apiGetShippingAddresses = (payload) => new Promise(async(resolve,reject)=>{
     console.log("payload là",payload)
     axiosConfig({

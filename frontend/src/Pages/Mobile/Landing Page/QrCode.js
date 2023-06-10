@@ -8,11 +8,15 @@ import {gsap} from 'gsap';
 import { useEffect } from 'react';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { width } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 export default function QrCode({windowDimensions,setWindowDimensions}) {
- useEffect(()=>{
+ const navigate = useNavigate();
+  useEffect(()=>{
     
     },[]) 
-    
+  const handleOnclick = () =>{
+    navigate('./shopping');
+  }
   return (
     <div className={styles.container} >
         <div id = 'handCanvas' className = {styles.handImgWrapper} style ={{height:'100%',width:'100%'}}>
@@ -21,7 +25,7 @@ export default function QrCode({windowDimensions,setWindowDimensions}) {
         <div style ={{position : 'absolute',top:'5%', width: '100%'}}>
             <span className = {styles.productName}>QrCode Collection</span>
             <span className = {styles.productProperty}>Nếu độc thân, hãy là độc nhất</span>
-            <span><a href='#' className  = {styles.morebtn}>Xem thêm</a></span>
+            <span><a href='#' className  = {styles.morebtn} onClick = {handleOnclick}>Xem thêm</a></span>
         </div>
     </div>
 

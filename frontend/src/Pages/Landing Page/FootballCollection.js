@@ -1,6 +1,7 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from './footballcollection.module.css';
 import { useEffect, useState,useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import footballCollection1 from  '../../assets/images/football-collection-1.png'
 import footballCollection2 from  '../../assets/images/football-collection-2.png'
 import footballCollection3 from  '../../assets/images/football-collection-3.png'
@@ -15,6 +16,7 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
   const [cur, setCur] = useState(1);
   const [isPlay,setIsPlay] = useState(true);
   const [isPlayVideo,setIsPlayVideo] = useState(false);
+  const navigate = useNavigate();
   let firstTurn = false;
   let transitionTime = 800;
   //const [speed,setSpeed] = useState(2000)
@@ -42,7 +44,9 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
       stop();
     }
   },[isPlay])
-
+  const handleOnclick = () =>{
+    navigate('./shopping')
+  }
   useEffect(() => {
     if(cur === 5){
       setTimeout(() => {
@@ -92,9 +96,9 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
         <div className={styles.footballCollectionImageWrapper }>
         <img src = {footballCollection1} className = {`${styles.footballCollectionImg} ${(cur == 1 )? '': styles.outfocus } ${!disableTransition && styles.transition}`} ></img>
         
-        <div className= {`${styles.shoppingButtonWrapper}`} style = {{ transition : `all 0.8s ease-in-out ${(cur == 1 )? '0s':'0.2s'}`, bottom : (cur == 1 || cur == 5 )? '50px': '-50px' ,opacity : (cur == 1 || cur == 5 )? 1: 0}}>
+        <div onClick ={handleOnclick} className= {`${styles.shoppingButtonWrapper}`} style = {{ transition : `all 0.8s ease-in-out ${(cur == 1 )? '0s':'0.2s'}`, bottom : (cur == 1 || cur == 5 )? '50px': '-50px' ,opacity : (cur == 1 || cur == 5 )? 1: 0}}>
         <div>
-        <div className= {`${styles.shoppingButton}`} style = {{backgroundColor: '#ffedc7'}} >
+        <div className= {`${styles.shoppingButton}`} style = {{backgroundColor: '#ffedc7'}}  >
         <span>Neymar Collection</span>
         <img src = {shoppingIcon}></img>
         </div>
@@ -105,9 +109,9 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
         <div className={styles.footballCollectionImageWrapper }>
         <img src = {footballCollection2} className = {`${styles.footballCollectionImg} ${(cur == 2)? '': styles.outfocus } ${styles.transition}`} ></img>
         
-        <div className= {`${styles.shoppingButtonWrapper}`} style = {{ transition : `all 0.8s ease-in-out ${(cur == 2 )? '0s':'0.2s'}`, bottom : (cur == 2)? '50px': '-50px' ,opacity : (cur == 2)? 1: 0}}>
+        <div onClick ={handleOnclick} className= {`${styles.shoppingButtonWrapper}`} style = {{ transition : `all 0.8s ease-in-out ${(cur == 2 )? '0s':'0.2s'}`, bottom : (cur == 2)? '50px': '-50px' ,opacity : (cur == 2)? 1: 0}}>
         <div>
-        <div className= {`${styles.shoppingButton}`} style = {{backgroundColor: '#fff3f0'}} >
+        <div  className= {`${styles.shoppingButton}`} style = {{backgroundColor: '#fff3f0'}} >
         <span>Ronaldo Collection</span>
         <img src = {shoppingIcon}></img>
         </div>
@@ -118,7 +122,7 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
         <div className={styles.footballCollectionImageWrapper }>
         <img src = {footballCollection3} className = {`${styles.footballCollectionImg} ${(cur == 3)? '': styles.outfocus } ${styles.transition}`} ></img>
         
-        <div className= {`${styles.shoppingButtonWrapper}`} style = {{ transition : `all 0.8s ease-in-out ${(cur == 3 )? '0s':'0.2s'}`, bottom : (cur == 3)? '50px': '-50px' ,opacity : (cur == 3)? 1: 0}}>
+        <div onClick ={handleOnclick} className= {`${styles.shoppingButtonWrapper}`} style = {{ transition : `all 0.8s ease-in-out ${(cur == 3 )? '0s':'0.2s'}`, bottom : (cur == 3)? '50px': '-50px' ,opacity : (cur == 3)? 1: 0}}>
         <div>
         <div className= {`${styles.shoppingButton}`} style = {{backgroundColor: '#fce8f2'}} >
         <span>Messi Collection</span>
@@ -131,7 +135,7 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
         <div className={styles.footballCollectionImageWrapper }>
         <img src = {footballCollection4} className = {`${styles.footballCollectionImg} ${(cur == 4)? '': styles.outfocus } ${styles.transition}`} ></img>
         
-        <div className= {`${styles.shoppingButtonWrapper}`} style = {{ transition : `all 0.8s ease-in-out ${(cur == 4 )? '0s':'0.2s'}`, bottom : (cur == 4)? '50px': '-50px' ,opacity : (cur == 4)? 1: 0}}>
+        <div onClick ={handleOnclick} className= {`${styles.shoppingButtonWrapper}`} style = {{ transition : `all 0.8s ease-in-out ${(cur == 4 )? '0s':'0.2s'}`, bottom : (cur == 4)? '50px': '-50px' ,opacity : (cur == 4)? 1: 0}}>
         <div>
         <div className= {`${styles.shoppingButton}`} style = {{backgroundColor: '#eff5df'}}>
         <span>Mbappe Collection</span>

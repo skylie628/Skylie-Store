@@ -5,15 +5,23 @@ import { v4 as uuidv4 } from 'uuid';
 export const addShippingAddressServices = (info) => new Promise(async (resolve, reject) => {
 
     const id = uuidv4();
+    //check default
+    let isDefault = 0;
+    const shippingAddresses = await getShippingAddressesServices({account_id:info.account_id})
+    if (shippingAddresses.data.length == 0){
+        isDefault = 1;
+    }
 
     const response = await db.ShippingAddress.findOrCreate({
         where :info,
         defaults:{
             id,
             ...info,
+            default:isDefault,
             status: 'enable'
         }
     })
+
     response[1] ?
     resolve({
         id,
@@ -31,7 +39,7 @@ export const getShippingAddressesServices = ({account_id}) => new Promise(async 
         account_id,
         status:'enable',
         },
-        order: [['createdAt', 'DESC']],
+        order: [['default', 'DESC']],
         raw:true
     })
     resolve({
@@ -87,6 +95,31 @@ export const updateShippingAddressServices = (addressInfo) => new Promise(async 
     reject( new InvalidParamError('Không tìm thấy địa chỉ vận chuyển tương ứng'))
 })
 
+
+export const setDefaultShippingAddressServices = ({id,account_id}) => new Promise(async (resolve, reject) => {
+    const shippingAddresses = await getShippingAddressesServices({account_id});
+    console.log(shippingAddresses);
+    console.log('address id',id);
+    console.log(' account_id',account_id);
+    const setFalse = await Promise.all(shippingAddresses.data.map(shippingAddress =>
+        updateShippingAddressServices({id:shippingAddress.id,default:0})
+        ))
+    const response = await db.ShippingAddress.update(
+        {id,default:1},
+        {where :
+            {
+                id,
+                status:'enable'
+            }
+        })
+    response[0] ?
+    resolve({
+        err: 0 ,
+        msg: 'update default address successfully' 
+    })   
+    :
+    reject( new InvalidParamError('Không tìm thấy địa chỉ vận chuyển tương ứng'))
+})
 
 export const deleteShippingAddressServices = (addressInfo) => new Promise(async (resolve, reject) => {
 

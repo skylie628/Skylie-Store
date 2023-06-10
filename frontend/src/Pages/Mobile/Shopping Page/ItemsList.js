@@ -81,7 +81,7 @@ export default function ItemsList({fetchFilter,setFetchFilter}) {
         </div>    
             )}
         {products.length == 0 && !isFetching &&
-        <EmptyCard msg="Không có sản phẩm nào phù hợp với tiêu chí tìm kiếm"></EmptyCard>
+        <EmptyCard style ={{margin:0}} msg="Không có sản phẩm nào phù hợp với tiêu chí tìm kiếm"></EmptyCard>
         }
     {isFetching && <LoadingSpinner overlay={{backgroundColor: 'white',zIndex:0}} isLoading ={isFetching}>
     <div style ={{height:'200px'}}>

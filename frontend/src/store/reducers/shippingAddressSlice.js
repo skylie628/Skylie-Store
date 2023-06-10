@@ -41,11 +41,12 @@ const shippingAddressSlice = createSlice({
         }
       },
       addSuccess: (state,action) =>{
+
          return {
         action: actionTypes.ADD_SUCCESS,
         errs: null,
          addresses:[...state.addresses,
-          action.payload.data]}
+          {...action.payload.data,default:state.addresses.length ==0? 1:0}]}
         },
       addFail: (state,action) =>{
           return {

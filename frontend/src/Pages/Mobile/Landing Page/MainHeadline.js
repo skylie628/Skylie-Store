@@ -5,8 +5,12 @@ import styles from './styles.module.css';
 import {gsap} from 'gsap';
 import PromoteImg from '../../../assets/images/promote-img-01.png'
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useNavigate } from 'react-router-dom';
 export default function MainHeadline({windowDimensions,setWindowDimensions}) {
-
+  const navigate = useNavigate();
+  const handleOnclick = () =>{
+    navigate('./shopping')
+  }
   return (
     <div className = {styles.mainHeadline} style ={{width: windowDimensions.width}}   id = "scroller">
         {/*<div className = {styles.text}>
@@ -24,7 +28,7 @@ export default function MainHeadline({windowDimensions,setWindowDimensions}) {
           <div className ={styles.brandname}>
           <div>Skylie Case.</div>
           <div style={{fontSize:'15px',fontWeight:'500',margin:'5px'}}>Find Your Style.</div>
-          <div  style={{fontSize:'18px',color:'#2997ff',fontWeight:'500',margin:'5px',cursor:'pointer'}}>{'Shopping >'}</div>
+          <div onClick = {handleOnclick} style={{fontSize:'18px',color:'#2997ff',fontWeight:'500',margin:'5px',cursor:'pointer'}}>{'Shopping >'}</div>
           </div>
 
           {/*<Canvas imgIndex={index}  width={1263} height = {600} className = {styles.canvasimg} ></Canvas>

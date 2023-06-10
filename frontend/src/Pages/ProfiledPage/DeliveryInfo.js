@@ -6,7 +6,7 @@ import Logo from '../../Components/Logo/Logo'
 import EmptyCard from '../../Components/EmptyCard/EmptyCard'
 import SingleNotify from '../../Components/MultipleNotify/SingleNotify'
 import actionTypes from '../../store/actions/actionTypes'
-import { fetchShippingAddresses,deleteShippingAddresses } from '../../store/actions/shippingAddress'
+import { fetchShippingAddresses,deleteShippingAddresses,setDefaultShippingAddress } from '../../store/actions/shippingAddress'
 import { useSelector,useDispatch } from 'react-redux'
 import { ResetError } from '../../store/actions/auth'
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
@@ -17,7 +17,11 @@ export default function DeliveryInfo({setIsOpenModal,selectedId,setSelectedId}) 
      const userInfo = useSelector(state => state.user).userInfo
      const addresses = useSelector(state => state.shippingAddress).addresses
      const {action} = useSelector(state => state.shippingAddress);
-     const dispatch = useDispatch()
+        const dispatch = useDispatch()
+     const setDefaultAddress = async (id) =>{
+        dispatch(setDefaultShippingAddress({id,account_id: userInfo.id}))
+     }
+
      const fetchShippingData = async()=>{
         /*const defaultIndex = addresses.findIndex(item => item.default);
         addresses.unshift(addresses.splice(defaultIndex,1)[0])*/
@@ -80,7 +84,7 @@ export default function DeliveryInfo({setIsOpenModal,selectedId,setSelectedId}) 
                      <div>{address.address}</div>
                  </div>
                  { isEdited && <div className={styles.cardControl}>
-                    { !address.default ? <div style = {{cursor:'pointer',color:'blue'}}> Đặt làm mặt định</div> : <div>Địa chỉ mặt định</div>}
+                    { !address.default ? <div style = {{cursor:'pointer',color:'blue'}} onClick = {()=>setDefaultAddress(address.id)}> Đặt làm mặt định</div> : <div>Địa chỉ mặt định</div>}
                      <div onClick = {()=>handleDeleteAddress(address.id)}><Logo src={DeleteIcon} style= {{width: '25px'}}></Logo></div>
                  </div>}
                  { isEdited && <div className={styles.editBtn} onClick ={()=>handleEditAddress(address.id)}>

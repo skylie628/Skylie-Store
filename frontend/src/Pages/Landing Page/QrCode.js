@@ -9,13 +9,18 @@ import {gsap} from 'gsap';
 import { useEffect } from 'react';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { width } from '@mui/system';
+import { useNavigate } from 'react-router-dom'
 export default function QrCode({windowDimensions,setWindowDimensions}) {
     gsap.registerPlugin(ScrollTrigger);
+    const navigate = useNavigate();
     const [sliderValue,setSliderValue] = useState(30);
     const value = {count : 30};
     const updateValue = (event, newValue) =>{
         setSliderValue(newValue);
     }
+  const handleOnClick = ()=>{
+    navigate('./shopping')
+  }
  useEffect(()=>{
     gsap.to(value, {
         // backgroundPosition: (-offset_value * frame_count * 2) + "px 50%",
@@ -147,9 +152,9 @@ gsap.fromTo('#sliderDot',
         <div id = 'handCanvas' className = {styles.handImgWrapper} style ={{height:windowDimensions.height,width: windowDimensions.width}}>
         <img id = 'handImage' src = {hand} className = {styles.handImg} ></img>
         </div>
-        <div id ="shoppingButton" className= {`${styles.shoppingButtonWrapper}`} style = {{ transition : `all 0.8s ease-in-out 0.2s'}` ,opacity :  1}}>
+        <div id ="shoppingButton" className= {`${styles.shoppingButtonWrapper}`} style = {{ transition : `all 0.8s ease-in-out 0.2s'}` ,opacity :  1}} onClick ={handleOnClick}>
         <div>
-        <div className= {`${styles.shoppingButton}`} style = {{backgroundColor: 'rgb(241,241,241)'}}>
+        <div className= {`${styles.shoppingButton}`} style = {{backgroundColor: 'rgb(241,241,241)',cursor:'pointer'}} >
         <span>QrCode Collection</span>
         <img src = {shoppingIcon}></img>
         </div>
