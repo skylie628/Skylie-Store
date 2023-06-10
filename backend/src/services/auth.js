@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs"
 import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
 import { addCartServices } from "./cart";
-import UnauthorizedError from "../errors/unauthorizedError";
+import UnauthorizedError from "../errors/UnauthorizedError";
 import ConflictError from "../errors/ConflictError";
 require('dotenv').config
  const hashPasword = (password) => bcrypt.hashSync(password,bcrypt.genSaltSync(12))
