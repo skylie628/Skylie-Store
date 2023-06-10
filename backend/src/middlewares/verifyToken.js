@@ -1,5 +1,5 @@
 import  jwt from "jsonwebtoken"
-import UnauthorizedError from "../errors/unauthorizedError";
+import UnauthorizedError from "../errors/UnauthorizedError";
 export const verifyToken = (req,res,next) =>{
     let accessToken = req.headers.authorization?.split(' ')[1];
     if(!accessToken){
