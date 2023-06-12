@@ -1,15 +1,14 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import styles from './ItemList.module.css'
 import ItemCard from '../../Components/Item Card/ItemCard'
-import ProductImage from '../../assets/images/ProductImage/1.png'
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner.js';
 import { useEffect, useState } from 'react'
+import actionTypes from '../../store/actions/actionTypes';
 import { useDispatch,useSelector } from 'react-redux'
 import { getProducts,ResetError } from '../../store/actions/product'
 import { resetProducts } from '../../store/reducers/productSlice';
 import EmptyCard from '../../Components/EmptyCard/EmptyCard';
 import { useNavigate } from 'react-router-dom'
-import ProductPage from '../ProductPage/ProductPage'
 export default function ItemsList() {
     const [isFetching, setIsFetching] = useState(false);
     const [offset,setOffset] = useState(0);
@@ -17,6 +16,7 @@ export default function ItemsList() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const products = useSelector(state => state.product).products;
+    const action = useSelector(state => state.product).action;
     const maxCount = useSelector(state => state.product).maxCount;
     const productQuery = useSelector(state=>state.productQuery);
   
@@ -72,7 +72,7 @@ export default function ItemsList() {
         }
         </div>    
             )}
-        {products.length == 0 && !isFetching &&
+        {products.length == 0 && !isFetching && action === actionTypes.GET_ALL_SUCCESS && 
         <EmptyCard msg="Không có sản phẩm nào phù hợp với tiêu chí tìm kiếm"></EmptyCard>
         }
     {isFetching && <LoadingSpinner overlay={{backgroundColor: 'white',zIndex:0}} isLoading ={isFetching}>

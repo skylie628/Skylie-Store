@@ -8,7 +8,6 @@ import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 import {gsap} from 'gsap';
 import { useEffect } from 'react';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { width } from '@mui/system';
 import { useNavigate } from 'react-router-dom'
 export default function QrCode({windowDimensions,setWindowDimensions}) {
     gsap.registerPlugin(ScrollTrigger);

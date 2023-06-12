@@ -6,6 +6,7 @@ import { useEffect,useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { updateSavedAlbums,ResetError } from '../../store/actions/savedAlbum'
 import { useMediaQuery } from 'react-responsive'
+import Button from '../../Components/ClassicButton/Button'
 import Modal from '../../Components/Modal/Modal'
 import actionTypes from '../../store/actions/actionTypes'
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
@@ -35,7 +36,7 @@ export default function RenameModal({selectedAlbum,setSelectedAlbum}) {
        <div className={styles.controls}>
         <div className={styles.albumName}>Tên Album</div>
         <input  className={styles.albumInput} value = {inputText} onChange ={(e)=>setInputText(e.target.value)} ></input>
-        <div><div className={styles.editBtn} onClick ={updateSavedAlbumsName}>Hoàn thành</div></div>
+        <Button  color ='black' style ={{margin:'20px auto',width: '200px'}} disabled ={!selectedAlbum.id}  label = 'Hoàn thành'  onClick ={updateSavedAlbumsName} />
         </div>
         </LoadingSpinner>
     </div>

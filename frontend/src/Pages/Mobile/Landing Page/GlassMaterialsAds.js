@@ -2,8 +2,6 @@ import React from 'react'
 import styles from './GlassMaterialsAds.module.css'
 import { useEffect } from 'react'
 import nano from '../../../assets/images/nano-material-mobile.png'
-import {gsap} from 'gsap'
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useNavigate } from 'react-router-dom'
 export default function GlassMaterialsAds({windowDimensions,setWindowDimensions}) {
   const navigate = useNavigate()

@@ -11,7 +11,6 @@ import shoppingIcon from  '../../assets/images/shopping-icon.png'
 import playIcon from  '../../assets/images/play-icon.png'
 import pauseIcon from  '../../assets/images/pause-icon.png'
 import VideoModal from "../../Components/Video Modal/VideoModal";
-import { Opacity } from "@mui/icons-material";
 export default function FootballCollection({windowDimensions,setWindowDimensions}) {
   const [cur, setCur] = useState(1);
   const [isPlay,setIsPlay] = useState(true);

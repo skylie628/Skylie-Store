@@ -1,6 +1,4 @@
 import React, { useEffect,useState } from 'react'
-import side1 from '../../../assets/images/ProductImage/side-1.png'
-import side2 from '../../../assets/images/ProductImage/side-2.png'
 import productSide3 from '../../../assets/images/product-side3.png'
 import productSide4 from '../../../assets/images/product-side4.png'
 import styles from './ProductImages.module.css'

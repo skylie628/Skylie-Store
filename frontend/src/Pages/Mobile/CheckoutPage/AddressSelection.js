@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Radio } from '@mui/material';
 import AddIcon from '../../../assets/images/add-icon.png';
 import { useEffect } from 'react';
-import { Button } from '@mui/material';
+import Button from '../../../Components/ClassicButton/Button';
 import Modal from '../../../Components/Modal/Modal';
 import EmptyCard from '../../../Components/EmptyCard/EmptyCard'
 import Logo from '../../../Components/Logo/Logo';
@@ -72,8 +72,8 @@ export default function AddressSelection({addressesData,setStateAddModalAddresse
           </div>
           <div style ={{position:'fixed',bottom:0,backgroundColor:'white',width:'100%',height: '100px'}}>
  <div style ={{display: 'flex',justifyContent:'center'}}>
-<Button variant="outlined" style = {{display: 'block',margin: '5px'}} onClick = {()=>handleCancelButton()}>Hủy</Button>
-<Button variant="outlined" disabled ={!localSelectedAddress?.id} style = {{display: 'block',margin: '5px'}} onClick = {()=>handleSaveButton()}>Xác nhận</Button>
+ <Button  label = "Hủy" color ='white' style ={{width:'100px',margin:'20px 5px 20px 10px'}}  onClick = {()=>handleCancelButton()} ></Button>
+<Button  label = "Xác nhận" disabled ={!localSelectedAddress?.id} color ='black' style ={{width:'100px',margin:'20px 20px 20px 10px'}} onClick = {()=>handleSaveButton()} ></Button>
 </div>   
 </div>
     </div>

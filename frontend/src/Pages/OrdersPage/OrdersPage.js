@@ -30,7 +30,7 @@ export default function OrdersPage() {
         </div>
        {(orderAction == actionTypes.DELETE_SUCCESS) && <HeaderNofify style = {{width: '100%'}} severity ='' msg={'Cancle đơn đặt hàng thành công thành công'} ></HeaderNofify>}
       <LoadingSpinner style ={{backgroundColor:'white',height:'500px'}} isLoading={orderAction == actionTypes.GET_ALL}>
-      {orders.length==0 && <EmptyCard msg="Chưa có đơn hàng nào được order, shopping ngay thôi nào!"></EmptyCard>}
+      {orders.length==0 && orderAction == actionTypes.GET_ALL_SUCCESS && <EmptyCard msg="Chưa có đơn hàng nào được order, shopping ngay thôi nào!"></EmptyCard>}
       {orders.length >0 && orders.map(order =>
       <OrderCard order ={order} deleteOrder={deleteOrder}></OrderCard>
       )}

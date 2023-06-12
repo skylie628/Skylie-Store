@@ -1,8 +1,6 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import styles from './ItemList.module.css'
 import ItemCard from '../../../Components/Mobile/Item Card/ItemCard'
-import ProductImage from '../../../assets/images/ProductImage/1.png'
-import { resetQuery } from '../../../store/reducers/productQuerySlice'
 import LoadingSpinner from '../../../Components/LoadingSpinner/LoadingSpinner.js';
 import { useEffect, useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
@@ -10,14 +8,14 @@ import { getProducts,ResetError } from '../../../store/actions/product'
 import { resetProducts } from '../../../store/reducers/productSlice';
 import { useNavigate } from 'react-router-dom'
 import EmptyCard from '../../../Components/EmptyCard/EmptyCard'
-import ProductPage from '../../ProductPage/ProductPage'
+import actionTypes from '../../../store/actions/actionTypes';
 export default function ItemsList({fetchFilter,setFetchFilter}) {
     const [isFetching, setIsFetching] = useState(false);
     const [offset,setOffset] = useState(0);
     const offsetRef  = useRef(offset);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const products = useSelector(state => state.product).products;
+    const {products,action} = useSelector(state => state.product);
     const maxCount = useSelector(state => state.product).maxCount;
     const productQuery = useSelector(state=>state.productQuery);
   
@@ -56,6 +54,7 @@ export default function ItemsList({fetchFilter,setFetchFilter}) {
       }
       offsetRef.current = offset
      },[offset])
+     useEffect(()=>{setFetchFilter(true);},[productQuery])
      useLayoutEffect(()=>{
       console.log('call from query')
       if(fetchFilter){
@@ -80,7 +79,7 @@ export default function ItemsList({fetchFilter,setFetchFilter}) {
         }
         </div>    
             )}
-        {products.length == 0 && !isFetching &&
+        {products.length == 0 && !isFetching && action == actionTypes.GET_ALL_SUCCESS &&
         <EmptyCard style ={{margin:0}} msg="Không có sản phẩm nào phù hợp với tiêu chí tìm kiếm"></EmptyCard>
         }
     {isFetching && <LoadingSpinner overlay={{backgroundColor: 'white',zIndex:0}} isLoading ={isFetching}>

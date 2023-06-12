@@ -1,10 +1,6 @@
 import React from 'react' ;
-import { useEffect, useState,useMemo,useRef } from 'react';
-import useWindowDimensions from '../../../Hooks/useWindowDimensions.js'
 import styles from './styles.module.css';
-import {gsap} from 'gsap';
 import PromoteImg from '../../../assets/images/promote-img-01.png'
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useNavigate } from 'react-router-dom';
 export default function MainHeadline({windowDimensions,setWindowDimensions}) {
   const navigate = useNavigate();

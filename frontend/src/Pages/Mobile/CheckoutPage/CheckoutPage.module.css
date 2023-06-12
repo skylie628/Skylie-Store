@@ -12,7 +12,7 @@
 .rightCol{
     flex:4 0 0;
     font-size: 15px;
-    margin: 20px 20px 20px 10px;
+    margin: 10px;
 }
 .descriptionCard{
     padding: 20px;
@@ -53,7 +53,8 @@ display: flex;
     margin: 5px;
 }
 .buttons{
- display: block;
+ display: flex;
+ flex-direction: space-between;
  padding: 20px ;
  margin-bottom: 20px;
 }

@@ -20,7 +20,7 @@
     background-color: black;
 }
 .shareLinkBtn{
-    margin: 20px 0;
+    margin: 50px 0;
     display: inline-block;
     border: 1px solid rgba(0,0,0,0.2);
     cursor: pointer;
@@ -29,4 +29,9 @@
 }
 .shareLinkBtn:hover{
     border: 1px solid rgba(0,0,0,0.5);
+}
+.successPopup{
+    border-radius: 15px;
+    top: 40px;
+    left: 50%;
 }

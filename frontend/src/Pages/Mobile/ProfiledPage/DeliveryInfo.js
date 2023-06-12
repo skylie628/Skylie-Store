@@ -4,7 +4,6 @@ import EditIcon from '../../../assets/images/edit-icon-thin.png'
 import styles from './DeliveryInfo.module.css'
 import Logo from '../../../Components/Logo/Logo'
 import EmptyCard from '../../../Components/EmptyCard/EmptyCard'
-import SingleNotify from '../../../Components/MultipleNotify/SingleNotify'
 import actionTypes from '../../../store/actions/actionTypes'
 import { fetchShippingAddresses,deleteShippingAddresses } from '../../../store/actions/shippingAddress'
 import { useSelector,useDispatch } from 'react-redux'
@@ -63,7 +62,7 @@ export default function DeliveryInfo({setIsOpenModal,selectedId,setSelectedId}) 
         <div className = {styles.content}>
         <LoadingSpinner overlay={{backgroundColor: 'white', height: '40px'}} isLoading ={action == actionTypes.GET_ALL}>
         </LoadingSpinner>
-        {addresses.length == 0 &&
+        {addresses.length == 0 && action == actionTypes.GET_ALL_SUCCESS &&
         <EmptyCard msg="Chưa có địa chỉ vận chuyển nào được tạo"></EmptyCard>
         }
             {

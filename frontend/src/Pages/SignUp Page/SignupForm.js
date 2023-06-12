@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { FormControl, InputAdornment } from '@mui/material';
 import { useSelector } from 'react-redux';
 import {useForm} from 'react-hook-form';
-import Button from '@mui/material/Button';
+import Button from '../../Components/ClassicButton/Button.js';
 import EmailIcon from '@mui/icons-material/Email';
 import InputField from '../../Components/Form Control/InputField/InputField.js';
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner.js';
@@ -90,7 +90,7 @@ export default function SignupForm(props) {
      </div>
      </LoadingSpinner>
      <div>
-     <Button variant="outlined" style = {{display: 'block', margin : '10px auto'}} onClick = {form.handleSubmit(handleFormSubmit)}>Đăng Ký</Button>
+     <Button  color ='black' style ={{margin:'10px auto',width: '100px'}}  label = 'Đăng Ký'  onClick = {form.handleSubmit(handleFormSubmit)} />
      </div>
      </form>
   )

@@ -1,4 +1,4 @@
-import {addProductServices,getProductServices, getProductsServices,updateProductServices,deleteProductServices} from '../services/product'
+import {addProductServices,getProductServices, getProductsServices,getRecommendProductsServices,updateProductServices,deleteProductServices} from '../services/product'
 import { validationResult } from "express-validator"
 import InvalidParamError from '../errors/InvalidParamError';
 export const addProduct = async(req,res) =>{
@@ -29,7 +29,14 @@ export const getProducts = async(req,res) =>{
     const response = await getProductsServices(req.query);
     return res.status(200).json(response)
 }
-
+export const getReCommendProducts = async(req,res) =>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()){
+        throw new InvalidParamError(errors.errors)
+    }
+    const response = await getRecommendProductsServices();
+    return res.status(200).json(response)
+}
 export const updateProduct = async(req,res) =>{
     const errors = validationResult(req);
     if (!errors.isEmpty()){

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import  Box  from '@mui/material/Box'
 import MainHeadline from './MainHeadline'
 import GlassMaterialsAds from './GlassMaterialsAds'
 import CoupleCollection from './CoupleCollection'
@@ -8,7 +7,6 @@ import QrCode from './QrCode'
 import useWindowDimensions from '../../../Hooks/useWindowDimensions'
 import { useSelector, useDispatch } from 'react-redux'
 import { GetUserCurrent } from '../../../store/actions/user'
-import { height } from '@mui/system'
 export default function LandingPage() {
  const [windowDimensions,setWindowDimensions] = useWindowDimensions();
  const dispatch = useDispatch();

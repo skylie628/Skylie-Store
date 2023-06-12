@@ -2,10 +2,10 @@ import React from 'react'
 import styles from './AlbumSelection.module.css'
 import { Fragment } from 'react';
 import { useState } from 'react';
+import Button from '../../Components/ClassicButton/Button';
 import { Radio } from '@mui/material';
 import AddIcon from '../../assets/images/add-icon.png';
 import { useEffect } from 'react';
-import { Button } from '@mui/material';
 import Modal from '../../Components/Modal/Modal';
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner';
 import Logo from '../../Components/Logo/Logo';
@@ -86,10 +86,14 @@ export default function AlbumSelection({setStateSavedProductModal,productInfo,se
           </div>
           </div>
           </div>
-          <div style ={{position:'fixed',bottom:0,backgroundColor:'white',width:'100%',height: '50px'}}>
+          <div style ={{position:'fixed',bottom:0,backgroundColor:'white',width:'100%',height: '100px'}}>
  <div style ={{display: 'flex',justifyContent:'right',marginBottom:'20px'}}>
-<Button variant="outlined"  style = {{display: 'block',margin: '5px'}} onClick = {()=>handleCancelButton()}>Hủy</Button>
-<Button variant="outlined" disabled ={!selectedAlbum.id} style = {{display: 'block',margin: '5px'}} onClick = {()=>handleSaveButton()}>Xác nhận</Button>
+{/*<Button variant="outlined"  style = {{display: 'block',margin: '5px'}} onClick = {()=>handleCancelButton()}>Hủy</Button>
+<Button variant="outlined" disabled ={!selectedAlbum.id} style = {{display: 'block',margin: '5px'}} onClick = {()=>handleSaveButton()}>Xác nhận</Button>*/
+}
+<Button  color ='white' style ={{margin:'20px',width: '100px'}} label = 'Hủy'  onClick={()=>handleCancelButton()} />
+<Button  color ='black' style ={{margin:'20px',width: '100px'}} disabled ={!selectedAlbum.id}  label = 'Xác nhận'  onClick = {()=>handleSaveButton()} />
+
 </div>   
 </div>
     </div>

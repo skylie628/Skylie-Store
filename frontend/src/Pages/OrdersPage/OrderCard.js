@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './OrderCard.module.css'
-import product from '../../assets/images/ProductImage/side-1.png'
 import { useNavigate } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { covertCurrencyFormat } from '../../utils/currencyFortmat'

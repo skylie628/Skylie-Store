@@ -1,5 +1,5 @@
-import { position } from '@mui/system'
-import React, { useEffect, useState } from 'react'
+
+import React from 'react'
 import styles from './FilterCriterions.module.css'
 import ColourCriterion from '../../../Components/Mobile/Filter Criterion/ColourCriterion'
 import CollectionCriterion from '../../../Components/Mobile/Filter Criterion/CollectionCriterion'

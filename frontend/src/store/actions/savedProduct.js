@@ -1,9 +1,16 @@
 import {getAll,getAllFail,getAllSuccess,add,addFail,addSuccess,update,updateSuccess,updateFail, drop,dropSuccess,dropFail,resetError} from "../reducers/savedProductSlice";
 import { apiGetSavedProducts, apiAddSavedProduct, apiUpdateSavedProduct,apiDeleteSavedProduct } from "../../services/savedProduct";
-import { apiGetSavedAlbum } from "../../services/savedAlbum";
+import { apiGetSavedAlbum ,apiGetSavedByShareUrl} from "../../services/savedAlbum";
 export  const fetchSavedProducts = (payload) => async(dispatch) =>{
         dispatch(getAll())
         apiGetSavedAlbum(payload)
+        .then(response => dispatch(getAllSuccess(response)))
+        .catch(response =>dispatch(getAllFail({data: 'Khong the get duoc'})))
+    }
+
+export  const fetchSavedProductsByShareUrl = (payload) => async(dispatch) =>{
+        dispatch(getAll())
+        apiGetSavedByShareUrl(payload)
         .then(response => dispatch(getAllSuccess(response)))
         .catch(response =>dispatch(getAllFail({data: 'Khong the get duoc'})))
     }

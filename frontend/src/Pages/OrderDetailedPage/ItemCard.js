@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './ItemCard.module.css'
 import { useNavigate } from 'react-router-dom'
-import product from '../../assets/images/ProductImage/side-1.png'
 import { covertCurrencyFormat } from '../../utils/currencyFortmat'
 export default function ItemCard({itemInfo}) {
   const navigate = useNavigate()

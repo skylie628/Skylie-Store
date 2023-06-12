@@ -8,6 +8,7 @@
 .cardItem{
     min-width: 30%;
     margin: 10px;
+    cursor: pointer;
     display: block;
 }
 .cardItem img{
@@ -26,4 +27,23 @@
 .price{
     padding: 10px;
     font-size: 18px;
+}
+
+.percentSale{
+    margin: 5px 0px;
+    color: green;
+    font-weight: 500;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.campaignName{
+border: 0.5px solid green;
+color: green;
+font-size: 16px;
+font-weight: 500;
+border-radius: 5px;
+width: 100px;
+padding: 5px !important;
+display: block;
 }

@@ -6,6 +6,7 @@ import {InputAdornment} from '@mui/material';
 import SearchIcon from '../../../assets/images/search-icon.png'
 import FilterIcon from '../../../assets/images/filter-icon-small.png' 
 import SortIcon from '../../../assets/images/sort-icon-small.png' 
+import actionTypes from '../../../store/actions/actionTypes';
 import { filterByName } from '../../../store/reducers/productQuerySlice';
 import {apiGetProducts, apiGetSearchSuggest} from '../../../services/product';
 import Logo from '../../Logo/Logo';
@@ -29,7 +30,9 @@ export default function HelperHeader({isFixed,style,showFilter,setShowFilter}) {
   const [searchSuggestion,setSearchSuggestion] = useState([]);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const handleSelectedSort = (index)=>{
+  const {maxCount,action} = useSelector(state=>state.product);
+  const handleSelectedSort = async (index)=>{
+    console.log('selected!',index);
     dispatch(sort(index));
   }
   const handleOnchange = (event)=>{
@@ -105,12 +108,14 @@ export default function HelperHeader({isFixed,style,showFilter,setShowFilter}) {
       <SearchSuggestion isLoading ={isLoading} products = {searchSuggestion}></SearchSuggestion>
     </div>
     <div className = {styles.container} >
-      <div className = {styles.brandName}style ={{ display : searchFocus ? 'none' :'block'}}>Skylie</div>
+    <div className = {styles.brandName}style ={{ display : searchFocus ? 'none' :'block'}}>
+      {action== actionTypes.GET_ALL_SUCCESS &&<div>Cases {`(${maxCount})`}</div>}
+      </div>
       <div className = {styles.rightAlignWrapper} style ={{ display : searchFocus ? 'none' :'flex'}}>
         <div className = {styles.filterWrapper} onClick = {()=>{setShowFilter((prev)=> !prev)}}>
         <div style ={{position:'relative', height: '100%'}}>
       <div style ={{position:'relative', display: 'flex',verticalAlign:'center',alignItems:'center',height:'100%'}}>
-        <span>{showFilter ? 'Ẩn bộ lọc' : 'Hiện bộ lọc'}</span>
+        <span>Filter</span>
         <Logo src={FilterIcon}  style = {{width : '20px' ,height : '20px', display:'inline-block!important'}}></Logo>
       </div>
       </div>
@@ -118,13 +123,13 @@ export default function HelperHeader({isFixed,style,showFilter,setShowFilter}) {
       <div className = {styles.sortWrapper} onClick = {()=>{setShowSortPopup((prev)=> !prev)}}>
       <div style ={{position:'relative', height: '100%'}}>
       <div style ={{position:'relative', display: 'flex',verticalAlign:'center',alignItems:'center',height:'100%'}}>
-      <span>Sắp xếp</span>
+      <span>Sort</span>
       <Logo src={SortIcon}  style = {{width : '20px' ,height : '20px',display: 'inline-block!important'}}></Logo>
       </div>
       </div>
       <div className = {styles.sortPopup} style = {{display: showSortPopup? 'block' : 'none'}}>
         <div style ={{width:'100%',height: '100%',margin: '10px'}}>
-        {["Mới nhất","Hot nhất","Phù hợp nhất","Giá"].map((x,i) =>
+        {["Mới nhất","Hot nhất","Giá tăng","Giá giảm"].map((x,i) =>
           <div style ={{margin: '10px', color: (i == selectedSort)? 'black': 'rgba(0,0,0,0.8)'}} onClick = {()=>handleSelectedSort(i)}>{x}</div>)}
         </div>
       </div>

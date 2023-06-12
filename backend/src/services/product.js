@@ -55,7 +55,7 @@ export const getProductsServices = (data) => new Promise(async (resolve, reject)
         {price: { [Op.gte]: 200000}}
 
     const nameQuery = {name : {
-        [Op.like]:`%${data.name}%`
+        [Op.iLike]:`%${data.name}%`
     }}
     let whereQuery = {}
     if(data.collection && !data.price && !data.name){
@@ -87,7 +87,7 @@ export const getProductsServices = (data) => new Promise(async (resolve, reject)
     }
     let response = await db.Product.findAll({
         where: whereQuery,
-        order: data.order == 0? [['createdAt','DESC']] : data.order == 1? [['sales','DESC']]: [['price','DESC']],
+        order: data.order == 0? [['createdAt','DESC']] : data.order == 1? [['sales','DESC']]:  data.order == 2? [['price','ASC']] :[['price','DESC']],
         include: [ {model : db.ProductOption,
             attributes:[ 'showing_img_thumbnail'],
             as : 'options'},
@@ -135,7 +135,55 @@ export const getProductsServices = (data) => new Promise(async (resolve, reject)
         err: 0,
     }) 
 })
+export const getRecommendProductsServices = () => new Promise(async (resolve, reject) => {
+    
+    let response = await db.Product.findAll({
+        include: [ {model : db.ProductOption,
+            attributes:[ 'showing_img_thumbnail'],
+            as : 'options',
+        duplicating: false,
+    required: true}
+        ],
+        attributes:{
+             include: [[sequelize.literal('(SELECT COUNT(*) FROM "Comments" as c WHERE c.product_id = "Product".id)'), 'commentsCount']]
+        },
+         subQuery: false,
+        order: [['sales','DESC'],[sequelize.literal('"commentsCount"'), 'DESC']] ,
+   
+          nest: true,
+        //offset: +data.offset*9,
+        limit:6,
+    })
+    console.log('response recommend',response)
+    response = JSON.parse(JSON.stringify(response));
+    let rst = response;
+    console.log(rst.response);
+    //get Image Url
+    let promises = rst.map(product => 
+    getProductImage(`Products/Medium/showing image thumnail/${product.options[0].showing_img_thumbnail}.png`)
+    .then(rst => ({...product,options:{showing_img_thumbnail:rst[0]}}))
+    )
+    let fetchedResponse = await Promise.all(promises); 
 
+    //getSalesCampaign 
+    promises = fetchedResponse.map(product => 
+        getSalesPrice(product.id)
+        .then(rs => ({...product,campaign:rs})))
+    fetchedResponse = await Promise.all(promises); 
+
+        //product.options.straight_img= await getProductImage(`Products/Medium/str image/${product.options.straight_img}.png`);
+        //product.options.straight_img= await getProductImage(`Products/Medium/str image/${product.options.straight_img}.png`);
+        //product.options.side_img_thumbnail= await getProductImage(`Products/Medium/side image thumbnail/${product.options.side_img_thumbnail}.png`);
+        //product.options.side_img= await getProductImage(`Products/Medium/side image/${product.options.side_img}.png`);
+
+    //const rst = await getProductImage(`/Products/Medium/showing image thumnail/medium-12-zodiacs-0001-showing-img-thumbnail.png`)
+    //console.log(rst)
+    //console.log('response là',response);
+    resolve({
+        data: {products: fetchedResponse},
+        err: 0,
+    }) 
+})
 export const getProductServices = (ProductInfo) => new Promise(async (resolve, reject) => {
 try{
         console.log(ProductInfo)

@@ -3,6 +3,7 @@ import styles from '../ProductPage/ProductPage.module.css'
 import CheckoutModal from './CheckoutModal'
 import ProductImages from './ProductImages'
 import OptionSelection from './OptionSelection'
+import Button from '../../Components/ClassicButton/Button'
 import MaterialSelection from './MaterialSelection'
 import Comment from './Comment'
 import { covertCurrencyFormat } from '../../utils/currencyFortmat'
@@ -12,7 +13,6 @@ import SimpleItemList from '../../Components/Simple Item List/SimpleItemList'
 import Suggestion from '../../Components/Suggestion/Suggestion'
 import AddAlbumModal from './AddAlbumModal'
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
-import side1 from '../../assets/images/ProductImage/side-1.png'
 import { apiGetModel, apiGetSeries } from '../../services/phone'
 import { getProductDetail } from '../../store/actions/productDetail'
 import { useDispatch, useSelector } from 'react-redux'
@@ -153,8 +153,8 @@ export default function ProductPage() {
         <BrandMenu stateBrandMenu ={stateBrandMenu} setStateBrandMenu ={setStateBrandMenu} id='brandMenu' ref={brandMenu} selectedBrand ={selectedBrand} setSelectedBrand ={setSelectedBrand}></BrandMenu>
         <SimpleItemList  nameList = 'Series' stateModel = {stateSeries} setStateModel = {setStateSeries} ListItem={listSeries} selectedItem = {selectedSeries} setSelectedItem ={setSelectedSeries} style ={{}}></SimpleItemList>
         <SimpleItemList nameList = 'Models' stateModel = {stateModel} setStateModel = {setStateModel} ListItem={listModels} selectedItem = {selectedModel} setSelectedItem ={setSelectedModel} style ={{}}></SimpleItemList>
-        <div id='checkoutBtn' className = {styles.addToCartBtn} style ={{   pointerEvents: stateCheckoutBtn == 'notActive'? 'none' :''}} onClick={()=>{if(stateCheckoutBtn != 'notActive'){if(userInfo){addTocart();}else{setShowSigninNotify(true)}}}}>Thêm vào giỏ hàng</div>
-        <div id='checkoutBtn' className = {styles.addToCartBtn} style={{marginTop:'10px !important'}}  onClick={addToWishlist}>Lưu</div>
+        <Button id='checkoutBtn' color ='black' label = 'Thêm vào giỏ hàng' disabled = {stateCheckoutBtn == 'notActive'} onClick={()=>{if(stateCheckoutBtn != 'notActive'){if(userInfo){addTocart();}else{setShowSigninNotify(true)}}}} />
+        <Button id='checkoutBtn' color ='white' label = 'Lưu'  onClick={addToWishlist} />
         <ShowHideLayout header='Chính sách vận chuyển'>
             <div style ={{ lineHeight:'2em'}}>
             <div>

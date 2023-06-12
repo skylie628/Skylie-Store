@@ -87,7 +87,9 @@ const add = () => {
   const getOne = () => {
     return []
   }
-  
+  const getRecommend = () => {
+    return []
+  }
   const drop = () => {
     return [
       query('id')
@@ -98,5 +100,5 @@ const add = () => {
   }
   
 export const productValidate = {
-    add,update,get,drop,getOne
+    add,update,get,drop,getOne,getRecommend
 };

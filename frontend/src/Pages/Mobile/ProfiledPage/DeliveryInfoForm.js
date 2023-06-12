@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@mui/material';
@@ -7,7 +7,6 @@ import LoadingSpinner from '../../../Components/LoadingSpinner/LoadingSpinner';
 import actionTypes from '../../../store/actions/actionTypes';
 import Logo from '../../../Components/Logo/Logo';
 import CloseIcon from '../../../assets/images/close-icon-black.png'
-import { useMemo } from 'react';
 import InputField from '../../../Components/Form Control/InputField/InputField';
 import { ResetError } from '../../../store/actions/shippingAddress';
 import SelectField from '../../../Components/Form Control/InputField/SelectField';

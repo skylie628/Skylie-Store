@@ -1,7 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import AddressSelection from './AddressSelection'
 import styles from './AddressInfomation.module.css'
-import { useSelector } from 'react-redux'
 import EmptyCard from '../../Components/EmptyCard/EmptyCard'
 export default function AddressInfomation({addressesData,selectedAddress,setStateModalAddresses}) {
   return (

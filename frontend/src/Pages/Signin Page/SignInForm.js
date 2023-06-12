@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import { FormControl, InputAdornment } from '@mui/material';
 import {useForm} from 'react-hook-form';
-import Button from '@mui/material/Button';
+import Button from '../../Components/ClassicButton/Button.js';
 import EmailIcon from '@mui/icons-material/Email';
 import InputField from '../../Components/Form Control/InputField/InputField.js';
 import PasswordInputField from '../../Components/Form Control/InputField/PasswordInputField.js';
@@ -38,7 +37,7 @@ export default function SignInForm(props) {
       )
   return (
     <form onSubmit = {form.handleSubmit(handleFormSubmit)}>
-    {(action == actionTypes.LOGIN_FAIL) && <SingleNotify style = {{backgroundColor:'rgba(0,0,0,0.1)',width: '30%',margin:'0 auto'}} severity ='error' msg={errors}></SingleNotify>}
+    {(action == actionTypes.LOGIN_FAIL) && <SingleNotify style = {{backgroundColor:'rgba(0,0,0,0.1)',width: '30%',margin:'0 auto'}} severity ='error' msg={errors} ></SingleNotify>}
     <LoadingSpinner overlay={{backgroundColor: 'white'}} isLoading ={action == actionTypes.LOGIN }>
     <div style={{ m: 1, width: '30%',minWidth : 380 , display: 'block',margin : '30px auto' }} variant="outlined">  
        <InputField
@@ -60,7 +59,7 @@ export default function SignInForm(props) {
      </div>
      </LoadingSpinner>
      <div>
-     <Button variant="outlined" style = {{display: 'block', margin : '10px auto'}} onClick = {form.handleSubmit(handleFormSubmit)}>Đăng nhập</Button>
+     <Button  color ='black' style ={{margin:'10px auto',width: '100px'}}  label = 'Đăng nhập'  onClick = {form.handleSubmit(handleFormSubmit)} />
      </div>
      
      </form>

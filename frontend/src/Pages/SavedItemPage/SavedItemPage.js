@@ -12,9 +12,8 @@ import actionTypes from '../../store/actions/actionTypes'
 export default function SavedItemPage() {
   const [isEdited,setIsEdited] = useState(false);
   const [selectedAlbum,setSelectedAlbum] = useState(null);
-  const {action} = useSelector(state=>state.savedAlbum);
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
-  const savedAlbums = useSelector(state=>state.savedAlbum).savedAlbums;
+  const {savedAlbums,action} = useSelector(state=>state.savedAlbum);
   const userInfo = useSelector(state=>state.user).userInfo;
   const dispatch = useDispatch();
   const getSavedAlbums = async()=>{
@@ -46,7 +45,7 @@ export default function SavedItemPage() {
 
       <LoadingSpinner overlay={{backgroundColor:'white'}} isLoading ={action == actionTypes.DELETE}>
       <div className = {styles.AlbumList}>
-    {savedAlbums.length == 0 && <EmptyCard msg = 'Không có album nào được tạo'></EmptyCard>}
+    {savedAlbums.length == 0 && action == actionTypes.GET_ALL_SUCCESS && <EmptyCard msg = 'Không có album nào được tạo'></EmptyCard>}
     {
     !isTabletOrMobile&&savedAlbums&&Array.from(Array(Math.ceil(savedAlbums.length/2)).keys()).map(
       i =>{

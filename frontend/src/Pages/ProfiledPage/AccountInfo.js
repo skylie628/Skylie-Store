@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import UpdateAccountInfoForm from './UpdateAccountInfoForm';
 import HeaderNofify from '../../Components/MultipleNotify/HeaderNotify';
-import { GetUserCurrent,UpdateUserCurrent,ResetError } from '../../store/actions/user';
-import { apiupdateCurrent } from '../../services/user';
+import {UpdateUserCurrent,ResetError } from '../../store/actions/user';
 import { useDispatch, useSelector } from 'react-redux';
 import actionTypes from '../../store/actions/actionTypes';
 export default function AccountInfo() {

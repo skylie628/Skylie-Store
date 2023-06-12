@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './EyeProtection.module.css'
 import EyeProtect from '../../../assets/images/full-eye-protect.png'
-import Mantis from '../../../assets/images/mantis.png'
 import {gsap} from 'gsap';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 export default function EyeProtection({windowDimensions,setWindowDimensions}) {

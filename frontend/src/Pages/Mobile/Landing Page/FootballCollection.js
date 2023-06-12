@@ -10,7 +10,6 @@ import shoppingIcon from  '../../../assets/images/shopping-icon.png'
 import playIcon from  '../../../assets/images/play-icon.png'
 import pauseIcon from  '../../../assets/images/pause-icon.png'
 import VideoModal from "../../../Components/Mobile/Video Modal/VideoModal";
-import { Opacity } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 export default function FootballCollection({windowDimensions,setWindowDimensions}) {
   const [cur, setCur] = useState(1);

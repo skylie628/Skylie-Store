@@ -17,7 +17,14 @@ export const apiGetProducts = (payload) => new Promise(async(resolve,reject)=>{
     }).then(rs=>resolve(rs.data))
     .catch(err =>reject(err))
 })
-
+export const apiGetRecommendProducts = (payload) => new Promise(async(resolve,reject)=>{
+    console.log("payload là",payload)
+    axiosConfig({
+        method: 'get',
+        url: 'api/v1/product/recommends',
+    }).then(rs=>resolve(rs.data))
+    .catch(err =>reject(err))
+})
 export const apiGetSearchSuggest = (payload) => new Promise(async(resolve,reject)=>{
     console.log("payload là",payload)
     axiosConfig({

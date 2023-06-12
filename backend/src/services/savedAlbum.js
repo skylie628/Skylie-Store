@@ -3,6 +3,15 @@ import InvalidParamError from "../errors/InvalidParamError";
 import { getProductImage } from "../utils/getProductImage";
 import db from "../models";
 import { v4 as uuidv4 } from 'uuid';
+const crypto = require("crypto");
+
+const algorithm = "aes-256-cbc"; 
+// generate 16 bytes of random data
+//const initVector = crypto.randomBytes(16);
+// secret key generate 32 bytes of random data
+//const Securitykey = crypto.randomBytes(32);
+const Securitykey =  Buffer.from("isMblXd+uMX2SM9VbNEkDVap1t6hQ4gzjoF/RAzDRxo=".toString('base64'), 'base64')
+const initVector = Buffer.from("rtEqYq7sk1gENzJxw+juVA==".toString('base64'), 'base64') 
 export const addSavedAlbumServices = (info) => new Promise(async (resolve, reject) => {
 
     const id = uuidv4();
@@ -92,6 +101,11 @@ export const getSavedAlbumServices = (id) => new Promise(async (resolve, reject)
                 }
 
             ]
+        },
+        {
+            model: db.Account,
+            attributes:['id','lastname'],
+            as:'account',
         }
         ],
         nest: true
@@ -112,7 +126,32 @@ export const getSavedAlbumServices = (id) => new Promise(async (resolve, reject)
     }) }
     catch(err){reject(new InvalidParamError('Get không thành công'))}
 })
-
+export const getShareUrlServices= (albumId) => new Promise(async (resolve, reject) => {
+    const cipher = crypto.createCipheriv(algorithm, Securitykey, initVector);
+    let encryptedData = cipher.update(albumId, "utf-8", "hex");
+    encryptedData += cipher.final("hex");
+    resolve({
+        access_id: encryptedData,
+        err: 0,
+    })
+})
+export const getSavedAlbumByShareUrlServices= (accessToken) => new Promise(async (resolve, reject) => {
+  try{  const decipher = crypto.createDecipheriv(algorithm, Securitykey, initVector);
+    let albumId = decipher.update(accessToken, "hex", "utf-8");
+    albumId += decipher.final("utf8");
+    const rs = await getSavedAlbumServices(albumId);
+    console.log('album là',rs.data)
+    rs.data ? 
+    resolve({
+        data: rs.data,
+        err: 0,
+    }) 
+    :
+    reject(new InvalidParamError('access id không hợp lệ')) }
+    catch(err){
+        reject(new InvalidParamError('access id không hợp lệ'))
+    }
+})
 export const updateSavedAlbumServices = (albumInfo) => new Promise(async (resolve, reject) => {
     console.log('al là',albumInfo
         )

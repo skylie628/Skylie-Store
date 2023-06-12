@@ -16,6 +16,7 @@ import ProductPageMobile from './Pages/Mobile/ProductPage/ProductPage';
 import CartPage from './Pages/CartPage/CartPage';
 import SavedItemPage from './Pages/SavedItemPage/SavedItemPage';
 import DetailedAlbum from './Pages/AlbumPage/DetailedAlbum';
+import SharedAlbum from './Pages/SharedAlbumPage/SharedAlbum';
 import ProfilePage from './Pages/ProfiledPage/ProfiledPage';
 import ProfilePageMobile from './Pages/Mobile/ProfiledPage/ProfiledPage';
 import OrdersPage from './Pages/OrdersPage/OrdersPage';
@@ -62,6 +63,7 @@ function App() {
             <Route path="/cart" element  = {<Private><FetchInfo><CartPage/></FetchInfo></Private>}/> 
             <Route path="/saved" element  = {<Private><FetchInfo><SavedItemPage/></FetchInfo></Private>}/> 
             <Route path="/saved/:id" element  = {<Private><FetchInfo><DetailedAlbum/></FetchInfo></Private>}/> 
+            <Route path="/shared/:access_id" element = {<SharedAlbum/>} />
             <Route path="/profile" element  = {<Private><FetchInfo>{isTabletOrMobile?<ProfilePageMobile/>:<ProfilePage/>}</FetchInfo></Private>}/> 
             <Route path="/orders" element  = {<Private><FetchInfo><OrdersPage/></FetchInfo></Private>}/> 
             <Route path="/orders/:order_id" element  = {<Private><FetchInfo>{isTabletOrMobile?<OrderDetailedPageMobile/>:<OrderDetailedPage/>}</FetchInfo></Private>}/> 

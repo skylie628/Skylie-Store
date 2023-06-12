@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react'
-import SiliconImage from '../../../assets/images/Transparent Silicon Sequence Img/sil1.png'
 import EyeProtection from './EyeProtection'
 import FlexibleAds from './FlexibleAds'
 import useWindowDimensions from '../../../Hooks/useWindowDimensions'
 import SiliconOption from './SiliconOption'
 import styles from './MaterialDetailPage.module.css'
-import SiliconCanvas from '../../../Components/Canvas/SiliconCanvas'
 import {gsap} from 'gsap';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 export default function MaterialDetailPage() {

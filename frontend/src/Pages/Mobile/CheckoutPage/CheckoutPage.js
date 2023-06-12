@@ -3,6 +3,7 @@ import React from 'react'
 import PaymentSummary from './PaymentSummary'
 import AddressInfomation from './AddressInfomation'
 import ItemCard from './ItemCard'
+import Button from '../../../Components/ClassicButton/Button'
 import AddressSelection from './AddressSelection'
 import DeliveryInfoForm from '../../Mobile/ProfiledPage/DeliveryInfoForm'
 import OrderSuccess from './OrderSuccess'
@@ -127,12 +128,12 @@ export default function CheckoutPage() {
             <div style={{fontSize:'18px',textAlign:'left',margin:'10px 0px'}}>Đã chọn</div>
             {cart.cartItems.map(item =>  <ItemCard itemInfo = {item}/>)}
             <div className={styles.productTotal}>
-                <div  style ={{fontSize: '20px'}}>Total</div>
-                <div  style ={{fontSize: '18px'}}>{covertCurrencyFormat(productTotal)}</div>
+                <div  style ={{fontSize: '16px'}}>Tiền hàng</div>
+                <div  style ={{fontSize: '18px',fontWeight:'600'}}>{covertCurrencyFormat(productTotal)}</div>
             </div>
             <div className={styles.buttons}>
-            <div className={styles.backCartButton} onClick = {()=>navigate('../cart')}>Giỏ hàng</div>
-            <div className={styles.continueShoppingButton} onClick = {()=>navigate('../shopping')}>Shopping</div>
+           < Button  label = "Giỏ hàng" color ='white' style ={{width:'100px',margin:'20px'}} onClick = {()=>navigate('../cart')} ></Button>
+<Button  label = "Shopping"  color ='black' style ={{width:'100px',margin:'20px '}} onClick = {()=>navigate('../shopping')} ></Button>
             </div>
             </div>
         </div>

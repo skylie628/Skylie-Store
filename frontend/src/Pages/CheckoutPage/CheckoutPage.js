@@ -4,10 +4,9 @@ import PaymentSummary from './PaymentSummary'
 import AddressInfomation from './AddressInfomation'
 import ItemCard from './ItemCard'
 import AddressSelection from './AddressSelection'
+import Button from '../../Components/ClassicButton/Button'
 import DeliveryInfoForm from '../ProfiledPage/DeliveryInfoForm'
 import OrderSuccess from './OrderSuccess'
-import {gsap} from 'gsap'
-import { apiLookupProvince,apiLookupDistrict } from '../../services/address'
 import { apiGetFee } from '../../services/giaohangtietkiem'
 import { useEffect,useState } from 'react'
 import { translateAddress } from '../../utils/translateAddress'
@@ -61,7 +60,9 @@ export default function CheckoutPage() {
         }
     },[addressAction])
     const calculateShippingFee =  async (pcode,dcode) =>{
-    const fee = await apiGetFee({province:pcode,district:dcode,quantity:1})
+    const quantity = cart.cartItems.reduce((x,y)=>(x+ y.quantity),0);
+    console.log('quantity là',quantity);
+    const fee = await apiGetFee({province:pcode,district:dcode,quantity})
     .then(rst => rst.fee)
     .catch(err => 30000)
     console.log('fee là',fee)
@@ -115,12 +116,12 @@ calculateShippingFee(selectedAddress.province,selectedAddress.district).then(rst
             </div>
             {cart.cartItems.map(item =>  <ItemCard itemInfo = {item}/>)}
             <div className={styles.productTotal}>
-                <div  style ={{fontSize: '20px'}}>Total</div>
-                <div  style ={{fontSize: '18px'}}>{covertCurrencyFormat(productTotal)}</div>
+                <div  style ={{fontSize: '16px'}}>Tiền hàng</div>
+                <div  style ={{fontSize: '18px',fontWeight:'600'}}>{covertCurrencyFormat(productTotal)}</div>
             </div>
             <div className={styles.buttons}>
-            <div className={styles.backCartButton} onClick = {()=>navigate('../cart')}>Trở về giỏ hàng</div>
-            <div className={styles.continueShoppingButton} onClick = {()=>navigate('../shopping')}>Tiếp tục shopping</div>
+           < Button  label = "Giỏ hàng" color ='white' style ={{width:'100px',margin:'20px'}} onClick = {()=>navigate('../cart')} ></Button>
+<Button  label = "Shopping"  color ='black' style ={{width:'100px',margin:'20px '}} onClick = {()=>navigate('../shopping')} ></Button>
             </div>
             </div>
         </div>

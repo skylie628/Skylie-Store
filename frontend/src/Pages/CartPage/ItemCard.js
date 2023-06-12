@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './ItemCard.module.css'
-import product from '../../assets/images/ProductImage/side-1.png'
 import deleteBtn from '../../assets/images/delete-icon.png' 
 import Logo from '../../Components/Logo/Logo'
 import { useNavigate } from 'react-router-dom'

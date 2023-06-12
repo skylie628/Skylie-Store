@@ -6,6 +6,7 @@ import {InputAdornment} from '@mui/material';
 import SearchIcon from '../../assets/images/search-icon.png'
 import FilterIcon from '../../assets/images/filter-icon-small.png' 
 import SortIcon from '../../assets/images/sort-icon-small.png' 
+import skylieSign from '../../assets/images/skylie-sign.png' 
 import { filterByName } from '../../store/reducers/productQuerySlice';
 import {apiGetProducts, apiGetSearchSuggest} from '../../services/product';
 import Logo from '../Logo/Logo';
@@ -13,6 +14,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { sort } from '../../store/reducers/productQuerySlice';
 import SearchSuggestion from '../Search Suggestion/SearchSuggestion';
 import { makeStyles } from '@mui/styles';
+import actionTypes from '../../store/actions/actionTypes';
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiFilledInput-root": {
@@ -75,10 +77,14 @@ export default function HelperHeader({isFixed,style,showFilter,setShowFilter}) {
     inputSearch&&fetchSearchSuggest({name:inputSearch});
   },[inputSearch])
   const selectedSort = useSelector(state=> state.productQuery).order;
+  const {maxCount,action} = useSelector(state=>state.product);
+  
   return (
     <div style = {{width: '100%',zIndex: searchFocus? 3 : 1,top : (!isFixed && searchFocus) ? '-64px' : '0px', transition : (searchFocus || !isFixed) ?(!searchFocus ? ' top 0.5s linear , z-index 0s ease-in-out 0.5s':'top 0.5s linear')  : '',position : isFixed ? 'fixed' : 'relative' }}>
     <div className = {styles.container} >
-      <div className = {styles.brandName}style ={{ display : searchFocus ? 'none' :'block'}}>Skylie</div>
+      <div className = {styles.brandName}style ={{ display : searchFocus ? 'none' :'block'}}>
+      {action== actionTypes.GET_ALL_SUCCESS &&<div>Cases {`(${maxCount})`}</div>}
+      </div>
       <div className = {styles.searchWrapper} style ={{ flex : searchFocus ? '0 0 100%' :'0 0 50%'}}>
       <TextField  className = {classes.root}
       sx = {{backgroundColor:'rgb(229,229,229)', borderRadius :'40px',height: '20px',width:'40%', padding:'15px 20px ',
@@ -121,7 +127,7 @@ export default function HelperHeader({isFixed,style,showFilter,setShowFilter}) {
       </div>
       <div className = {styles.sortPopup} style = {{display: showSortPopup? 'block' : 'none'}}>
         <div style ={{width:'100%',height: '100%',margin: '10px'}}>
-        {["Mới nhất","Hot nhất","Phù hợp nhất","Giá"].map((x,i) =>
+        {["Mới nhất","Hot nhất","Giá tăng","Giá giảm"].map((x,i) =>
           <div style ={{margin: '10px', color: (i == selectedSort)? 'black': 'rgba(0,0,0,0.8)'}} onClick = {()=>handleSelectedSort(i)}>{x}</div>)}
         </div>
       </div>

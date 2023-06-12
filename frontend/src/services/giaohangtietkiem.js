@@ -7,7 +7,7 @@ export const apiGetFee = (payload) => new Promise(async(resolve,reject)=>{
         params: {
             province: payload.province,
             district : payload.district,
-            weight: 200*payload.quantity,
+            quantity: payload.quantity,
         }
     }).then(rs=>{console.log('rst là',rs);resolve(rs.data);})
     .catch(err =>reject(err))

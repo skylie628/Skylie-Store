@@ -37,12 +37,3 @@
     padding: 10px;
     height: 20px;
 }
-.editBtn{
-    cursor: pointer;
-    border-radius: 10px;
-    background-color: black;
-    width: 30%;
-    padding: 10px;
-    color: white;
-    margin: 10px auto;
-}

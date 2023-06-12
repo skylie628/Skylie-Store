@@ -25,6 +25,8 @@
     display: flex;
 }
 .brandName{
+    margin: 20px;
+    font-size: 18px;
 }
 
 .filterWrapper, .sortWrapper{

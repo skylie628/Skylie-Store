@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './AddressInfomation.module.css'
-import { useSelector } from 'react-redux'
 export default function AddressInfomation({addressInfo}) {
   return (
     <div className={styles.billInfo}>

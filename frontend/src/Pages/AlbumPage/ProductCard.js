@@ -3,10 +3,9 @@ import deleteBtn from '../../assets/images/delete-icon.png'
 import Logo from '../../Components/Logo/Logo'
 import styles from './ProductCard.module.css'
 import { deleteSavedProducts } from '../../store/actions/savedProduct'
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
-import actionTypes from '../../store/actions/actionTypes'
 export default function ProductCard({Product}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();

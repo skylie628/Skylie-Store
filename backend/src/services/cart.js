@@ -8,7 +8,6 @@ export const addCartServices = (account_id) => new Promise(async (resolve, rejec
 
     const id = uuidv4();
     console.log(account_id);
-    try{
     const response = await db.Cart.findOrCreate({
         where :{account_id,status:'Cart'},
         defaults:{
@@ -24,25 +23,38 @@ export const addCartServices = (account_id) => new Promise(async (resolve, rejec
         msg:  'add Cart successfully' 
     })
     : 
-    reject(new ConflictError('Cart đã tồn tại'))}
-    catch(err){reject(new InvalidParamError('Thêm dữ liệu không thành công'))}
+    resolve({
+        id: response[0].dataValues.id,
+        err: 0,
+        msg:  'add Cart successfully' 
+    })
+
+    
+
 })
 
 
 export const getCartByAccountServices = (account_id) => new Promise(async (resolve,reject) =>{
     try{
-        const response = await db.Cart.findOne({
+
+        const id = uuidv4();
+        const [row, created] = await db.Cart.findOrCreate({
             where:{
+                account_id,
+                status: 'Cart'
+            },
+            defaults: {
+                id,
                 account_id,
                 status: 'Cart'
             },
             attributes: ['id'],
             raw:true
           });
-        console.log(response)
+        console.log('find one get cart la',row.dataValues,created)
         resolve({
             err: 0,
-            data: response
+            data: created? row.dataValues :row
         })
     }
     catch(err){
@@ -84,7 +96,7 @@ export const getTotalCartPrice = (cartId,order_id) => new Promise(async (resolve
         const orderItems = cartItems.map((item,index) => {
             const campaign_id = products[index].campaign? products[index].campaign.id : null;
             return {
-                id: uuidv4(),
+                id: `'${uuidv4()}'`,
                 order_id: item.order_id,
                 model_id: item.model_id,
                 material_id : item.material_id,

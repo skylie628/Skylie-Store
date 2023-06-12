@@ -37,6 +37,25 @@ export const apiGetSavedAlbums = (payload) => new Promise(async(resolve,reject)=
     .catch(err =>reject(err))
 })
 
+export const apiGetShareUrl = (payload) => new Promise(async(resolve,reject)=>{
+    console.log("payload là",payload)
+    axiosConfig({
+        method: 'get',
+        url: 'api/v1/savedAlbum/sharedUrl',
+        params:payload
+    }).then(rs=>resolve(rs.data))
+    .catch(err =>reject(err))
+})
+export const apiGetSavedByShareUrl = (payload) => new Promise(async(resolve,reject)=>{
+    console.log("payload là",payload)
+    axiosConfig({
+        method: 'get',
+        url: 'api/v1/savedAlbum/SavedBySharedUrl',
+        params:payload
+    }).then(rs=>resolve(rs.data))
+    .catch(err =>reject(err))
+})
+
 export const apiGetSavedAlbum = (payload) => new Promise(async(resolve,reject)=>{
     console.log("payload là",payload)
     axiosConfig({
