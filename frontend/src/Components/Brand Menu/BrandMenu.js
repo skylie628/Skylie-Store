@@ -81,7 +81,7 @@ export default function BrandMenu({id,stateBrandMenu,setStateBrandMenu,selectedB
    {brandNames.map((name,index) => 
    <div id={index} className ={styles.phoneBrandImage}>
         <img  src ={brandImgs[index]} style={{opacity: selectedBrand == index ? 1 : ''}} onClick={()=>changeBrandMenu(index)}></img>
-        <span>{name}</span>
+        <span style ={{fontSize:'13px'}}>{name}</span>
     </div>)}
     </div>
     </div>

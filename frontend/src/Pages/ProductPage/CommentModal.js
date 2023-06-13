@@ -85,7 +85,7 @@ const handleCancelEdit = ()=>{
     enableComment != 0 && <div className={styles.ratingForm}>
     <div className = {styles.rating}>
         {
-                [1,2,3,4,5].map(x =>   <img className ={styles.star} src={myRating < x ? GrayStar : BlackStar} onClick ={()=>setMyRating(x)}></img>)
+                [1,2,3,4,5].map(x =>   <img className ={styles.star} src={myRating < x ? "/rating-start-gray-large" : "/rating-start-black-large.png"} onClick ={()=>setMyRating(x)}></img>)
                 }
     </div>
         
