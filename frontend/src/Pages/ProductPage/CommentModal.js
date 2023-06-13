@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import styles from './CommentModal.module.css'
 import Logo from '../../Components/Logo/Logo'
-import BlackStar from '../../assets/images/rating-start-black-large.png'
-import GrayStar from '../../assets/images/rating-start-gray-large.png'
 import CloseIcon from '../../assets/images/close-icon-black.png'
 import moment from 'moment'
 import actionTypes from '../../store/actions/actionTypes'
@@ -99,7 +97,7 @@ const handleCancelEdit = ()=>{
         <div className={styles.ratingForm}>
     <div className = {styles.rating}>
         {
-                [1,2,3,4,5].map(x =>   <img className ={styles.star} src={myRating < x ? GrayStar : BlackStar} onClick ={()=>isEdited&&setMyRating(x)}></img>)
+                [1,2,3,4,5].map(x =>   <img className ={styles.star} src={myRating < x ? "/rating-start-gray-large" : "/rating-start-black-large.png"} onClick ={()=>isEdited&&setMyRating(x)}></img>)
                 }
     </div>
         {!isEdited&&<div style ={{fontSize:'30px',margin:'50px auto',textAlign:'center',color:'rgba(0,0,0,0.5)',fontFamily:'sans-serif',width:'70%'}}><i>{`" ${commented.content} "`}</i></div>}
@@ -137,7 +135,7 @@ const handleCancelEdit = ()=>{
     <div className = {styles.userRating}>
     <div className = {styles.rating}>
         {
-                [1,2,3,4,5].map(x =>   <img className ={styles.userStar} src={ comment.rating< x ? GrayStar : BlackStar}></img>)
+                [1,2,3,4,5].map(x =>   <img className ={styles.userStar} src={ comment.rating< x ? "/rating-start-gray-large" : "/rating-start-black-large.png"}></img>)
                 }
             </div>
     </div>

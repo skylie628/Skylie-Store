@@ -47,6 +47,7 @@ export default function BrandMenu({id,stateBrandMenu,setStateBrandMenu,selectedB
       "Motorola",
       "Oneplus"
     ]
+    const imgsrc = brandNames.map(x =>`/brandLogo/${x}-logo.png`)
     const numBrands = 12;
     useEffect(()=>{
          setSpeed(ScrollWidth?.current?.clientWidth/80);
@@ -80,7 +81,7 @@ export default function BrandMenu({id,stateBrandMenu,setStateBrandMenu,selectedB
     <div id="brandMenu" className ={styles.phoneBrandSlider} style={{left: `-${current*speed*60}px`,transition:'0.3s ease-in-out'}}>
    {brandNames.map((name,index) => 
    <div id={index} className ={styles.phoneBrandImage}>
-        <img  src ={brandImgs[index]} style={{opacity: selectedBrand == index ? 1 : ''}} onClick={()=>changeBrandMenu(index)}></img>
+        <img  src ={imgsrc[index]} style={{opacity: selectedBrand == index ? 1 : ''}} onClick={()=>changeBrandMenu(index)}></img>
         <span style ={{fontSize:'13px'}}>{name}</span>
     </div>)}
     </div>
