@@ -30,7 +30,7 @@ export default function ShoppingPage() {
     window.scrollTo(0,0);
   },[productQuery])
   return (
-    <div style = {{position: 'relative'}}>
+    <div style = {{position: 'relative', minHeight:'100vh'}}>
       <div style = {{position: 'relative',height:80}}>
     <HelperHeader id = "header" showFilter ={showFilter} setShowFilter = {setShowFilter} ref = {header} isFixed = {isFixed} style = {{top:isFixed ? 0: -64,position: isFixed? 'sticky' : 'relative'}}></HelperHeader>
       </div>

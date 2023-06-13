@@ -28,7 +28,7 @@
 .colorDot{
     display: block;
     border-radius: 100%;
-    z-index: 4;
+    z-index: 2;
     cursor: pointer;
     padding: 10px;
     width: 15px;
@@ -41,7 +41,7 @@
     flex-direction: column;
     margin-left: 10%;
     font-size: 18px;
-    z-index: 5;
+    z-index: 2;
     width: 40%;
     top:50%;
     font-weight: 500;

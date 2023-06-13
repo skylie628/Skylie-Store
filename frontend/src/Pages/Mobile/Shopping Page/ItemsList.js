@@ -9,7 +9,7 @@ import { resetProducts } from '../../../store/reducers/productSlice';
 import { useNavigate } from 'react-router-dom'
 import EmptyCard from '../../../Components/EmptyCard/EmptyCard'
 import actionTypes from '../../../store/actions/actionTypes';
-export default function ItemsList({fetchFilter,setFetchFilter}) {
+export default function ItemsList() {
     const [isFetching, setIsFetching] = useState(false);
     const [offset,setOffset] = useState(0);
     const offsetRef  = useRef(offset);
@@ -38,7 +38,6 @@ export default function ItemsList({fetchFilter,setFetchFilter}) {
       dispatch(resetProducts({data:null}))
       setIsFetching(true);
       setOffset(0);
-      setFetchFilter(false);
       return () => {window.removeEventListener('scroll', handleScroll);dispatch(ResetError());};
     }, []);
     useLayoutEffect(()=>{
@@ -54,18 +53,15 @@ export default function ItemsList({fetchFilter,setFetchFilter}) {
       }
       offsetRef.current = offset
      },[offset])
-     useEffect(()=>{setFetchFilter(true);},[productQuery])
+     
+
      useLayoutEffect(()=>{
       console.log('call from query')
-      if(fetchFilter){
       dispatch(resetProducts({data:null}))
       setIsFetching(true);
       setOffset(0);
-      setFetchFilter(false);
-
-    }
       return ()=>{dispatch(ResetError())}
-     },[fetchFilter])
+     },[productQuery])
 
     const itemCount = products.length;
     const row  = Math.ceil(products.length/2);

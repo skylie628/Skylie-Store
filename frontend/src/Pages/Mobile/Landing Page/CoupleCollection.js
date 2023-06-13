@@ -9,7 +9,7 @@ export default function CoupleCollection({windowDimensions,setWindowDimension}) 
   }
   return (
     <div className = {styles.coupleCollectionWrapper} style ={{height:'80vh'}}>
-    <img src = {coupleCollection} style ={{height: '100%'}}className ={styles.coupleCollectionImg}></img>
+    <img src = {coupleCollection} style ={{width: '100%',height:'100%'}}className ={styles.coupleCollectionImg}></img>
     <div className = {styles.coupleCollectioncontentWrapper} style ={{width:'100%',height:'100%'}}>
         <div style ={{position : 'absolute',top:'5%', width: '100%'}}>
             <span className = {styles.productName}>Couple Case</span>

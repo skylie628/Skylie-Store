@@ -27,11 +27,9 @@ import CheckoutPageMobile from './Pages/Mobile/CheckoutPage/CheckoutPage';
 import NotFoundPage from './Pages/NotFoundPage/NotFoundPage'
 import Private from './Components/Private/Private';
 import FetchInfo from './Components/FetchInfo/FetchInfo';
-import MobileDetect from './Components/MobileDetect/MobileDetect';
 import ScrollToTop from './Components/Scroll To Top/ScrollToTop';
 import { useMediaQuery } from 'react-responsive';
 import { Route, Routes } from 'react-router-dom';
-import Scrollbar from 'smooth-scrollbar';
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {

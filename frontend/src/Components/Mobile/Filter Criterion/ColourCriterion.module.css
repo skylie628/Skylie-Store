@@ -20,24 +20,26 @@
 .flexRow{
     display: flex;
     flex-wrap: nowrap;
+    justify-content: center;
 }
 .Option{
-    flex: 1 0 calc(33% - 25px);
+    flex: 0 0 calc(33% - 50px);
     display: block;
-    margin: 12.5px;
+
+    margin: 25px;
 }
 .OptionLeft{
-    flex: 1 0 calc(33% - 25px);
+    flex: 0 0 calc(33% - 25px);
     display: block;
     margin: 12.5px;
 }
 .OptionMiddle{
-    flex: 1 0 calc(33% - 25px);
+    flex: 0 0 calc(33% - 25px);
     display: block;
     margin: 12.5px;
 }
 .OptionRight{
-    flex: 1 0 calc(33% - 25px);
+    flex: 0 0 calc(33% - 25px);
     display: block;
     margin: 12.5px;
 }

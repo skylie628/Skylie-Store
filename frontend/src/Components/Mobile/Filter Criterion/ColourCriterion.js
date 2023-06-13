@@ -6,9 +6,11 @@ import NarrowIcon from '../../../assets/images/narrow-icon.png'
 import { useDispatch } from 'react-redux'
 import { filterByColors } from '../../../store/reducers/productQuerySlice'
 import { apiGetColors } from '../../../services/color'
+import { useSelector } from 'react-redux'
 import CheckIcon from   '../../../assets/images/check-icon.png'
-export default function ColourCriterion() {
+export default function ColourCriterion({showFilter,tempSelectedColors,setTempSelectedColors}) {
     const dispatch = useDispatch();
+    const colors = useSelector(state=>state.productQuery).colors;
     /*const [colourList, setColourList] = useState([
         {
             name:'Trắng',
@@ -74,15 +76,28 @@ export default function ColourCriterion() {
     ])*/
 const [colourList, setColourList] = useState([])
 useEffect(()=>{
-    apiGetColors().then(
-        rst => {console.log('color list la',rst);setColourList(rst.data);})
-},[])
+    colors && apiGetColors().then(
+        rst => {
+            console.log('rstt la',rst.data)
+            console.log('colors la',colors)
+            const mergeColor = rst.data.map(x=> (colors.includes(x.id) ? {...x,select:true}:{...x,select:false}))
+            setColourList(mergeColor);})
+},[colors])
+useEffect(()=>{
+    if(showFilter&&colourList.length>0){
+    console.log(colors)
+    const mergeColor = colourList.map(x=> (colors.includes(x.id) ? {...x,select:true}:{...x,select:false}))
+    setColourList(mergeColor);}
+},[showFilter])
+useEffect(()=>{
+    tempSelectedColors==0&&setColourList(prev =>prev.map(color =>({...color,select:false})))
+},[tempSelectedColors])
  const handleOnClick = (x,y) =>{
     const clone = [...colourList];
     clone[3*x+y].select =  !clone[3*x+y].select;
     const selectedColors = clone.filter(color => color.select).map(color => color.id);
     console.log('selectedcolor',selectedColors);
-    dispatch(filterByColors(selectedColors));
+    setTempSelectedColors(selectedColors);
     setColourList(clone);
  }
   return (
@@ -91,7 +106,7 @@ useEffect(()=>{
     <div style={{float:'left'}}>Màu sắc</div>
     <div style ={{clear:'both'}}></div>
     </div>
-    <div className={styles.FilterValue} style = {{maxHeight:'500px' ,overflow: 'hidden',transition:'0.5s ease-in-out'}}>
+    <div className={styles.FilterValue} style = {{overflow: 'hidden',transition:'0.5s ease-in-out'}}>
      
      {
         colourList.length >0 && [0,1,2,3].map(x=>

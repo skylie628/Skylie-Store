@@ -23,8 +23,8 @@ export default function SiliconOption() {
     <div>Soft.</div>
     <div>Luxury.</div>
     </div>
-    <img className={styles.materialsImg} src = {BlackSil} style ={{zIndex : 3, height:'100%', opacity: optionSelect, transition:'0.5s ease-in-out'}} ></img>
-    <img className={styles.materialsImg} src = {TransSil} style ={{zIndex: 2,height:'100%',transition:'0.5s ease-in-out'}} ></img>
+    <img className={styles.materialsImg} src = {BlackSil} style ={{zIndex : 1, height:'100%', opacity: optionSelect, transition:'0.5s ease-in-out'}} ></img>
+    <img className={styles.materialsImg} src = {TransSil} style ={{zIndex: 0,height:'100%',transition:'0.5s ease-in-out'}} ></img>
     <div className ={styles.options}>
         <div style ={{margin:'0 auto'}}>
         <div className={styles.option}>

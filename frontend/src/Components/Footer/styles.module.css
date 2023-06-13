@@ -8,7 +8,7 @@
 }
 .footerContents{
     display: block;
-    margin: 0 30px;
+    flex: 1 0 0;
 }
 .footerContentName{
     display: block;

@@ -39,6 +39,15 @@ const productQuerySlice = createSlice({
           collection: action.payload
         }
       },
+      filterByCriterias: (state,action) =>{
+        console.log('redux state',action.payload);
+        return {
+          ...state,
+          collection: action.payload.collection,
+          price: action.payload.price,
+          colors: action.payload.colors
+        }
+      },
       sort: (state,action) =>{
         return {
           ...state,
@@ -50,5 +59,5 @@ const productQuerySlice = createSlice({
       },
   }})
 
-export const {filterByName,filterByColors,filterByCollection,filterByPrice,sort,resetQuery} = productQuerySlice.actions
+export const {filterByCriterias,filterByName,filterByColors,filterByCollection,filterByPrice,sort,resetQuery} = productQuerySlice.actions
 export default productQuerySlice.reducer
