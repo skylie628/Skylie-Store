@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
-import productSide3 from '../../../../public/static/images/product-side3.png'
-import productSide4 from '../../../../public/static/images/product-productSide4.png'
+import productSide3 from '../../../../public/static/images/product3.png'
+import productSide4 from '../../../../public/static/images/product4.png'
 import styles from './ProductImages.module.css'
 import { useSelector } from 'react-redux'
 export default function ProductImages() {
