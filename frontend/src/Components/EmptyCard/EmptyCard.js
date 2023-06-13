@@ -1,5 +1,4 @@
 import React from 'react'
-import EmptyImage from '../../assets/images/empty-box.png'
 import styles from './EmptyCard.module.css'
 export default function EmptyCard({msg,style}) {
   return (
