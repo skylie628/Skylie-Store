@@ -36,14 +36,14 @@ useEffect(()=>{
   >
     <div className = {styles.headerTitle}>Đăng ký tài khoản </div>
       <SignupForm onSubmit ={handleFormSubmit}></SignupForm>
-      <div style = {{display: 'flex', alignItems: 'center',justifyContent : 'center'}}>
+     {/*} <div style = {{display: 'flex', alignItems: 'center',justifyContent : 'center'}}>
         <Logo src = {FacebookInactive} srcOnHover = {FacebookActive} style ={{width : '40px' ,height : '40px',marginLeft: '10px'}}></Logo>
         <Logo src = {GoogleInactive} srcOnHover = {GoogleActive} style = {{width : '40px' , height : '40px', marginLeft: '10px'}}></Logo>
       </div>
-      <div style={{margin: '20px'}}>
+     <div style={{margin: '20px'}}>
       <div className = {styles.resetBtn}>Quên tài khoản ? <a>Reset ngay</a></div>
       <div className = {styles.signupBtn}>Chưa có tài khoản ? <a>Đăng ký</a></div>
-      </div>
+  </div>*/}
   </Box>
   )
 }

@@ -30,12 +30,12 @@ const handleFormSubmit = async (value) =>{
   >
     <div className = {styles.headerTitle}>Đăng nhập để nhận được nhiều ưu đãi!</div>
       <SignInForm onSubmit ={handleFormSubmit}></SignInForm>
-      <div style = {{display: 'flex', alignItems: 'center',justifyContent : 'center'}}>
+      {/*<div style = {{display: 'flex', alignItems: 'center',justifyContent : 'center'}}>
         <Logo src = {FacebookInactive} srcOnHover = {FacebookActive} style ={{width : '40px' ,height : '40px',marginLeft: '10px'}}></Logo>
         <Logo src = {GoogleInactive} srcOnHover = {GoogleActive} style = {{width : '40px' , height : '40px', marginLeft: '10px'}}></Logo>
-      </div>
+  </div>*/}
       <div style={{margin: '20px'}}>
-      <div className = {styles.resetBtn}>Quên tài khoản ? <a>Reset ngay</a></div>
+      {/*<div className = {styles.resetBtn}>Quên tài khoản ? <a>Reset ngay</a></div>*/}
       <div className = {styles.signupBtn}>Chưa có tài khoản ? <a  onClick = {()=> navigate('/signup')}>Đăng ký</a></div>
       </div>
   </Box>

@@ -30,10 +30,10 @@ export default function ProductImages() {
      <img src={images.side_img_thumbnail} style={{width : '100%'}} onClick = {()=>{setShowingImage(images.side_img)}}></img>
      </div>   
      <div className = {styles.thumbnailImg}>
-     <img src="/product3" style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
+     <img src="/product3.png" style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
     </div>   
      <div className = {styles.thumbnailImg}>
-     <img src="/product4" style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
+     <img src="/product4.png" style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
     </div>   
     </div>
     </div>
