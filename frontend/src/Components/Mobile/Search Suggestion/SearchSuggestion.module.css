@@ -18,8 +18,6 @@
     height: 100%;
 }
 .searchRst{
-    margin: 10px;
-    align-self: center;
     display: block;
     cursor: pointer;
 }

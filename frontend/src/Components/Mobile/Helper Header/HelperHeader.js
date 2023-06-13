@@ -105,7 +105,7 @@ export default function HelperHeader({isFixed,style,showFilter,setShowFilter}) {
       <div style = {{position:'absolute',right:40,top:80,zIndex:10, cursor : 'pointer',  display: searchFocus ? 'block' : 'none',transition: '0.5 ease-in-out' }} onClick = {handleOutfocus}>Cancel</div>
       </div>
         <div className = {styles.searchSuggest} style ={{height : searchFocus ? 'auto' : '0px'}}>
-      <SearchSuggestion isLoading ={isLoading} products = {searchSuggestion}></SearchSuggestion>
+      <SearchSuggestion handleOutfocus ={handleOutfocus} isLoading ={isLoading} products = {searchSuggestion}></SearchSuggestion>
     </div>
     <div className = {styles.container} >
     <div className = {styles.brandName}style ={{ display : searchFocus ? 'none' :'block'}}>

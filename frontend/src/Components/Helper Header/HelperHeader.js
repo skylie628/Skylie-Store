@@ -135,7 +135,7 @@ export default function HelperHeader({isFixed,style,showFilter,setShowFilter}) {
       </div>
     </div>
     <div className = {styles.searchSuggest} style ={{height : searchFocus ? 'auto' : '0px'}}>
-      <SearchSuggestion isLoading ={isLoading} products = {searchSuggestion}></SearchSuggestion>
+      <SearchSuggestion handleOutfocus={handleOutfocus} isLoading ={isLoading} products = {searchSuggestion}></SearchSuggestion>
     </div>
     </div>
   )
