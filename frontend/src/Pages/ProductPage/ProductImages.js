@@ -1,6 +1,4 @@
 import React, { useEffect,useState } from 'react'
-import productSide3 from '../../assets/images/static/product3.png'
-import productSide4 from '../../assets/images/static/product4.png'
 import styles from './ProductImages.module.css'
 import { useSelector } from 'react-redux'
 export default function ProductImages() {
@@ -29,10 +27,10 @@ export default function ProductImages() {
      <img src={images.side_img_thumbnail} style={{width : '100%'}} onClick = {()=>{setShowingImage(images.side_img)}}></img>
      </div>   
      <div className = {styles.thumbnailImg}>
-     <img src={productSide3} style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
+     <img src="https://firebasestorage.googleapis.com/v0/b/skylie-store.appspot.com/o/Products%2Fside%20product%2Fproduct3.png?alt=media&token=4742a268-8e07-496c-8e20-c77fe3b5409b&_gl=1*1kehdip*_ga*MTg3ODkxNTgyNC4xNjgyNDg0MzQ3*_ga_CW55HF8NVT*MTY4NjYzNTY4Mi41LjEuMTY4NjYzNTkwMC4wLjAuMA.." style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
     </div>   
      <div className = {styles.thumbnailImg}>
-     <img src={productSide4} style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
+     <img src="https://firebasestorage.googleapis.com/v0/b/skylie-store.appspot.com/o/Products%2Fside%20product%2Fproduct4.png?alt=media&token=bf9437a4-dfde-41f7-bf7f-578765ec2846&_gl=1*1vyaz8o*_ga*MTg3ODkxNTgyNC4xNjgyNDg0MzQ3*_ga_CW55HF8NVT*MTY4NjYzNTY4Mi41LjEuMTY4NjYzNTgxOS4wLjAuMA.." style={{width : '100%'}} onClick = {(img)=>{changeImage(img)}}></img>
     </div>   
     </div>
     <div className={styles.productImage}>
