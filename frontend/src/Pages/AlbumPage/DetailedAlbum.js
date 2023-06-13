@@ -47,7 +47,7 @@ export default function DetailedAlbum() {
     return (
     <div>
         
-        <div className ={styles.header}>
+        <div >
         {action == actionTypes.DELETE_SUCCESS && <HeaderNofify style={{width:'100%'}} msg="Xóa sản phẩm khỏi album thành công"></HeaderNofify>}
         <div style={{fontSize: '35px', textAlign:'left', fontWeight:'600'}}>{savedProducts.name} Album.</div>
         <div style={{fontSize: '20px', textAlign:'left',color:'gray',fontWeight:'100'}}>Save & Share.</div>
