@@ -111,7 +111,7 @@ gsap.to('#slogan',
   </div> */}
 
         <div  id ="pin" style = {{display :'block', width : windowDimensions.width,height: windowDimensions.height-64, position: 'fixed'}}>{/*style = {{position :  (ratio >3 )? 'absolute' :'sticky', bottom:(ratio >3 )? 0 :'' , display:'block',width:'100%',height:'100%'}} */}
-          <div style = {{position: 'relative', display: 'block'}}>
+          <div style = {{position: 'relative', display: 'block',height:'100%'}}>
           <canvas ref = {canvas} width = {windowDimensions.width} height = {windowDimensions.height-64} className = {styles.canvasimg}></canvas>
           <div  ref = {brandname} id="brandname" className={styles.HeaderName}>
           <span  style ={{display:'flex'}}>

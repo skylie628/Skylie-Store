@@ -20,9 +20,9 @@
   display: block;
   position: absolute;
   top: 50%;
-  left: 3%;
+  left: 50%;
   right: 0;
-  transform: translateY(50%);
+  transform: translateY(-50%,-50%);
   z-index: 0;
   text-align: center;
   color: rgb(241, 241, 241);
