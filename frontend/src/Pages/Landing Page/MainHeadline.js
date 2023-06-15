@@ -56,8 +56,8 @@ render();
   }
  }})
 
-gsap.fromTo('#brandname', {opacity: 1, fontSize :'16vw', yPercent :50},
- { opacity: 0, fontSize :'20vw', yPercent :-10,
+gsap.fromTo('#brandname', {opacity: 1, fontSize :'16vw', yPercent :-50,xPercent:-47},
+ { opacity: 0, fontSize :'20vw', yPercent :-120,
   scrollTrigger: {
   trigger:'#brandname',
   start: "top top",
