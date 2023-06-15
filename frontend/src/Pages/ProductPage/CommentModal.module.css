@@ -1,7 +1,7 @@
 .commentModal{
     background-color: white;
     left: 0px;
-    width: 1280px;
+    width: 100vw;
     top:0px;
     display: block;
     position: fixed;

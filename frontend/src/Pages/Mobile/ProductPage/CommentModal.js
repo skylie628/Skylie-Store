@@ -83,7 +83,7 @@ const handleCancelEdit = ()=>{
     enableComment != 0 && <div className={styles.ratingForm}>
     <div className = {styles.rating}>
         {
-                [1,2,3,4,5].map(x =>   <img className ={styles.star} src={myRating < x ? "/rating-start-gray-large" : "/rating-start-black-large.png"} onClick ={()=>setMyRating(x)}></img>)
+                [1,2,3,4,5].map(x =>   <img className ={styles.star} src={myRating < x ? "/rating-start-gray-large.png" : "/rating-start-black-large.png"} onClick ={()=>setMyRating(x)}></img>)
                 }
     </div>
         
@@ -97,7 +97,7 @@ const handleCancelEdit = ()=>{
         <div className={styles.ratingForm}>
     <div className = {styles.rating}>
         {
-                [1,2,3,4,5].map(x =>   <img className ={styles.star} src={myRating < x ? "/rating-start-gray-large" : "/rating-start-black-large.png"} onClick ={()=>isEdited&&setMyRating(x)}></img>)
+                [1,2,3,4,5].map(x =>   <img className ={styles.star} src={myRating < x ? "/rating-start-gray-large.png" : "/rating-start-black-large.png"} onClick ={()=>isEdited&&setMyRating(x)}></img>)
                 }
     </div>
         {!isEdited&&<div style ={{fontSize:'30px',margin:'50px auto',textAlign:'center',color:'rgba(0,0,0,0.5)',fontFamily:'sans-serif',width:'70%'}}><i>{`" ${commented.content} "`}</i></div>}
@@ -133,7 +133,7 @@ const handleCancelEdit = ()=>{
     <div className = {styles.userRating}>
     <div className = {styles.rating}>
         {
-                [1,2,3,4,5].map(x =>   <img className ={styles.userStar} src={ comment.rating< x ? "/rating-start-gray-large" : "/rating-start-black-large.png"}></img>)
+                [1,2,3,4,5].map(x =>   <img className ={styles.userStar} src={ comment.rating< x ? "/rating-start-gray-large.png" : "/rating-start-black-large.png"}></img>)
                 }
             </div>
     </div>
