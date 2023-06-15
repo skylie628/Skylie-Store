@@ -26,6 +26,7 @@ useEffect(() => {
   const width = window.document.body.clientWidth;
   const height = window.innerHeight;
   setWindowDimensions({width : width,height : height});
+  console.log('width height là',width,height);
   const nwidth =  (windowDimensions.height-64)*3000/840;
   const offsetX = (windowDimensions.width - nwidth) / 2 ;
   const offsetY =  0;
