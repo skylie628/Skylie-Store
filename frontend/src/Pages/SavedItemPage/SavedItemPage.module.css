@@ -2,7 +2,7 @@
     background-color: white;
     position: sticky;
     top:0px;
-    z-index: 4;
+    z-index: 1;
     text-align: left;
 }
 .SaveHeader div{

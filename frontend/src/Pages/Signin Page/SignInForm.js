@@ -19,9 +19,6 @@ export default function SignInForm(props) {
       onSubmit(value)
     }
     }
-    useEffect(()=>{
-      console.log("loi la : ",errors,action);
-    })
     const schema = yup.object().shape({
         email: yup.string().required('Hãy nhập email bạn nhé!').email('Hãy nhập đúng email bạn nhé!'),
         password: yup.string().required('Hãy nhập password bạn nhé!'),

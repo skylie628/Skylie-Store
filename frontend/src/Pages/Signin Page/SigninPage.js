@@ -8,7 +8,7 @@ import SignInForm from './SignInForm.js'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import styles from './styles.module.css'
-import { Login } from '../../store/actions/auth.js'
+import { Login, ResetError } from '../../store/actions/auth.js'
 import { useDispatch, useSelector } from 'react-redux'
 export default function SigninPage() {
 const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const navigate = useNavigate();
 const {islogged} = useSelector(state => state.auth);
 useEffect(()=>{
   islogged && navigate('/')
+  return ()=>dispatch(ResetError())
 },[islogged])
 const handleFormSubmit = async (value) =>{
   await dispatch(Login(value))

@@ -8,7 +8,7 @@ export default function ItemCard({id,best_sale,name,options,sales,price,campaign
   return (
     <div className = {styles.card} onClick ={()=>navigate(`../product/${slugify(name)}`)}>
     <div className ={styles.square}>
-        <img src ={options.showing_img_thumbnail} ></img>
+        <img src ={options.showing_img_thumbnail } loading="lazy"  ></img>
     </div>
     <div className={styles.description}>
     {campaign!=0 &&<div style ={{display:'flex',justifyContent:'space-between'}}>

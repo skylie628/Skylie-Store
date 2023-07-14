@@ -5,12 +5,14 @@ import FilterCriterions from './FilterCriterions';
 import ItemsList from './ItemsList';
 import { resetQuery } from '../../store/reducers/productQuerySlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { ResetError } from '../../store/actions/product';
 export default function ShoppingPage() {
   const [isFixed,setIsFixed] = useState(false);
   const dispatch = useDispatch();
   const [showFilter,setShowFilter] = useState(false);
   const productQuery = useSelector(state=>state.productQuery);
   const header = useRef();
+  
   useLayoutEffect(()=>{
     const onScroll = () => {
       if ( window.scrollY>64) {
@@ -23,6 +25,7 @@ export default function ShoppingPage() {
     return () => {
     window.removeEventListener("scroll", onScroll);
     dispatch(resetQuery());
+    return ()=>dispatch(ResetError())
   }
   },[])
 

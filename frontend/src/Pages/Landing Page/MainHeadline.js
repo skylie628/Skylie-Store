@@ -1,6 +1,5 @@
 import React from 'react' ;
-import { useEffect, useState,useMemo,useRef } from 'react';
-import useWindowDimensions from '../../Hooks/useWindowDimensions.js'
+import { useEffect,useMemo } from 'react';
 import styles from './styles.module.css';
 import {gsap} from 'gsap';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -57,7 +56,7 @@ render();
  }})
 
 gsap.fromTo('#brandname', {opacity: 1, fontSize :'16vw', yPercent :-50,xPercent:-47},
- { opacity: 0, fontSize :'20vw', yPercent :-120,
+ { opacity: 0, fontSize :'20vw', yPercent :-120,xPercent:-53,
   scrollTrigger: {
   trigger:'#brandname',
   start: "top top",

@@ -2,7 +2,7 @@ import React from 'react' ;
 import styles from './styles.module.css';
 import PromoteImg from '../../../assets/images/promote-img-01.png'
 import { useNavigate } from 'react-router-dom';
-export default function MainHeadline({windowDimensions,setWindowDimensions}) {
+export default function MainHeadline({windowDimensions}) {
   const navigate = useNavigate();
   const handleOnclick = () =>{
     navigate('./shopping')

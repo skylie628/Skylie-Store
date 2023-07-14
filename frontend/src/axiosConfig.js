@@ -1,15 +1,16 @@
 import axios from "axios";
-
+import { store } from "./redux/store";
+import { logout } from "./store/reducers/authSlice";
 const instance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL || "https://skylie-store-ecommerce.onrender.com"
   
   //baseURL: process.env.REACT_APP_SERVER_URL || "http://localhost:5000"
   })
-
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
     console.log('persited token',window.localStorage.getItem('persist:root'))
     const token = window.localStorage.getItem('persist:root') && JSON.parse(localStorage.getItem('persist:root'))?.userToken?.slice(1,-1);
+
     config.headers = {
       authorization: `Bearer ${token}`
     }
@@ -21,9 +22,13 @@ instance.interceptors.request.use(function (config) {
   });
 
   instance.interceptors.response.use(function (response) {
-    
+    console.log('res của req là',response)
     return response;
   }, function (error) {
+    console.log('res của req là',error)
+    if(error.response.status == 401){
+      store.dispatch(logout())
+    }
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(error);

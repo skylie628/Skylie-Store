@@ -57,10 +57,10 @@ export default function ExpandHeader({onMouseLeave,isRelative,isExpandHeader,set
                     <div>Account</div>
                 </div>
 
-              <div onClick = {()=>handleLogout()}>
+              {islogged&&<div onClick = {()=>handleLogout()}>
                     <Logo src={ isRelative ? LogoutIconBlack : LogoutIconWhite} style = {{width:'20px'}}/>
                     <div>Logout</div>
-                </div>
+                </div>}
                 </Fragment>
             </div>
         </div>

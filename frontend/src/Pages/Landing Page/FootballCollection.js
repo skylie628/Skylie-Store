@@ -1,6 +1,6 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from './footballcollection.module.css';
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState,useRef,useTransition } from "react";
 import { useNavigate } from "react-router-dom";
 import footballCollection1 from  '../../assets/images/football-collection-1.png'
 import footballCollection2 from  '../../assets/images/football-collection-2.png'
@@ -14,6 +14,7 @@ import VideoModal from "../../Components/Video Modal/VideoModal";
 export default function FootballCollection({windowDimensions,setWindowDimensions}) {
   const [cur, setCur] = useState(1);
   const [isPlay,setIsPlay] = useState(true);
+  const [isPending, startTransition] = useTransition();
   const [isPlayVideo,setIsPlayVideo] = useState(false);
   const navigate = useNavigate();
   let firstTurn = false;
@@ -49,13 +50,14 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
   useEffect(() => {
     if(cur === 5){
       setTimeout(() => {
-      	setDisableTransition(prev =>true);
-      	setCur(1);
+        startTransition(()=>{	setDisableTransition(prev =>true);
+      	setCur(1);})
       }, transitionTime)
     }
     if(cur === 1){
       setTimeout(() => {
-        setDisableTransition(false);
+        startTransition(()=>
+        setDisableTransition(false))
       }, transitionTime)
     }
    },[cur]);
@@ -68,7 +70,8 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
         firstTurn = false
       }
       else{
-      setCur(preCur =>  preCur +1 );}
+      startTransition(()=>setCur(preCur =>preCur +1 ))
+      ;}
     },speed)
   }
   }

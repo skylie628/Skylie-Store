@@ -25,18 +25,19 @@ export default function ItemsList() {
       const products = dispatch(getProducts({offset:payload.offset,...productQuery}));
       setIsFetching(false);
       console.log('product sau khi get là',products);
-      },2000)
+      },1000)
       setOffset(prev => prev+1);
       return products;
     }
     function handleScroll() {
-      console.log('offset là',offset);
       if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight ) return;
       (offsetRef.current !== -1) && setIsFetching(true);
     }
     useEffect(() => {
       window.addEventListener('scroll', handleScroll);
-      return () => {window.removeEventListener('scroll', handleScroll);dispatch(ResetError());};
+      return () => {
+      window.removeEventListener('scroll', handleScroll);
+      dispatch(ResetError());};
     }, []);
     useLayoutEffect(()=>{
       console.log('call from isFetchingchange')

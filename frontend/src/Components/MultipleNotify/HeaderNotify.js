@@ -7,6 +7,7 @@ export default function HeaderNofify(props) {
   const [isVisible,setIsVisible] = useState(false);
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
   useEffect(()=>{
+    console.log('notify')
     setIsVisible(true)
     setTimeout(()=>{
       setIsVisible(false)
