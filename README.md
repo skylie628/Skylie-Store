@@ -13,7 +13,7 @@
 * Photoshop for automatic editing bulk images
 * Stable Diffusion for generating advertising resources.
 
-## key features
+## Key Features
 * Sign in, Sign up
 * Product's material representation
 * Add product to cart
