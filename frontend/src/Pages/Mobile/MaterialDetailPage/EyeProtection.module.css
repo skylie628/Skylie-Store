@@ -3,6 +3,7 @@
     color: white;
     overflow-x: hidden ;
     height: 50vh;
+    min-height: 720px;
 }
 .img{
     width: 35%;

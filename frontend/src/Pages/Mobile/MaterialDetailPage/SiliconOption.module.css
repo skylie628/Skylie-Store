@@ -1,6 +1,7 @@
 .container{
     position: relative;
     background-color: black;
+    min-height: 720px;
 }
 .materialsImg{
     display: block;

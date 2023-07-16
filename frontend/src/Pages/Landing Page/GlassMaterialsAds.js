@@ -9,9 +9,9 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useNavigate } from 'react-router-dom'
 export default function GlassMaterialsAds({windowDimensions,setWindowDimensions}) {
   const navigate = useNavigate()
-  gsap.registerPlugin(ScrollTrigger);
+  /*   gsap.registerPlugin(ScrollTrigger);
   useEffect(() => {
-    gsap.to('#uvb',
+ gsap.to('#uvb',
     { top:20, 
       left: 30,
      immediateRender: false,
@@ -44,7 +44,7 @@ export default function GlassMaterialsAds({windowDimensions,setWindowDimensions}
  },
  });
 
-  },[])
+  },[])*/
   return (
     <div className={styles.Container} style ={{width: windowDimensions.width}}>
     <div className={styles.Sticky}  style ={{height: windowDimensions.height-64}}>

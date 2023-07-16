@@ -100,7 +100,7 @@ useEffect(()=>{
             { 
             return <div className = {styles.flexRow}>
                 {[0,1,2].map( y => 
-            <div className = {styles.Option}>
+            <div className = {styles.Option} key={colourList[x*3+y].name}>
             <div className = {styles.ColorDot} style ={{backgroundColor: colourList[x*3+y].code}}  onClick={()=>handleOnClick(x,y)}>
             <Logo src ={CheckIcon} style= {{width:'20px',height:'20px',top:'50%',left:'50%',transform: 'translate(-50%,-50%)', position:'absolute', display: colourList[x*3+y].select? 'block': 'none'}}/>
             </div>

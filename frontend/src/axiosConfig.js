@@ -2,7 +2,7 @@ import axios from "axios";
 import { store } from "./redux/store";
 import { logout } from "./store/reducers/authSlice";
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL || "https://skylie-store-ecommerce.onrender.com"
+  //baseURL: process.env.REACT_APP_SERVER_URL || "https://skylie-store-ecommerce.onrender.com"
   
   //baseURL: process.env.REACT_APP_SERVER_URL || "http://localhost:5000"
   })

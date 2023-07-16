@@ -2,10 +2,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from './footballcollection.module.css';
 import { useEffect, useState,useRef,useTransition } from "react";
 import { useNavigate } from "react-router-dom";
-import footballCollection1 from  '../../assets/images/football-collection-1.png'
-import footballCollection2 from  '../../assets/images/football-collection-2.png'
-import footballCollection3 from  '../../assets/images/football-collection-3.png'
-import footballCollection4 from  '../../assets/images/football-collection-4.png'
+import footballCollection1 from  '../../assets/images/football-collection-1.webp'
+import footballCollection2 from  '../../assets/images/football-collection-2.webp'
+import footballCollection3 from  '../../assets/images/football-collection-3.webp'
+import footballCollection4 from  '../../assets/images/football-collection-4.webp'
 import playingVideo from '../../assets/images/play-video-button.png'
 import shoppingIcon from  '../../assets/images/shopping-icon.png'
 import playIcon from  '../../assets/images/play-icon.png'
@@ -23,7 +23,7 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
   let speed = 5000;
   const [disableTransition,setDisableTransition] = useState(false);
   //const { height, width } = useWindowDimensions();
-  const width = 1263;
+
   const showVideoModal = () =>{
     setIsPlayVideo(!isPlayVideo);
   }
@@ -63,6 +63,7 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
    },[cur]);
 
   const updateCur = () =>{
+    console.log('mount')
     if(timer.current || !isPlay){}
     else {
       timer.current = setInterval(()=>{
@@ -84,7 +85,12 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
     updateCur();
   }
   useEffect(() => {
-    updateCur()
+    updateCur();
+    return ()=>{
+      console.log("unmount")
+      clearInterval(timer.current);
+      timer.current = null;
+    }
   },[]);
 
   return (

@@ -31,7 +31,7 @@ export default function CollectionCriterion() {
     <div className={styles.FilterValue} style = {{maxHeight: showCollection? '500px' : '0',overflow: 'hidden',transition:'0.5s ease-in-out'}}>
       {
       collections.map(collection => 
-      <div id= {collection.id} style ={{zIndex: 5,color: ((collection.id == selectedCollection) ? 'black' : 'rgba(0,0,0,0.6)')}} onClick={()=>handleSelectedCollection(collection.id)} >{collection.name}</div>
+      <div id= {collection.id} key ={collection.id} style ={{zIndex: 5,color: ((collection.id == selectedCollection) ? 'black' : 'rgba(0,0,0,0.6)')}} onClick={()=>handleSelectedCollection(collection.id)} >{collection.name}</div>
       )
       }
     </div>

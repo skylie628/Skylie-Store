@@ -5,6 +5,7 @@
 }
 .fixEle{
     position: sticky;
+    overflow: hidden;
     top:64px;
 }
 .property{

@@ -69,7 +69,7 @@ export default function ItemsList() {
     {Array.from(Array(row).keys()).map(x =>
         <div style ={{display:'flex',flexWrap: 'wrap'}}>
         {Array.from(Array(itemPerRow).keys()).map(y =>
-                (x*itemPerRow + y > itemCount-1)? '':<ItemCard className={styles.square}  {...products[x*itemPerRow + y]}/>)
+                (x*itemPerRow + y > itemCount-1)? '':<ItemCard key = {products[x*itemPerRow + y].id} className={styles.square}  {...products[x*itemPerRow + y]}/>)
         }
         </div>    
             )}

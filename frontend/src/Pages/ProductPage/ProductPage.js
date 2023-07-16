@@ -6,7 +6,7 @@ import OptionSelection from './OptionSelection'
 import Button from '../../Components/ClassicButton/Button'
 import { Suspense } from 'react'
 import MaterialSelection from './MaterialSelection'
-import Comment from './Comment'
+//import Comment from './Comment'
 import { covertCurrencyFormat } from '../../utils/currencyFortmat'
 import BrandMenu from '../../Components/Brand Menu/BrandMenu'
 import ShowHideLayout from '../../Components/Show Hide Layout/ShowHideLayout'
@@ -27,6 +27,7 @@ import { getCartId,fetchCartItem, addCartItem } from '../../store/actions/cartIt
 import { ResetState } from '../../store/actions/comment'
 import actionTypes from '../../store/actions/actionTypes'
 import HeaderNofify from '../../Components/MultipleNotify/HeaderNotify'
+const Comment = React.lazy(() => import('./Comment'));
 export default function ProductPage() {
     gsap.registerPlugin(ScrollToPlugin);
     const brandMenu = useRef();
@@ -187,7 +188,9 @@ export default function ProductPage() {
             </ul>
             </div>
         </ShowHideLayout>
+        <Suspense fallback = {<div></div>}>
         <Comment productInfo ={productInfo} userInfo={userInfo} />
+        </Suspense>
     </div>
     </div>
     </LoadingSpinner>

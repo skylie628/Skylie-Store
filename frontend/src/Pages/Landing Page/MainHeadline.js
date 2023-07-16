@@ -12,11 +12,10 @@ const brandname = React.useRef();
 const imagelist = useMemo(() => {
   
   let imgls = [...Array(108).keys()].map(x=>{
-      console.log('preload image')
       const image = new Image();
       image.width = 3000;
       image.height = 840;
-      image.src = require(`../../assets/images/Sequence Image 50fps/seqimg-header-55fps0${x+100}-min.png`);
+      image.src = require(`../../assets/images/Sequence Image 50fps webp/seqimg-header-55fps0${x+100}-min.webp`);
       return image;
   })
   return imgls;

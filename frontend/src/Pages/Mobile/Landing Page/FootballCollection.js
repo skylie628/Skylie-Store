@@ -162,7 +162,7 @@ export default function FootballCollection({windowDimensions,setWindowDimensions
        </div>
     </div>
     <div className= {styles.controlGroup}>
-    <div className= {`${styles.buttonswrapper} ${styles.centerXY}`} >
+    <div className= {`${styles.buttonswrapper} ${styles.centerXY}`} style ={{width:'fit-content',zIndex:3}} >
         <div className= {styles.buttons} >
           <button id={styles.first} className= {styles.button} style = {{backgroundColor : (cur == 1)? '#f2a127 ' : '#d4d4d4',opacity: (cur == 1)? 1: 0.5 }} onClick = {()=>setCurClick(1)}></button>
           <button id='2' className= {`${styles.button} ${styles.transition}`} style = {{backgroundColor : (cur == 2)? '#ba143f ' : '#d4d4d4',opacity: (cur == 2)? 1: 0.5  }} onClick = {()=>setCurClick(2)}></button>

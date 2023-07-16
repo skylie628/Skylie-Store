@@ -5,6 +5,7 @@
   }
   .coupleCollectionWrapper{
     margin-top: 20px;
+    min-height: 720px;
     position: relative;
     display: block;
     background-color : #f5f5f7;

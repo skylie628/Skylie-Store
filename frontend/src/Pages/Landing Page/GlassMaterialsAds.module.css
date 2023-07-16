@@ -1,14 +1,12 @@
 
 .Container{
     display: block;
+    position:relative;
     width: 100%;
-    height: 200vh;
+    height: 100vh;
+    margin-top: 15px;
     background-color: black;
   }
-.Sticky{
-    position: sticky;
-    top:64px;
-}
 .glassMaterialsImg {
     position: absolute;
     height: 600px;

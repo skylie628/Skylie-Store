@@ -1,6 +1,7 @@
 .mainHeadline{
   display: block;
   height: 80vh;
+  min-height: 720px;
   background-color: black;
 }
 .mainHeadline div{

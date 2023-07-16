@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-
 import HelperHeader from '../../Components/Helper Header/HelperHeader'
+import { Suspense } from 'react';
 import FilterCriterions from './FilterCriterions';
 import ItemsList from './ItemsList';
 import { resetQuery } from '../../store/reducers/productQuerySlice';
