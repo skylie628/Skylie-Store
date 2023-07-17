@@ -2,10 +2,12 @@
     position: relative;
     background-color: black;
     height: 200vh;
+    
 }
 .fixEle{
     position: sticky;
     height: 100vh;
+    overflow: hidden;
     top:64px;
 }
 .property{

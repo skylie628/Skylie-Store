@@ -10,8 +10,10 @@ import PasswordInputField from '../../Components/Form Control/InputField/Passwor
 import SingleNotify from '../../Components/MultipleNotify/SingleNotify.js';
 import actionTypes from '../../store/actions/actionTypes.js';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useMediaQuery } from 'react-responsive';
 export default function SignupForm(props) {
     const yup = require("yup");
+    const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
     const {errors,action} = useSelector(state => state.auth)
     useEffect(()=>{
       console.log('action là', action)
@@ -40,9 +42,9 @@ export default function SignupForm(props) {
       )
   return (
     <form onSubmit = {form.handleSubmit(handleFormSubmit)}>
-    {(action == actionTypes.REGISTER_FAIL) && <SingleNotify style = {{backgroundColor:'rgba(0,0,0,0.1)',width: '30%',margin:'0 auto'}} severity ='error' msg={errors} ></SingleNotify>}
+    {(action == actionTypes.REGISTER_FAIL) && <SingleNotify style = {{backgroundColor:'rgba(0,0,0,0.1)',width: isTabletOrMobile?'80%':'30%',margin:'0 auto'}} severity ='error' msg={errors} ></SingleNotify>}
     <LoadingSpinner overlay={{backgroundColor: 'white'}} isLoading ={action == actionTypes.REGISTER }>
-    <div style = {{ m: 1, width: '30%',minWidth : 380 , display: 'flex',margin : '30px  auto' }}>
+    <div style = {{ m: 1, width: isTabletOrMobile?'80%':'30%' , display: 'flex',margin : '30px  auto' }}>
     <div style = {{ m: 1, flex: '1 1 auto', display: 'block',margin : '30px 0px 10px 0px', alignSelf : "left" }}>
     <InputField
        name= "firstname"
@@ -62,7 +64,7 @@ export default function SignupForm(props) {
        />
     </div>
     </div>
-    <div style={{ m: 1, width: '30%',minWidth : 380 , display: 'block',margin : '30px  auto'  }}>  
+    <div style={{ m: 1, width: isTabletOrMobile?'80%':'30%' , display: 'block',margin : '30px  auto'  }}>  
        <InputField
        name= "email"
        id="email"
@@ -72,7 +74,7 @@ export default function SignupForm(props) {
        form = {form}
        />
    </div>
-    <div  style={{ m: 1, width: '30%',minWidth : 380 , display: 'block',margin : '30px auto' }} >
+    <div  style={{ m: 1, width: isTabletOrMobile?'80%':'30%' , display: 'block',margin : '30px auto' }} >
      <PasswordInputField
          name= "password"
          id="password"
@@ -80,7 +82,7 @@ export default function SignupForm(props) {
          variant="outlined"
          form = {form} />
      </div>
-     <div  style={{ m: 1, width: '30%',minWidth : 380 , display: 'block',margin : '30px auto' }} >
+     <div  style={{ m: 1, width: isTabletOrMobile?'80%':'30%' , display: 'block',margin : '30px auto' }} >
      <PasswordInputField
          name= "confirmpassword"
          id="confirmpassword"

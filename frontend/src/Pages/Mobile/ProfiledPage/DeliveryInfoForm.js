@@ -218,7 +218,7 @@ export default function DeliveryInfoForm(props) {
         </div>
         </div>
 }
-        <Button variant="outlined" style = {{display: 'block', margin : '50px auto'}} onClick = {selectedId? updateform.handleSubmit(submitForm) :  addform.handleSubmit(submitForm)}>Save</Button>
+        <Button variant="outlined" style = {{display: 'block', margin : '15px auto 120px auto'}} onClick = {selectedId? updateform.handleSubmit(submitForm) :  addform.handleSubmit(submitForm)}>Save</Button>
     </div>
     </div>
   )

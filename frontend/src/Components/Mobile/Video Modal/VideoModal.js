@@ -16,8 +16,8 @@ export default function VideoModal(props) {
 
   return (
     <div className = {styles.container}>
-      <div style = {{maxWidth: 'fit-content', height:'100%',margin:'0 auto', position:'relative'}}>
-        <img src = {CloseIcon} style = {{width: '20px', height: '20px', display:'block',position :"absolute",cursor:'pointer',zIndex:1, top:'80px',left:'10px'}} onClick = {()=>{return props.closeModal(false)}}></img>
+      <div style = {{maxWidth: 'fit-content', height:'100%',margin:'50px auto', position:'relative'}}>
+        <img src = {CloseIcon} style = {{width: '20px', height: '20px', display:'block',position :"absolute",cursor:'pointer',zIndex:1, top:'-5px',left:'10px'}} onClick = {()=>{return props.closeModal(false)}}></img>
         <div style = {{height : '100%',width:'100%',position :"relative"}} > 
           <video ref = {video} width ='100%' style ={{ objectFit: 'cover'}} controls>
           <source src={videoPath} type="video/mp4"/>

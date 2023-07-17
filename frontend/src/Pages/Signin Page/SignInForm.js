@@ -8,10 +8,12 @@ import SingleNotify from '../../Components/MultipleNotify/SingleNotify.js';
 import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import actionTypes from '../../store/actions/actionTypes.js';
+import { useMediaQuery } from 'react-responsive';
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner.js';
 export default function SignInForm(props) {
     const {errors,action} = useSelector(state => state.auth);
     const yup = require("yup");
+    const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
     const handleFormSubmit = (value)=>{
       console.log(value)
       const {onSubmit} = props;
@@ -34,9 +36,9 @@ export default function SignInForm(props) {
       )
   return (
     <form onSubmit = {form.handleSubmit(handleFormSubmit)}>
-    {(action == actionTypes.LOGIN_FAIL) && <SingleNotify style = {{backgroundColor:'rgba(0,0,0,0.1)',width: '30%',margin:'0 auto'}} severity ='error' msg={errors} ></SingleNotify>}
+    {(action == actionTypes.LOGIN_FAIL) && <SingleNotify style = {{backgroundColor:'rgba(0,0,0,0.1)',width:isTabletOrMobile?'80%' :'30%',margin:'0 auto'}} severity ='error' msg={errors} ></SingleNotify>}
     <LoadingSpinner overlay={{backgroundColor: 'white'}} isLoading ={action == actionTypes.LOGIN }>
-    <div style={{ m: 1, width: '30%',minWidth : 380 , display: 'block',margin : '30px auto' }} variant="outlined">  
+    <div style={{ m: 1, width: isTabletOrMobile? '80%':'30%' , display: 'block',margin : '30px auto' }} variant="outlined">  
        <InputField
        name= "email"
        id="email"
@@ -46,7 +48,7 @@ export default function SignInForm(props) {
        form = {form}
        />
    </div>
-    <div style={{ m: 1, width: '30%',minWidth : 380 , display: 'block',margin : '30px auto' }} variant="outlined">
+    <div style={{ m: 1, width: isTabletOrMobile? '80%':'30%'  , display: 'block',margin : '30px auto' }} variant="outlined">
      <PasswordInputField
          name= "password"
          id="password"

@@ -13,9 +13,11 @@ import styles from './styles.module.css'
 import { Register,ResetError } from '../../store/actions/auth.js'
 import actionTypes from '../../store/actions/actionTypes.js'
 import {useDispatch, useSelector} from 'react-redux'
+import { useMediaQuery } from 'react-responsive'
 export default function SignupPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
   const {islogged} = useSelector(state => state.auth);
   const handleFormSubmit =  async value =>{
   await dispatch(Register(value))
@@ -28,13 +30,11 @@ useEffect(()=>{
   return dispatch(ResetError())
 },[])
   return (
-    <Box
-    sx={{
-        display: 'block',
-    }}
+    <div
     className = {styles.container}
+    style={{marginBottom:'50px'}}
   >
-    <div className = {styles.headerTitle}>Đăng ký tài khoản </div>
+    <div className = {styles.headerTitle} style ={{fontSize: isTabletOrMobile?'24px':'32px'}}>Đăng ký tài khoản </div>
       <SignupForm onSubmit ={handleFormSubmit}></SignupForm>
      {/*} <div style = {{display: 'flex', alignItems: 'center',justifyContent : 'center'}}>
         <Logo src = {FacebookInactive} srcOnHover = {FacebookActive} style ={{width : '40px' ,height : '40px',marginLeft: '10px'}}></Logo>
@@ -44,6 +44,6 @@ useEffect(()=>{
       <div className = {styles.resetBtn}>Quên tài khoản ? <a>Reset ngay</a></div>
       <div className = {styles.signupBtn}>Chưa có tài khoản ? <a>Đăng ký</a></div>
   </div>*/}
-  </Box>
+  </div>
   )
 }

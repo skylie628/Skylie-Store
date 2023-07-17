@@ -46,6 +46,7 @@ export default function Header(props) {
   const navigate = useNavigate();
   const changePath = (path) =>{
     navigate(path);
+    setIsExpandHeader(false);
   }
   return (
     <AppBar  className ={styles.header}sx = {{boxShadow: 'inherit',zIndex:3, top:0, position :isRelative ? 'relative' : 'sticky',height:'64px',backfaceVisibility:'hidden',transform:'translate3d(0px,0px,0px)' }} onMouseLeave={()=>{setIsLeavingHeader(true);console.log('leave ')}}>

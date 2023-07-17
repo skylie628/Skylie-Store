@@ -86,8 +86,8 @@ export default function AlbumSelection({setStateSavedProductModal,productInfo,se
           </div>
           </div>
           </div>
-          <div style ={{position:'fixed',bottom:0,backgroundColor:'white',width:'100%',height: '100px'}}>
- <div style ={{display: 'flex',justifyContent:'right',marginBottom:'20px'}}>
+          <div style ={{position:'fixed',bottom:0,backgroundColor:'white',width:'100%',height: '20%'}}>
+ <div style ={{display: 'flex',justifyContent:'space-between',marginBottom:'50px'}}>
  <Button  color ='white' style ={{margin:'20px',width: '100px'}} label = 'Hủy'  onClick={()=>handleCancelButton()} />
 <Button  color ='black' style ={{margin:'20px',width: '100px'}} disabled ={!selectedAlbum.id}  label = 'Xác nhận'  onClick = {()=>handleSaveButton()} />
 </div>   

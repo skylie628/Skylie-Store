@@ -8,11 +8,13 @@ import SignInForm from './SignInForm.js'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import styles from './styles.module.css'
+import { useMediaQuery } from 'react-responsive'
 import { Login, ResetError } from '../../store/actions/auth.js'
 import { useDispatch, useSelector } from 'react-redux'
 export default function SigninPage() {
 const dispatch = useDispatch();
 const navigate = useNavigate();
+const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
 const {islogged} = useSelector(state => state.auth);
 useEffect(()=>{
   islogged && navigate('/')
@@ -29,7 +31,7 @@ const handleFormSubmit = async (value) =>{
     }}
     className = {styles.container}
   >
-    <div className = {styles.headerTitle}>Đăng nhập để nhận được nhiều ưu đãi!</div>
+    <div className = {styles.headerTitle} style ={{fontSize: isTabletOrMobile?'24px':'32px'}}>Đăng nhập để nhận được nhiều ưu đãi!</div>
       <SignInForm onSubmit ={handleFormSubmit}></SignInForm>
       {/*<div style = {{display: 'flex', alignItems: 'center',justifyContent : 'center'}}>
         <Logo src = {FacebookInactive} srcOnHover = {FacebookActive} style ={{width : '40px' ,height : '40px',marginLeft: '10px'}}></Logo>

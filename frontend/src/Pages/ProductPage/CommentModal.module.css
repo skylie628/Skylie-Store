@@ -17,6 +17,7 @@
     background-color: white;
     position: sticky;
     top:0px;
+    z-index: 5;
 }
 .productCard {
     display: flex;

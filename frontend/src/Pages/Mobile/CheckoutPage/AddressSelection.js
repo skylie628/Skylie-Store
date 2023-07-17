@@ -7,7 +7,6 @@ import AddIcon from '../../../assets/images/add-icon.png';
 import { useEffect } from 'react';
 import Button from '../../../Components/ClassicButton/Button';
 import Modal from '../../../Components/Modal/Modal';
-import EmptyCard from '../../../Components/EmptyCard/EmptyCard'
 import Logo from '../../../Components/Logo/Logo';
 export default function AddressSelection({addressesData,setStateAddModalAddresses,setStateModalAddresses,selectedAddress,setSelectedAddress}) {
     const [localSelectedAddress,setLocalSelectedAddress] = useState(selectedAddress)||{};
@@ -70,10 +69,10 @@ export default function AddressSelection({addressesData,setStateAddModalAddresse
           </div>
           </div>
           </div>
-          <div style ={{position:'fixed',bottom:0,backgroundColor:'white',width:'100%',height: '100px'}}>
+          <div style ={{position:'fixed',bottom:0,backgroundColor:'white',width:'100%',height: '150px'}}>
  <div style ={{display: 'flex',justifyContent:'center'}}>
- <Button  label = "Hủy" color ='white' style ={{width:'100px',margin:'20px 5px 20px 10px'}}  onClick = {()=>handleCancelButton()} ></Button>
-<Button  label = "Xác nhận" disabled ={!localSelectedAddress?.id} color ='black' style ={{width:'100px',margin:'20px 20px 20px 10px'}} onClick = {()=>handleSaveButton()} ></Button>
+ <Button  label = "Hủy" color ='white' style ={{width:'100px',margin:'20px 5px 120px 10px'}}  onClick = {()=>handleCancelButton()} ></Button>
+<Button  label = "Xác nhận" disabled ={!localSelectedAddress?.id} color ='black' style ={{width:'100px',margin:'20px 20px 120px 10px'}} onClick = {()=>handleSaveButton()} ></Button>
 </div>   
 </div>
     </div>
